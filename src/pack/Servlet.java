@@ -27,7 +27,19 @@ public class Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		String op = request.getParameter("op");
+		
+		if (op.equals("index")) {
+			String button = request.getParameter("indexbutton");
+			if (button.equals("S'inscrire")) {
+				request.getRequestDispatcher("creationcompte.html").forward(request, response);
+			} else {
+				response.getWriter().append("Served at: ").append(request.getContextPath());
+			}
+		} else {
+			response.getWriter().append("Served at: ").append(request.getContextPath());
+		}
 	}
 
 	/**
