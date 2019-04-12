@@ -1,0 +1,17 @@
+package pack;
+
+public enum Loisirs {
+	DANSE,
+	LECTURE,
+	CUISINE,
+	COURSE,
+	JUDO,
+	ESCALADE,
+	JEUX_VIDEOS,
+	PROGRAMMATION,
+	VIOLON,
+	PIANO,
+	GUITARE
+	
+
+}
