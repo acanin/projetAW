@@ -1,4 +1,4 @@
-package pack;
+package enumerations;
 
 public enum Cheveux {
 	NOIR,

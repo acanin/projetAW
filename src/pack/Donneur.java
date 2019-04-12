@@ -8,6 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import enumerations.AntecedentsMedicaux;
+import enumerations.Cheveux;
+import enumerations.Loisirs;
+import enumerations.Peau;
+import enumerations.Yeux;
+
 @Entity
 public class Donneur {
 
