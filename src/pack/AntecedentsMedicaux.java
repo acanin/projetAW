@@ -4,7 +4,7 @@ public enum AntecedentsMedicaux {
 	CARDIAQUE,
 	ASTHMATIQUE,
 	DIABETIQUE,
-	PARKISON,
+	PARKINSON,
 	AVC,
 	ALZHEIMER,
 	SIDA

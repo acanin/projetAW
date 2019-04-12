@@ -7,11 +7,9 @@ public enum Loisirs {
 	COURSE,
 	JUDO,
 	ESCALADE,
-	JEUX_VIDEOS,
-	PROGRAMMATION,
+	JEUX_VIDEO,
 	VIOLON,
 	PIANO,
-	GUITARE
-	
+	GUITARE	
 
 }
