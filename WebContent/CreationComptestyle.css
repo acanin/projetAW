@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+body
+{
+  margin: 10px 0 ;
+  padding: 0 ;
+  text-align: center ;
+}
+
+conteneur
+{
+  width: 770px ;
+  margin: 0 auto ;
+  text-align: left ;
+}
+
+header
+{
+  height: 258px ;
+  background: url(apple.jpg) no-repeat left top;
+}

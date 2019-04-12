@@ -22,7 +22,7 @@ public class Receveur {
 
 	
 	/** Pour avoir une relation bidirectionnelle 
-	 * 1 centre avec plsr donneur
+	 * 1 centre avec plsr receveur
 	 * */
 	@ManyToOne
 	Centre owner; 

@@ -18,6 +18,10 @@ public class RDV {
 	@ManyToOne
 	Centre owner;
 	
+	
+	/** Pour avoir une relation bidirectionnelle 
+	 * 1 centre avec plsr rdv
+	 * */
 	public RDV(){
 		
 	}
