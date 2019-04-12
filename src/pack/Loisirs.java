@@ -11,5 +11,4 @@ public enum Loisirs {
 	VIOLON,
 	PIANO,
 	GUITARE	
-
 }
