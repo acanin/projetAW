@@ -1,5 +1,7 @@
 package pack;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +22,11 @@ public class Donneur {
 	private int poids;
 	private boolean sexe; // 1 pour les femmes et 0 pour les mecs
 	private boolean disponibilite;
-	// ajouter enumeration
+	private Yeux yeux;
+	private Cheveux cheveux;
+	private Peau peau;
+	private Collection<Loisirs> loisirs;
+	private Collection<AntecedentsMedicaux> antecedents;
 	
 	
 	
