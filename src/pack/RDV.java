@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class RDV {
@@ -14,10 +15,21 @@ public class RDV {
 	private int heure;
 	private Date date;
 	
+	@ManyToOne
+	Centre owner;
+	
 	public RDV(){
 		
 	}
 	
+	public Centre getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Centre owner) {
+		this.owner = owner;
+	}
+
 	public RDV(int h, Date d){
 		this.heure = h;
 		this.date = d;

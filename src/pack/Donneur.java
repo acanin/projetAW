@@ -52,6 +52,46 @@ public class Donneur {
 		
 	}
 	
+	public Yeux getYeux() {
+		return yeux;
+	}
+
+	public void setYeux(Yeux yeux) {
+		this.yeux = yeux;
+	}
+
+	public Cheveux getCheveux() {
+		return cheveux;
+	}
+
+	public void setCheveux(Cheveux cheveux) {
+		this.cheveux = cheveux;
+	}
+
+	public Peau getPeau() {
+		return peau;
+	}
+
+	public void setPeau(Peau peau) {
+		this.peau = peau;
+	}
+
+	public Collection<Loisirs> getLoisirs() {
+		return loisirs;
+	}
+
+	public void setLoisirs(Collection<Loisirs> loisirs) {
+		this.loisirs = loisirs;
+	}
+
+	public Collection<AntecedentsMedicaux> getAntecedents() {
+		return antecedents;
+	}
+
+	public void setAntecedents(Collection<AntecedentsMedicaux> antecedents) {
+		this.antecedents = antecedents;
+	}
+
 	public Donneur(){
 		
 	}
