@@ -36,7 +36,7 @@ public class Donneur {
 	@ManyToOne
 	Centre owner; 
 	
-	public Donneur(String n, String p, int a, int t, int po, boolean s, boolean dispo){
+	public Donneur(String n, String p, int a, int t, int po, boolean s, boolean dispo,Yeux y,Cheveux c,Peau peau,Collection<Loisirs> l, Collection<AntecedentsMedicaux> am){
 		this.nom = n;
 		this.prenom = p;
 		this.age = a;
@@ -44,7 +44,11 @@ public class Donneur {
 		this.poids = po;
 		this.sexe = s; 
 		this.disponibilite = dispo;
-		// ajouter enumeration
+		this.yeux = y;
+		this.cheveux = c;
+		this.peau = peau;
+		this.loisirs = l;
+		this.antecedents = am;
 		
 	}
 	
