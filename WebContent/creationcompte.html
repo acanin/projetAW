@@ -6,29 +6,49 @@
 <title>Bébé à tout prix</title>
 
 </head>
+
 <body>
-Bonjour, veuillez remplir les champs ci-dessous pour obtenir un compte.
+
+<h1 id="header">
+    	Bébé à tout prix
+</h1>
+
+<div id="conteneur"> 
+<b>Bonjour, veuillez remplir les champs ci-dessous pour obtenir un compte :  </b>
+
+<c>
+	<form method="post"  action="Servlet"> 
+
+		<p><label for="nom">Nom :</label><input type="text" name="nom" /></p>
+		
+		<p><label for="prenom">Prénom :</label><input type="text" name="prenom" /></p>
+
+		<p><label for="mail">Mail :</label><input type="text" name="mail" /></p>
+
+		<p><label for="motdepasse">Mot de Passe :</label><input type="text" name="motdepasse" /></p>
+		
+		<p><label for="age">Age :</label><input type="text" name="age" /></p>
 
 
+		<p><label for="sexe">Sexe :</label><input type="radio" name= "sexe" value = "Femme"> Femme
+											<input type="radio" name= "sexe" value = "Homme"> Homme </p>
+											
+		<p><label for="type">Type d'abonné :</label><input type="radio" name= "type" value = "Receveur"> Receveur
+											<input type="radio" name= "type" value = "Donneur"> Donneur </p>
+</c>		
+		
+	
+		
+		
+		<b>
+		<p><input type="submit" name="operation" value="S'inscrire">
 
-<form method="post"  action="Servlet"> 
+		<input type="submit" name="operation" value="Annuler"></p> </b>
 
-<p>Nom <input type="text" name= "nom"></p>    
-        
-<p>Prénom <input type="text" name= "prenom"></p>
+		<input type="hidden" name = "op" value = "creationcompte"> 
 
-<p>Mail <input type="text" name= "mail"></p>
+	</form> 
 
-<p>Mot de passe  <input type="text" name= "motdepasse"></p>
-
-
-<p><input type="submit" name="operation" value="S'inscrire"></p> 
-
-<p><input type="submit" name="operation" value="Annuler"></p> 
-
-<input type="hidden" name = "op" value = "creationcompte"> 
-
-</form> 
-
+</div>
 </body>
 </html>

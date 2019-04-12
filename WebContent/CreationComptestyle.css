@@ -5,17 +5,48 @@ body
   margin: 10px 0 ;
   padding: 0 ;
   text-align: center ;
+  background: #E6E6FA ;
 }
 
-conteneur
+div#conteneur
 {
   width: 770px ;
   margin: 0 auto ;
   text-align: left ;
+  background: #fff ;
+  border: 2px solid #402038 ;
+  font-family: Verdana, sans-serif
+ 
+
 }
 
-header
+div#conteneur b
 {
-  height: 258px ;
-  background: url(apple.jpg) no-repeat left top;
+	text-align: center ;
+
 }
+
+div#conteneur c
+{
+	text-indent: 2em ;
+
+}
+
+
+h1#header
+{
+  font-family:Snell Roundhand, cursive;
+  font-size: xx-large;
+  height: 100px ;
+  color : #6C2126;
+
+}
+
+
+
+form label {
+    display: inline-block;
+    width: 200px;
+}
+
+
