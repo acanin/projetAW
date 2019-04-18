@@ -10,8 +10,9 @@ body
 
 div#conteneur
 {
-  width: 770px ;
-  margin: 0 auto ;
+  width: 900px ;
+  padding : 20px;
+  margin: 10px auto ;
   text-align: left ;
   background: #fff ;
   border: 2px solid #402038 ;
@@ -32,6 +33,12 @@ div#conteneur c
 
 }
 
+div#conteneur d
+{
+  display: block;
+  margin : auto;
+  text-align: center;
+}
 
 h1#header
 {
@@ -41,7 +48,6 @@ h1#header
   color : #6C2126;
 
 }
-
 
 
 form label {

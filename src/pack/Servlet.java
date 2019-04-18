@@ -37,9 +37,28 @@ public class Servlet extends HttpServlet {
 			} else {
 				response.getWriter().append("Served at: ").append(request.getContextPath());
 			}
-		} else {
-			response.getWriter().append("Served at: ").append(request.getContextPath());
+		} 
+		
+		
+		
+		if (op.equals("creationcompte")){
+			String button = request.getParameter("operation");
+			if (button.equals("Annuler")) {
+				request.getRequestDispatcher("index.html").forward(request, response);
+			} 
+			
+			else if ((button.equals("S'inscrire"))){
+				// a completer	
+			}
+			
+			else {
+				response.getWriter().append("Served at: ").append(request.getContextPath());
+			}
 		}
+		
+		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
