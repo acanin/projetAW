@@ -1,6 +1,8 @@
 package pack;
 
 import java.io.IOException;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Servlet")
 public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@EJB
+	Facade facade;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -20,6 +25,7 @@ public class Servlet extends HttpServlet {
     public Servlet() {
         super();
         // TODO Auto-generated constructor stub
+        facade = new Facade();
     }
 
 	/**
@@ -37,27 +43,48 @@ public class Servlet extends HttpServlet {
 			} else {
 				response.getWriter().append("Served at: ").append(request.getContextPath());
 			}
-		} 
-		
-		
-		
-		if (op.equals("creationcompte")){
+			
+		} else if (op.equals("creationcompte")){
 			String button = request.getParameter("operation");
 			if (button.equals("Annuler")) {
 				request.getRequestDispatcher("index.html").forward(request, response);
 			} 
 			
-			else if ((button.equals("S'inscrire"))){
-				// a completer	
-			}
-			
 			else {
-				response.getWriter().append("Served at: ").append(request.getContextPath());
+				String nom = request.getParameter("nom");
+				String prenom = request.getParameter("prenom");
+				String mail = request.getParameter("mail");
+				String mdp = request.getParameter("motdepasse");
+				String age = request.getParameter("age");
+				String sexe = request.getParameter("sexe");
+				String type = request.getParameter("type");
+				
+				if (type.equals("Receveur")) {
+					facade.ajoutReceveur(nom, prenom, Integer.parseInt(age), sexe);
+					response.getWriter().append("Coder page acceuil 1");
+				} else {
+					request.setAttribute("nom", nom);
+					request.setAttribute("prenom", prenom);
+					request.setAttribute("age", Integer.parseInt(age));
+					request.setAttribute("sexe", sexe);
+					request.getRequestDispatcher("creationpeofildonneur.jsp").forward(request, response);
+				}
+				// a completer pour mdp et mail	
 			}
+		} else if (op.equals("validerCreationDonneur")) {
+			String nom = request.getParameter("nom");
+			String prenom = request.getParameter("prenom");
+			String age = request.getParameter("age");
+			String sexe = request.getParameter("sexe");
+			String taille = request.getParameter("taille");
+			
+			
+
+			
+			response.getWriter().append("Boubidou");
+		} else {
+			response.getWriter().append("Served at: ").append(request.getContextPath());
 		}
-		
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 	}
 

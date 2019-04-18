@@ -46,7 +46,7 @@ Poids (en kg) : <input type="text" name="poids"><br/>
 	for (AntecedentsMedicaux am : AntecedentsMedicaux.allantmed) {
 	String s = AntecedentsMedicaux.toString(am);
 	%>
-	<input type = "radio" name= <%= s %>  value = <%= s %>> <%= s %> <br>
+	<input type = "radio" name= "antecedents"  value = <%= s %>> <%= s %> <br>
 <% } %>
 
 <p> Loisirs : </p>
@@ -54,7 +54,7 @@ Poids (en kg) : <input type="text" name="poids"><br/>
 	for (Loisirs l : Loisirs.allloisirs) {
 	String s = Loisirs.toString(l);
 	%>
-	<input type = "radio" name=<%= s %> value = <%= s %>> <%= s %> <br>
+	<input type = "radio" name="loisirs" value = <%= s %>> <%= s %> <br>
 <% } %>
 
 	<input type="submit" name="choix" value="Valider">

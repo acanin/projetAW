@@ -24,12 +24,13 @@ public class Facade {
 		
 	}
 	
-	public void ajoutDonneur(String nom, String prenom,  int age, int taille, int poids, boolean sexe, boolean dispo,Yeux y,Cheveux c,Peau peau,Collection<Loisirs> l, Collection<AntecedentsMedicaux> am){
-		em.persist(new Donneur(nom, prenom, age,taille, poids, sexe, dispo, y, c, peau, l, am));
+	public void ajoutDonneur(String nom, String prenom,  int age, int taille, int poids, String sexe, boolean dispo,Yeux y,Cheveux c,Peau peau,Collection<Loisirs> l, Collection<AntecedentsMedicaux> am){
+		em.persist(new Donneur(nom, prenom, age,taille, poids, sexe.equals("Femme"), dispo, y, c, peau, l, am));
 	}
 
-	public void ajoutReceveur(String n, String p, int a, boolean s){
-		em.persist(new Receveur(n, p, a, s));
+	public void ajoutReceveur(String n, String p, int a, String s){
+
+		em.persist(new Receveur(n, p, a, s.equals("Femme")));
 	}
 	
 	public Collection<Donneur> listerDonneurs(){
