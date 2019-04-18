@@ -71,9 +71,9 @@ public class Servlet extends HttpServlet {
 				} else {
 					request.setAttribute("nom", nom);
 					request.setAttribute("prenom", prenom);
-					request.setAttribute("age", Integer.parseInt(age));
+					request.setAttribute("age", age);
 					request.setAttribute("sexe", sexe);
-					request.getRequestDispatcher("creationpeofildonneur.jsp").forward(request, response);
+					request.getRequestDispatcher("creationprofildonneur.jsp").forward(request, response);
 				}
 				// a completer pour mdp et mail	
 			}
@@ -90,11 +90,9 @@ public class Servlet extends HttpServlet {
 			String am = request.getParameter("antecedents");
 			String loisir = request.getParameter("loisirs");
 			
-			facade.ajoutDonneur(nom, prenom, Integer.parseInt(age), Integer.parseInt(taille), Integer.parseInt(poids), sexe, true, Yeux.toCaracteristiques(yeux), Cheveux.toCaracteristiques(cheveux), Peau.toCaracteristiques(peau), Loisirs.toCaracteristiques(loisir), AntecedentsMedicaux.toCaracteristiques(am));
+			facade.ajoutDonneur(nom, prenom, 56, Integer.parseInt(taille), Integer.parseInt(poids), sexe, true, Yeux.toCaracteristiques(yeux), Cheveux.toCaracteristiques(cheveux), Peau.toCaracteristiques(peau), Loisirs.toCaracteristiques(loisir), AntecedentsMedicaux.toCaracteristiques(am));
 			response.getWriter().append("Coder page accueil 1");
 
-			
-			response.getWriter().append("Boubidou");
 		} else {
 			response.getWriter().append("Served at: ").append(request.getContextPath());
 		}

@@ -57,6 +57,7 @@ Poids (en kg) : <input type="text" name="poids"><br/>
 	<input type = "radio" name="loisirs" value = <%= s %>> <%= s %> <br>
 <% } %>
 
+	
 	<input type="submit" name="choix" value="Valider">
 	<input type="hidden" name = "op" value="validerCreationDonneur">
 </form>
