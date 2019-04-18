@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Bébés à tous prix</title>
+<title>Bébés à tout prix</title>
 </head>
 <body>
 
