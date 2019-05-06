@@ -31,8 +31,8 @@ public class Donneur {
 	private Yeux yeux;
 	private Cheveux cheveux;
 	private Peau peau;
-	private Collection<Loisirs> loisirs;
-	private Collection<AntecedentsMedicaux> antecedents;
+	private Loisirs loisirs;
+	private AntecedentsMedicaux antecedents;
 	
 	
 	
@@ -42,7 +42,7 @@ public class Donneur {
 	@ManyToOne
 	Centre owner; 
 	
-	public Donneur(String n, String p, int a, int t, int po, boolean s, boolean dispo,Yeux y,Cheveux c,Peau peau,Collection<Loisirs> l, Collection<AntecedentsMedicaux> am){
+	public Donneur(String n, String p, int a, int t, int po, boolean s, boolean dispo,Yeux y,Cheveux c,Peau peau,Loisirs l, AntecedentsMedicaux am){
 		this.nom = n;
 		this.prenom = p;
 		this.age = a;
@@ -82,19 +82,19 @@ public class Donneur {
 		this.peau = peau;
 	}
 
-	public Collection<Loisirs> getLoisirs() {
+	public Loisirs getLoisirs() {
 		return loisirs;
 	}
 
-	public void setLoisirs(Collection<Loisirs> loisirs) {
+	public void setLoisirs(Loisirs loisirs) {
 		this.loisirs = loisirs;
 	}
 
-	public Collection<AntecedentsMedicaux> getAntecedents() {
+	public AntecedentsMedicaux getAntecedents() {
 		return antecedents;
 	}
 
-	public void setAntecedents(Collection<AntecedentsMedicaux> antecedents) {
+	public void setAntecedents(AntecedentsMedicaux antecedents) {
 		this.antecedents = antecedents;
 	}
 

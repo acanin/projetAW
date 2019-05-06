@@ -13,7 +13,7 @@ public class RDV {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private int heure;
-	private Date date;
+	//private Date date;
 	
 	@ManyToOne
 	Centre owner;
@@ -34,9 +34,9 @@ public class RDV {
 		this.owner = owner;
 	}
 
-	public RDV(int h, Date d){
+	public RDV(int h){
 		this.heure = h;
-		this.date = d;
+		//this.date = d;
 	}
 
 	public int getId() {
@@ -55,13 +55,13 @@ public class RDV {
 		this.heure = heure;
 	}
 
-	public Date getDate() {
+	/**public Date getDate() {
 		return date;
 	}
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
+	}*/
 	
 	
 	

@@ -15,9 +15,9 @@ public class Admin {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private Collection<Donneur> donneur_en_attente;
+	/**private Collection<Donneur> donneur_en_attente;
 	private Collection<Donneur> donneurs_signales;
-	private Collection<Receveur> receveurs_signales;
+	private Collection<Receveur> receveurs_signales;*/
 	
 	
 	

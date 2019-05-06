@@ -9,6 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import enumerations.AntecedentsMedicaux;
+import enumerations.Cheveux;
+import enumerations.Loisirs;
+import enumerations.Peau;
+import enumerations.Yeux;
+
 /**
  * Servlet implementation class Servlet
  */
@@ -61,13 +67,13 @@ public class Servlet extends HttpServlet {
 				
 				if (type.equals("Receveur")) {
 					facade.ajoutReceveur(nom, prenom, Integer.parseInt(age), sexe);
-					response.getWriter().append("Coder page acceuil 1");
+					response.getWriter().append("Coder page accueil 1");
 				} else {
 					request.setAttribute("nom", nom);
 					request.setAttribute("prenom", prenom);
-					request.setAttribute("age", Integer.parseInt(age));
+					request.setAttribute("age", age);
 					request.setAttribute("sexe", sexe);
-					request.getRequestDispatcher("creationpeofildonneur.jsp").forward(request, response);
+					request.getRequestDispatcher("creationprofildonneur.jsp").forward(request, response);
 				}
 				// a completer pour mdp et mail	
 			}
@@ -77,11 +83,16 @@ public class Servlet extends HttpServlet {
 			String age = request.getParameter("age");
 			String sexe = request.getParameter("sexe");
 			String taille = request.getParameter("taille");
+			String poids = request.getParameter("poids");
+			String yeux = request.getParameter("yeux");
+			String cheveux = request.getParameter("cheveux");
+			String peau = request.getParameter("peau");
+			String am = request.getParameter("antecedents");
+			String loisir = request.getParameter("loisirs");
 			
-			
+			facade.ajoutDonneur(nom, prenom, 56, Integer.parseInt(taille), Integer.parseInt(poids), sexe, true, Yeux.toCaracteristiques(yeux), Cheveux.toCaracteristiques(cheveux), Peau.toCaracteristiques(peau), Loisirs.toCaracteristiques(loisir), AntecedentsMedicaux.toCaracteristiques(am));
+			response.getWriter().append("Coder page accueil 1");
 
-			
-			response.getWriter().append("Boubidou");
 		} else {
 			response.getWriter().append("Served at: ").append(request.getContextPath());
 		}
