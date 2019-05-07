@@ -60,6 +60,10 @@ Poids (en kg) : <input type="text" name="poids"><br/>
 	
 	<input type="submit" name="choix" value="Valider">
 	<input type="hidden" name = "op" value="validerCreationDonneur">
+	<input type="hidden" name = "nom" value = <%= (String) request.getAttribute("nom") %>> 
+	<input type="hidden" name = "prenom" value = <%= (String) request.getAttribute("prenom") %>> 
+	<input type="hidden" name = "age" value = <%= (String) request.getAttribute("age") %>> 
+	<input type="hidden" name = "sexe" value = <%= (String) request.getAttribute("sexe") %>> 
 </form>
 
 </body>

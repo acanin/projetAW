@@ -90,7 +90,7 @@ public class Servlet extends HttpServlet {
 			String am = request.getParameter("antecedents");
 			String loisir = request.getParameter("loisirs");
 			
-			facade.ajoutDonneur(nom, prenom, 56, Integer.parseInt(taille), Integer.parseInt(poids), sexe, true, Yeux.toCaracteristiques(yeux), Cheveux.toCaracteristiques(cheveux), Peau.toCaracteristiques(peau), Loisirs.toCaracteristiques(loisir), AntecedentsMedicaux.toCaracteristiques(am));
+			facade.ajoutDonneur(nom, prenom, Integer.parseInt(age), Integer.parseInt(taille), Integer.parseInt(poids), sexe, true, Yeux.toCaracteristiques(yeux), Cheveux.toCaracteristiques(cheveux), Peau.toCaracteristiques(peau), Loisirs.toCaracteristiques(loisir), AntecedentsMedicaux.toCaracteristiques(am));
 			response.getWriter().append("Coder page accueil 1");
 
 		} else {
