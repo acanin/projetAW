@@ -66,8 +66,13 @@ public class Servlet extends HttpServlet {
 				String type = request.getParameter("type");
 				
 				if (type.equals("Receveur")) {
-					facade.ajoutReceveur(nom, prenom, Integer.parseInt(age), sexe);
-					response.getWriter().append("Coder page accueil 1");
+					request.setAttribute("nom", nom);
+					request.setAttribute("prenom", prenom);
+					
+					//facade.ajoutReceveur(nom, prenom, Integer.parseInt(age), sexe);
+					//response.getWriter().append("pageaccueil.jsp");
+					request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+					
 				} else {
 					request.setAttribute("nom", nom);
 					request.setAttribute("prenom", prenom);
