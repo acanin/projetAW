@@ -3,14 +3,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" media="screen" type="text/css" href="CreationComptestyle.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Bébés à tout prix</title>
 </head>
 <body>
 
-Veuillez remplir les informations ci-dessus pour la création de votre profil en tant que donneur.<br>
-Votre profil sera en ligne lorsque qu'il sera approuvé par un de nos administrateurs. <br>
+<h1 id="header">
+    	Bébé à tout prix
+    	<p> Creation Profil Donneur </p>
+</h1>
 
+<div id="conteneur"> 
+
+<b> Veuillez remplir les informations ci-dessus pour la création de votre profil en tant que donneur.
+Votre profil sera en ligne lorsque qu'il sera approuvé par un de nos administrateurs.  </b>
+
+<c>
 <form action= "Servlet" method="post">
 
 Taille (en cm) : <input type="text" name="taille"><br/>
@@ -65,6 +74,7 @@ Poids (en kg) : <input type="text" name="poids"><br/>
 	<input type="hidden" name = "age" value = <%= (String) request.getAttribute("age") %>> 
 	<input type="hidden" name = "sexe" value = <%= (String) request.getAttribute("sexe") %>> 
 </form>
-
+</c>
+</div>
 </body>
 </html>
