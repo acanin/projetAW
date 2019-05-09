@@ -13,6 +13,7 @@ import enumerations.AntecedentsMedicaux;
 import enumerations.Cheveux;
 import enumerations.Loisirs;
 import enumerations.Peau;
+import enumerations.Specialite;
 import enumerations.Yeux;
 
 /**
@@ -160,7 +161,8 @@ public class Servlet extends HttpServlet {
 			if (button.equals("Ouverture d'un centre")) {
 				request.getRequestDispatcher("creationcentre.html").forward(request, response);
 			} else if (button.equals("Nouveau medecin")) {
-				response.getWriter().append("a coder ");
+				request.setAttribute("lc", facade.listerCentres());
+				request.getRequestDispatcher("creationmedecin.jsp").forward(request, response);
 			}
 			
 		} else if (op.equals("creationcentre")) {
@@ -170,6 +172,15 @@ public class Servlet extends HttpServlet {
 			facade.ajoutCentre(nom, adresse, ville);
 			request.getRequestDispatcher("pageadmin.html").forward(request, response);
 			
+			
+		} else if (op.equals("creationmedecin")){
+			String nom = request.getParameter("nom");
+			String spe = request.getParameter("specialite");
+			String idc = request.getParameter("idcentre");
+			
+			facade.ajoutMedecin(nom, Specialite.toCaracteristiques(spe),Integer.parseInt(idc));
+			
+			request.getRequestDispatcher("pageadmin.html").forward(request, response);
 		
 
 		} else {

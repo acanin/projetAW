@@ -7,11 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import enumerations.AntecedentsMedicaux;
-import enumerations.Cheveux;
-import enumerations.Loisirs;
-import enumerations.Peau;
-import enumerations.Yeux;
+import enumerations.*;
 
 @Singleton
 @LocalBean
@@ -37,6 +33,14 @@ public class Facade {
 		em.persist(new Centre(nom, adresse, ville));
 	}
 	
+	public void ajoutMedecin(String nom, Specialite spe, int idcentre) {
+		
+		Centre c = em.find(Centre.class, idcentre);
+		Medecin m = new Medecin(nom,spe);
+		em.persist(m);
+		m.setOwner(c);
+	}
+	
 	public Collection<Donneur> listerDonneurs(){
 		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p", Donneur.class);
 		return req.getResultList();
@@ -53,5 +57,12 @@ public class Facade {
 		TypedQuery<Centre> req = em.createQuery("select c from Centre c", Centre.class);
 		return req.getResultList();
 	}
+	
+	public Collection<Medecin> listerMedecins() {
+		TypedQuery<Medecin> req = em.createQuery("select m from Medecin m", Medecin.class);
+		return req.getResultList();
+	}
+	
+	
 	
 }
