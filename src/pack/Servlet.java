@@ -87,7 +87,11 @@ public class Servlet extends HttpServlet {
 			}
 			
 			
-			
+		} else if (op.equals("pageaccueil")) {	
+			String button = request.getParameter("choix");
+			if (button.equals("RechercherDonneur")) {
+				request.getRequestDispatcher("recherchedonneur.jsp").forward(request, response);
+			} 
 			
 			
 			
@@ -108,6 +112,51 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("nom", nom);
 			request.setAttribute("prenom", prenom);
 			request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+			
+			
+			
+		} else if (op.equals("rechercherDonneur")) {
+			String button = request.getParameter("choix");
+			if (button.equals("Annuler")) {
+				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+			} 
+			
+			// Bouton "Valider" 
+			else {
+				// On recupere les carateristiques recherchees 
+				String yeuxRecherche = request.getParameter("yeuxRecherche");
+				String cheveuxRecherche = request.getParameter("cheveuxRecherche");
+				String peauRecherche = request.getParameter("peauRecherche");
+				String amRecherche = request.getParameter("antecedentsRecherche");
+				String loisirRecherche = request.getParameter("loisirsRecherche");
+				
+				
+				
+				
+				
+				// On les envoie la page d'apres
+				request.setAttribute("yeuxR", yeuxRecherche);
+				request.setAttribute("cheveuxR", cheveuxRecherche);
+				request.setAttribute("peauR", peauRecherche);
+				request.setAttribute("amR", amRecherche);
+				request.setAttribute("loisirR", loisirRecherche);
+	
+				
+				request.getRequestDispatcher("afficherDonneurSelectionne.jsp").forward(request, response);
+			}
+			
+			
+			
+			
+			
+		} else if (op.equals("afficherDonneurSelectionne")){
+			String button = request.getParameter("choix");
+			if (button.equals("Annuler")) {
+				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+			} 
+			
+		
+		
 
 		} else {
 			response.getWriter().append("Served at: ").append(request.getContextPath());

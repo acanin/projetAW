@@ -5,13 +5,13 @@
 <head>
 <link rel="stylesheet" media="screen" type="text/css" href="CreationComptestyle.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Bébés à tout prix</title>
+<title>Insert title here</title>
 </head>
 <body>
 
 <h1 id="header">
     	Bébé à tout prix
-    	<p> Pade d'Accueil </p>
+    	<p> Voici les résultats </p>
 </h1>
 
 <div id="conteneur"> 
@@ -19,21 +19,28 @@
 	<c>
 	
 	<form action= "Servlet" method="post">
-	<b> Bonjour  
+	<b> 
 	<%
-	String n = (String) request.getAttribute("nom");
-	String p = (String) request.getAttribute("prenom");
+	String y = (String) request.getAttribute("yeuxR");
+	String c = (String) request.getAttribute("cheveuxR");
+	String p = (String) request.getAttribute("peauR");
+	String am = (String) request.getAttribute("amR");
+	String l = (String) request.getAttribute("loisirR");
+	
 	%>
-	<%= n  %> 
-	<%= p  %> <br> 
+	<%= y  %> 
+	<%= c  %>
+	<%= p  %> 
+	<%= am %>
+	<%= l  %> <br> 
 	
 	</b>
 
 	
 	
-		<input type="submit" name="choix" value="RechercherDonneur">
+		<input type="submit" name="choix" value="Annuler">
 		<input type="submit" name="choix" value="Bouton2">
-		<input type="hidden" name = "op" value="pageaccueil">
+		<input type="hidden" name = "op" value="afficherDonneurSelectionne">
 		
 		
 	</form>

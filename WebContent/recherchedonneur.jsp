@@ -26,7 +26,7 @@
 		for (Yeux y : Yeux.allyeux) {
 		String s = Yeux.toString(y);
 		%>
-		<input type = "radio" name=<%= s %> value = <%= s %>> <%= s %> 
+		<input type = "radio" name="yeuxRecherche" value = <%= s %>> <%= s %> <br>
 	<% } %>
 	
 	
@@ -36,7 +36,7 @@
 		for (Cheveux y : Cheveux.allcheveux) {
 		String s = Cheveux.toString(y);
 		%>
-		<input type = "radio" name=<%= s %> value = <%= s %>> <%= s %> 	
+		<input type = "radio" name="cheveuxRecherche" value = <%= s %>> <%= s %> <br> 	
 	<% } %>
 
 	
@@ -46,7 +46,7 @@
 		for (Peau p : Peau.allpeau) {
 		String s = Peau.toString(p);
 		%>
-		<input type = "radio" name=<%= s %> value = <%= s %>> <%= s %> 
+		<input type = "radio" name="peauRecherche" value = <%= s %>> <%= s %> <br> 
 	<% } %>
 	
 	<b><p> Antécédents Médicaux : </p></b>
@@ -54,7 +54,7 @@
 		for (AntecedentsMedicaux am : AntecedentsMedicaux.allantmed) {
 		String s = AntecedentsMedicaux.toString(am);
 		%>
-		<input type = "radio" name= <%= s %>  value = <%= s %>> <%= s %> 
+		<input type = "radio" name="antecedentRecherche" value = <%= s %>> <%= s %> <br> 
 	<% } %>
 	
 	<b><p> Loisirs : </p></b>
@@ -62,13 +62,14 @@
 		for (Loisirs l : Loisirs.allloisirs) {
 		String s = Loisirs.toString(l);
 		%>
-		<input type = "radio" name=<%= s %> value = <%= s %>> <%= s %> 
+		<input type = "radio" name="loisirRecherche" value = <%= s %>> <%= s %> <br> 
 	<% } %>
 	<br>
 		<d>
 		<input type="submit" name="choix" value="Valider">
+		<input type="submit" name="choix" value="Annuler">
 		</d>
-		<input type="hidden" name = "op" value="validerCreationDonneur">
+		<input type="hidden" name = "op" value="rechercherDonneur">
 	</form>
 	
 
