@@ -35,12 +35,27 @@
 	<%= l  %> <br> 
 	
 	</b>
+	
+	<% Collection<Donneur> ld = (Collection<Donneur>)request.getAttribute("listedonneur");
+	Yeux yeux = Yeux.toCaracteristiques(y);
+	for(Donneur d : ld){
+		if (d.getYeux() == yeux){ %>
+			<li> <%= "ok cette personne est compatible" %></li>
+		<% } else {%>
+		  		Il n'y a malheureusement aucun donneur qui correspond à vos caractéristiques.
+			
+		<% }%>
+
+	<% }%>
+
 
 	
 	
-		<input type="submit" name="choix" value="Annuler">
+		<input type="submit" name="choix" value="Retour Accueil">
 		<input type="submit" name="choix" value="Bouton2">
 		<input type="hidden" name = "op" value="afficherDonneurSelectionne">
+		<input type="hidden" name = "nom" value = <%= (String) request.getAttribute("nom") %>> 
+		<input type="hidden" name = "prenom" value = <%= (String) request.getAttribute("prenom") %>> 
 		
 		
 	</form>
