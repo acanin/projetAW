@@ -33,6 +33,10 @@ public class Facade {
 		em.persist(new Receveur(n, p, a, s.equals("Femme")));
 	}
 	
+	public void ajoutCentre(String nom, String adresse, String ville) {
+		em.persist(new Centre(nom, adresse, ville));
+	}
+	
 	public Collection<Donneur> listerDonneurs(){
 		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p", Donneur.class);
 		return req.getResultList();
@@ -43,6 +47,11 @@ public class Facade {
 		TypedQuery<Receveur> req = em.createQuery("select a from Receveur a", Receveur.class);
 		return req.getResultList();
 		
+	}
+	
+	public Collection<Centre> listerCentres(){
+		TypedQuery<Centre> req = em.createQuery("select c from Centre c", Centre.class);
+		return req.getResultList();
 	}
 	
 }
