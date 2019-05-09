@@ -31,9 +31,11 @@
 
 	
 	
-		<input type="submit" name="choix" value="Bouton1">
+		<input type="submit" name="choix" value="Rechercher Donneur">
 		<input type="submit" name="choix" value="Bouton2">
 		<input type="hidden" name = "op" value="pageaccueil">
+		<input type="hidden" name = "nom" value = <%= (String) request.getAttribute("nom") %>> 
+		<input type="hidden" name = "prenom" value = <%= (String) request.getAttribute("prenom") %>> 
 		
 		
 	</form>
