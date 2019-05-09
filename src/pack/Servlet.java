@@ -50,6 +50,10 @@ public class Servlet extends HttpServlet {
 				response.getWriter().append("Served at: ").append(request.getContextPath());
 			}
 			
+			
+			
+			
+			
 		} else if (op.equals("creationcompte")){
 			String button = request.getParameter("operation");
 			if (button.equals("Annuler")) {
@@ -66,11 +70,10 @@ public class Servlet extends HttpServlet {
 				String type = request.getParameter("type");
 				
 				if (type.equals("Receveur")) {
+					facade.ajoutReceveur(nom, prenom, Integer.parseInt(age), sexe);
+					//response.getWriter().append("pageaccueil.jsp");
 					request.setAttribute("nom", nom);
 					request.setAttribute("prenom", prenom);
-					
-					//facade.ajoutReceveur(nom, prenom, Integer.parseInt(age), sexe);
-					//response.getWriter().append("pageaccueil.jsp");
 					request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 					
 				} else {
@@ -82,6 +85,12 @@ public class Servlet extends HttpServlet {
 				}
 				// a completer pour mdp et mail	
 			}
+			
+			
+			
+			
+			
+			
 		} else if (op.equals("validerCreationDonneur")) {
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
@@ -96,7 +105,9 @@ public class Servlet extends HttpServlet {
 			String loisir = request.getParameter("loisirs");
 			
 			facade.ajoutDonneur(nom, prenom, Integer.parseInt(age), Integer.parseInt(taille), Integer.parseInt(poids), sexe, true, Yeux.toCaracteristiques(yeux), Cheveux.toCaracteristiques(cheveux), Peau.toCaracteristiques(peau), Loisirs.toCaracteristiques(loisir), AntecedentsMedicaux.toCaracteristiques(am));
-			response.getWriter().append("Coder page accueil 1");
+			request.setAttribute("nom", nom);
+			request.setAttribute("prenom", prenom);
+			request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 
 		} else {
 			response.getWriter().append("Served at: ").append(request.getContextPath());
