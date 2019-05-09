@@ -174,7 +174,21 @@ public class Servlet extends HttpServlet {
 				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 			} 
 			
-		
+		} else if (op.equals("admin")) {
+			String button = request.getParameter("adminbutton");
+			if (button.equals("Ouverture d'un centre")) {
+				request.getRequestDispatcher("creationcentre.html").forward(request, response);
+			} else if (button.equals("Nouveau medecin")) {
+				response.getWriter().append("a coder ");
+			}
+			
+		} else if (op.equals("creationcentre")) {
+			String nom = request.getParameter("nom");
+			String adresse = request.getParameter("adresse");
+			String ville = request.getParameter("ville");
+			facade.ajoutCentre(nom, adresse, ville);
+			request.getRequestDispatcher("pageadmin.html").forward(request, response);
+			
 		
 
 		} else {
