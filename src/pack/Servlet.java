@@ -154,7 +154,7 @@ public class Servlet extends HttpServlet {
 				request.setAttribute("prenom", prenom);
 				
 				// On envoie la liste des donneurs
-				request.setAttribute("listedonneur", facade.listerDonneurs());
+				request.setAttribute("listedonneurCompatible", facade.rechercher(yeuxRecherche,cheveuxRecherche,peauRecherche,amRecherche,loisirRecherche));
 	
 				request.getRequestDispatcher("afficherDonneurSelectionne.jsp").forward(request, response);
 			}

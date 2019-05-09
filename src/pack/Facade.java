@@ -54,4 +54,9 @@ public class Facade {
 		return req.getResultList();
 	}
 	
+	public Collection<Donneur> rechercher(String yeux, String cheveux,String peau,String am,String loisir){
+		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) + "AND CHEVEUX = " + Cheveux.toInteger(cheveux) + "AND PEAU = " + Peau.toInteger(peau)  + "AND ANTECEDENTS = " + AntecedentsMedicaux.toInteger(am)  + "AND LOISIRS = " + Loisirs.toInteger(loisir) , Donneur.class);
+		return req.getResultList();
+	}
+	
 }

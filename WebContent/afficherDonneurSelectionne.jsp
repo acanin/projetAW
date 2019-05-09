@@ -21,31 +21,25 @@
 	<form action= "Servlet" method="post">
 	<b> 
 	<%
-	String y = (String) request.getAttribute("yeuxR");
-	String c = (String) request.getAttribute("cheveuxR");
-	String p = (String) request.getAttribute("peauR");
-	String am = (String) request.getAttribute("amR");
-	String l = (String) request.getAttribute("loisirR");
+	//String y = (String) request.getAttribute("yeuxR");
+	//String c = (String) request.getAttribute("cheveuxR");
+	//String p = (String) request.getAttribute("peauR");
+	//String am = (String) request.getAttribute("amR");
+    //String l = (String) request.getAttribute("loisirR");
 	
 	%>
-	<%= y  %> 
-	<%= c  %>
-	<%= p  %> 
-	<%= am %>
-	<%= l  %> <br> 
+	 <br>
+
+	
 	
 	</b>
+	Voici les donneurs qui vous sont compatibles :
 	
-	<% Collection<Donneur> ld = (Collection<Donneur>)request.getAttribute("listedonneur");
-	Yeux yeux = Yeux.toCaracteristiques(y);
-	for(Donneur d : ld){
-		if (d.getYeux() == yeux){ %>
-			<li> <%= "ok cette personne est compatible" %></li>
-		<% } else {%>
-		  		Il n'y a malheureusement aucun donneur qui correspond à vos caractéristiques.
-			
-		<% }%>
-
+	<% Collection<Donneur> ld = (Collection<Donneur>)request.getAttribute("listedonneurCompatible");
+	for (Donneur d : ld){ %>
+		
+		<li> <%= d.getNom() +" - " + d.getPrenom() %> </li>
+		
 	<% }%>
 
 

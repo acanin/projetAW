@@ -46,4 +46,24 @@ public static final Peau[] allpeau = Peau.values();
 		return s;
 	}
 	
+	public static int toInteger(String nom) {
+		int s = 0;
+		switch(nom) {
+		case "Blanche":
+			s = 0 ;
+			break;
+		case "Noir":
+			s = 1;
+			break;
+		case "Chocolat":
+			s = 2;
+			break;
+		case "Metisse":
+			s = 3;
+			break;
+		}
+		return s;
+	}
+	
+	
 }

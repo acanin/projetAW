@@ -74,4 +74,35 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 		return s;
 	}
 	
+	public static int toInteger(String nom) {
+		int s = 0;
+		switch(nom) {
+		case "Cardiaque":
+			s = 0;
+			break;
+		case "Asthmatique":
+			s = 1;
+			break;
+		case "Diabetique":
+			s = 2;
+			break;
+		case "Parkison":
+			s = 3;
+			break;
+		case "AVC":
+			s = 4;
+			break;
+		case "Alzheimer":
+			s = 5 ;
+			break;
+		case "Sida":
+			s = 6;
+			break;
+		case "Fausse Couche":
+			s = 7;
+			break;
+		}
+		return s;
+	}
+	
 }

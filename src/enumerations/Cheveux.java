@@ -59,4 +59,29 @@ public static final Cheveux[] allcheveux = Cheveux.values();
 		}
 		return s;
 	}
+	
+	public static int toInteger(String cheveux) {
+		int s = 0;
+		switch(cheveux) {
+		case "Noir":
+			s = 0;
+			break;
+		case "Brun":
+			s = 1;
+			break;
+		case "Chatain":
+			s = 2;
+			break;
+		case "Blond":
+			s = 3;
+			break;
+		case "Roux":
+			s = 4;
+			break;
+		case "Chauve":
+			s = 5;
+			break;
+		}
+		return s;
+	}
 }
