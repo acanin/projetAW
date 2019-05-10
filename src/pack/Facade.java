@@ -58,7 +58,7 @@ public class Facade {
 		return req.getResultList();
 	}
 	
-<<<<<<< HEAD
+
 	public Collection<Medecin> listerMedecins() {
 		TypedQuery<Medecin> req = em.createQuery("select m from Medecin m", Medecin.class);
 		return req.getResultList();
@@ -66,11 +66,11 @@ public class Facade {
 	
 	
 	
-=======
+
 	public Collection<Donneur> rechercher(String yeux, String cheveux,String peau,String am,String loisir){
 		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) + "AND CHEVEUX = " + Cheveux.toInteger(cheveux) + "AND PEAU = " + Peau.toInteger(peau)  + "AND ANTECEDENTS = " + AntecedentsMedicaux.toInteger(am)  + "AND LOISIRS = " + Loisirs.toInteger(loisir) , Donneur.class);
 		return req.getResultList();
 	}
 	
->>>>>>> ba0b424db5a8bf70be7644f5b1e7abd3a6d2d013
+
 }
