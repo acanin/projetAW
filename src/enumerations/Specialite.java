@@ -12,13 +12,13 @@ public enum Specialite {
 		String s = null;
 		switch(sp) {
 		case GENERALISTE:
-			s = "Généraliste";
+			s = "Generaliste";
 			break;
 		case GYNECO:
-			s = "Gynécologue";
+			s = "Gynecologue";
 			break;
 		case INFIRMIERE:
-			s = "Infirmière";
+			s = "Infirmiere";
 			break;
 		}
 		return s;
@@ -27,13 +27,13 @@ public enum Specialite {
 	public static Specialite toCaracteristiques(String nom) {
 		Specialite s = Specialite.Test;
 		switch(nom) {
-		case "Généraliste":
+		case "Generaliste":
 			s = GENERALISTE;
 			break;
-		case "Gynécologue":
+		case "Gynecologue":
 			s = GYNECO;
 			break;
-		case "Infirmière":
+		case "Infirmiere":
 			s = INFIRMIERE;
 			break;
 		}
