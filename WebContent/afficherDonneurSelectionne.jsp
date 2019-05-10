@@ -21,26 +21,35 @@
 	<form action= "Servlet" method="post">
 	<b> 
 	<%
-	String y = (String) request.getAttribute("yeuxR");
-	String c = (String) request.getAttribute("cheveuxR");
-	String p = (String) request.getAttribute("peauR");
-	String am = (String) request.getAttribute("amR");
-	String l = (String) request.getAttribute("loisirR");
+	//String y = (String) request.getAttribute("yeuxR");
+	//String c = (String) request.getAttribute("cheveuxR");
+	//String p = (String) request.getAttribute("peauR");
+	//String am = (String) request.getAttribute("amR");
+    //String l = (String) request.getAttribute("loisirR");
 	
 	%>
-	<%= y  %> 
-	<%= c  %>
-	<%= p  %> 
-	<%= am %>
-	<%= l  %> <br> 
-	
-	</b>
+	 <br>
 
 	
 	
-		<input type="submit" name="choix" value="Annuler">
+	</b>
+	Voici les donneurs qui vous sont compatibles :
+	
+	<% Collection<Donneur> ld = (Collection<Donneur>)request.getAttribute("listedonneurCompatible");
+	for (Donneur d : ld){ %>
+		
+		<li> <%= d.getNom() +" - " + d.getPrenom() %> </li>
+		
+	<% }%>
+
+
+	
+	
+		<input type="submit" name="choix" value="Retour Accueil">
 		<input type="submit" name="choix" value="Bouton2">
 		<input type="hidden" name = "op" value="afficherDonneurSelectionne">
+		<input type="hidden" name = "nom" value = <%= (String) request.getAttribute("nom") %>> 
+		<input type="hidden" name = "prenom" value = <%= (String) request.getAttribute("prenom") %>> 
 		
 		
 	</form>

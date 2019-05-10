@@ -87,4 +87,41 @@ public static final Loisirs[] allloisirs = Loisirs.values();
 		}
 		return s;
 	}
+	
+	public static int toInteger(String nom) {
+		int s = 0;
+		switch(nom) {
+		case "Danse":
+			s = 0 ;
+			break;
+		case "Lecture":
+			s = 1;
+			break;
+		case "Cuisine":
+			s = 2 ;
+			break;
+		case "Course":
+			s = 3;
+			break;
+		case "Judo":
+			s = 4;
+			break;
+		case "Escalade":
+			s = 5;
+			break;
+		case "Jeux video":
+			s = 6;
+			break;
+		case "Violon":
+			s = 7;
+			break;
+		case "Piano":
+			s = 8;
+			break;
+		case "Guitare":
+			s = 9;
+			break;
+		}
+		return s;
+	}
 }

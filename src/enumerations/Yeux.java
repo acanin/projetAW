@@ -61,4 +61,30 @@ public enum Yeux {
 		return s;
 	};
 	
+	public static int toInteger(String y){
+		int valeur = 0;
+		switch(y) {
+		case "Bleu":
+			valeur = 0 ;
+			break;
+		case "Vert":
+			valeur = 1 ;
+			break;
+		case "Marron":
+			valeur = 2 ;
+			break;
+		case "Noisette":
+			valeur = 3 ;
+			break;
+		case "Gris":
+			valeur = 4 ;
+			break;
+		case "Vairon":
+			valeur = 5 ;
+			break;
+		}
+		return valeur;
+		
+	}
+	
 }
