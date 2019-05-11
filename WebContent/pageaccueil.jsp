@@ -23,11 +23,20 @@
 	<%
 	String n = (String) request.getAttribute("nom");
 	String p = (String) request.getAttribute("prenom");
+	
+	
 	%>
 	<%= n  %> 
 	<%= p  %> <br> 
 	
 	</b>
+	
+	
+	<p> Nous avons actuellement 
+	<% Collection<Donneur> ld = (Collection<Donneur>) request.getAttribute("listedonneur");
+		int nb_donneur = ld.size(); %>
+		
+		<%= nb_donneur  %> donneurs disponibles dans tout nos centres. <br>
 
 	
 	

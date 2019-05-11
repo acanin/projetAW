@@ -75,6 +75,7 @@ public class Servlet extends HttpServlet {
 					//response.getWriter().append("pageaccueil.jsp");
 					request.setAttribute("nom", nom);
 					request.setAttribute("prenom", prenom);
+					request.setAttribute("listedonneur", facade.listerDonneurs());
 					request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 					
 				} else {
@@ -92,6 +93,10 @@ public class Servlet extends HttpServlet {
 			String button = request.getParameter("choix");
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
+			
+			// Affichage du nombre de donneur 
+			
+			
 			
 			if (button.equals("Rechercher Donneur")) {
 				request.setAttribute("nom", nom);
@@ -117,6 +122,7 @@ public class Servlet extends HttpServlet {
 			facade.ajoutDonneur(nom, prenom, Integer.parseInt(age), Integer.parseInt(taille), Integer.parseInt(poids), sexe, true, Yeux.toCaracteristiques(yeux), Cheveux.toCaracteristiques(cheveux), Peau.toCaracteristiques(peau), Loisirs.toCaracteristiques(loisir), AntecedentsMedicaux.toCaracteristiques(am));
 			request.setAttribute("nom", nom);
 			request.setAttribute("prenom", prenom);
+			request.setAttribute("listedonneur", facade.listerDonneurs());
 			request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 			
 			
@@ -130,6 +136,7 @@ public class Servlet extends HttpServlet {
 			if (button.equals("Annuler")) {
 				request.setAttribute("nom", nom);
 				request.setAttribute("prenom", prenom);
+				request.setAttribute("listedonneur", facade.listerDonneurs());
 				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 			} 
 			
