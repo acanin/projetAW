@@ -189,6 +189,9 @@ public class Servlet extends HttpServlet {
 			} else if (button.equals("Nouveau medecin")) {
 				request.setAttribute("lc", facade.listerCentres());
 				request.getRequestDispatcher("creationmedecin.jsp").forward(request, response);
+			} else if(button.equals("listercentre")) { // C'est un test qu'il faudra enlever plus tard, flemme de faire la bonne page
+				request.setAttribute("lc", facade.listerCentres());
+				request.getRequestDispatcher("listercentre.jsp").forward(request, response);
 			}
 			
 		} else if (op.equals("creationcentre")) {
@@ -207,6 +210,11 @@ public class Servlet extends HttpServlet {
 			facade.ajoutMedecin(nom, Specialite.toCaracteristiques(spe),Integer.parseInt(idc));
 			
 			request.getRequestDispatcher("pageadmin.html").forward(request, response);
+			
+		} else if(op.equals("profilcentre")) {
+			String id = request.getParameter("centre");
+			request.setAttribute("idcentre", id);
+			request.getRequestDispatcher("profilcentre.jsp").forward(request, response);
 		
 
 		} else {

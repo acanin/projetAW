@@ -10,22 +10,5 @@
 
 
 
-<ul>
-
-<%
-	Collection<Centre> lc = (Collection<Centre>) request.getAttribute("lc");
-	for (Centre c : lc) { 
-		String s = "Centre " + c.getNom() + " à " + c.getVille();
-		int id = c.getId(); %>
-		
-		<li> <a href="Servlet?op=profilcentre&centre=<%= id%>"> <%= s %>  </a> </li>
-	
-	<% } %>
-
-
-</ul>
-
-
-
 </body>
 </html>

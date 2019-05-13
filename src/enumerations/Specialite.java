@@ -3,8 +3,7 @@ package enumerations;
 public enum Specialite {
 	GENERALISTE,
 	GYNECO,
-	INFIRMIERE,
-	Test;
+	INFIRMIERE;
 	
 	public static final Specialite[] allspe = Specialite.values();
 	
@@ -25,7 +24,7 @@ public enum Specialite {
 	};
 	
 	public static Specialite toCaracteristiques(String nom) {
-		Specialite s = Specialite.Test;
+		Specialite s = null;
 		switch(nom) {
 		case "Generaliste":
 			s = GENERALISTE;
