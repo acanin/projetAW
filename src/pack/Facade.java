@@ -72,5 +72,10 @@ public class Facade {
 		return req.getResultList();
 	}
 	
+	public Centre recupererCentre(int idCentre) {
+		Centre c = em.find(Centre.class, idCentre);
+		return c;
+	}
+	
 
 }

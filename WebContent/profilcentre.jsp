@@ -8,6 +8,12 @@
 </head>
 <body>
 
+<% Centre centre = (Centre) request.getAttribute("centre");
+String s = centre.getNom();
+%>
+
+<%= s %>
+
 
 
 </body>

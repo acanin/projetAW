@@ -213,7 +213,7 @@ public class Servlet extends HttpServlet {
 			
 		} else if(op.equals("profilcentre")) {
 			String id = request.getParameter("centre");
-			request.setAttribute("idcentre", id);
+			request.setAttribute("centre", facade.recupererCentre(Integer.parseInt(id)));
 			request.getRequestDispatcher("profilcentre.jsp").forward(request, response);
 		
 
