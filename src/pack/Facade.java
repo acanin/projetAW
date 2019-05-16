@@ -65,12 +65,35 @@ public class Facade {
 	}
 	
 	
-	
-
 	public Collection<Donneur> rechercher(String yeux, String cheveux,String peau,String am,String loisir){
 		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) + "AND CHEVEUX = " + Cheveux.toInteger(cheveux) + "AND PEAU = " + Peau.toInteger(peau)  + "AND ANTECEDENTS = " + AntecedentsMedicaux.toInteger(am)  + "AND LOISIRS = " + Loisirs.toInteger(loisir) , Donneur.class);
 		return req.getResultList();
 	}
+	
+	/** 	public Collection<Donneur> rechercherYeux(String yeux){
+		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) , Donneur.class);
+		return req.getResultList();
+	}
+	
+	public Collection<Donneur> rechercherCheveux(String cheveux){
+		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE CHEVEUX = " + Cheveux.toInteger(cheveux) , Donneur.class);
+		return req.getResultList();
+	}
+	
+	public Collection<Donneur> rechercherPeau(String peau){
+		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE PEAU = " + Peau.toInteger(peau) , Donneur.class);
+		return req.getResultList();
+	}
+	
+	public Collection<Donneur> rechercherAM(String am){
+		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE ANTECEDENTS = " + AntecedentsMedicaux.toInteger(am) , Donneur.class);
+		return req.getResultList();
+	}
+	
+	public Collection<Donneur> rechercherLoisir(String loisir){
+		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE LOISIRS = " + Loisirs.toInteger(loisir)  , Donneur.class);
+		return req.getResultList();
+	*/
 	
 
 }
