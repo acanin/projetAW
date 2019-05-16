@@ -11,7 +11,7 @@
 
 <h1 id="header">
     	Bébé à tout prix
-    	<p> Voici le porfil du donneur que vous avez selectionne </p>
+    	<p> Voici le profil du donneur que vous avez selectionne </p>
 </h1>
 
 <div id="conteneur"> 

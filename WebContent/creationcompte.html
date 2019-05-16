@@ -1,56 +1,140 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<link rel="stylesheet" media="screen" type="text/css" href="CreationComptestyle.css"/>
-<meta charset="UTF-8">
-<title>Bébé à tout prix</title>
-
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="medcare/img/favicon.png" type="image/png">
+    <title>Bébés à tout prix</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="medcare/css/bootstrap.css">
+    <link rel="stylesheet" href="medcare/css/themify-icons.css">
+    <link rel="stylesheet" href="medcare/css/flaticon.css">
+    <link rel="stylesheet" href="medcare/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="medcare/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="medcare/vendors/animate-css/animate.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="medcare/css/style.css">
+    <link rel="stylesheet" href="medcare/css/responsive.css">
 </head>
-
 <body>
 
-<h1 id="header">
-    	Bébé à tout prix
-    	<p> Inscription </p>
-</h1>
 
-<div id="conteneur"> 
-<b>Bonjour, veuillez remplir les champs ci-dessous pour obtenir un compte :  </b>
-
-<c>
-	<form method="post"  action="Servlet"> 
-
-		<p><label for="nom">Nom :</label><input type="text" name="nom" /></p>
-		
-		<p><label for="prenom">Prénom :</label><input type="text" name="prenom" /></p>
-
-		<p><label for="mail">Mail :</label><input type="text" name="mail" /></p>
-
-		<p><label for="motdepasse">Mot de Passe :</label><input type="text" name="motdepasse" /></p>
-		
-		<p><label for="age">Age :</label><input type="text" name="age" /></p>
+    <!--================Header Menu Area =================-->
+    <header class="header_area">	
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    
+                    <a class="navbar-brand logo_h" href="index2.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
+                    
+                    
+               
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--================Header Menu Area =================-->
 
 
-		<p><label for="sexe">Sexe :</label><input type="radio" name= "sexe" value = "Femme"> Femme
-											<input type="radio" name= "sexe" value = "Homme"> Homme </p>
+ 
+ <!--================Home Banner Area =================-->
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div
+            class="banner_content d-md-flex justify-content-between align-items-center"
+          >
+            <div class="mb-3 mb-md-0">
+              <h2>S'inscrire</h2>
+            
+            </div>
+            <div class="page_link">
+              <a href="index.html">Accueil</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+
+  <!-- ================ formulaire section start ================= -->
+  <section class="contact-section area-padding">
+    
+        <div class="col-12">
+          <h2 class="contact-title">Bonjour ! Veuillez remplir les champs ci-dessous pour obtenir un compte : </h2>
+        </div>
+        
+        <div class="col-lg-8">
+        
+        
+          <form method="post"  action="Servlet">
+          
+            <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                  <input class="form-control" name="nom" type="text" placeholder="Nom">
+                </div>
+              
+              </div>
+              
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input class="form-control" name="prenom" type="text" placeholder="Prenom">
+                </div>
+              </div>
+              
+              <div class="col-12">
+                <div class="form-group">
+                  <input class="form-control" name="mail" type="text" placeholder="Mail">
+                </div>
+              </div>
+              
+              <div class="col-12">
+                <div class="form-group">
+                  <input class="form-control" name="motdepasse" type="text" placeholder="Mot de passe">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <input class="form-control" name="age" type="text" placeholder="Age">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <input type="radio" name= "sexe" value = "Femme"> Femme
+				  <input type="radio" name= "sexe" value = "Homme"> Homme
 											
-		<p><label for="type">Type d'abonné :</label><input type="radio" name= "type" value = "Receveur"> Receveur
-											<input type="radio" name= "type" value = "Donneur"> Donneur </p>
-		
-		
-	
-		
-		
-		<b>
-		<p><input type="submit" name="operation" value="S'inscrire">
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <input type="radio" name= "type" value = "Receveur"> Receveur
+				  <input type="radio" name= "type" value = "Donneur"> Donneur			
+                </div>
+              </div>
+              
+            </div>
+            
+            
+            <div class="form-group mt-3">
+              
+                <input type="submit"  class="main_btn" name="operation" value="S'inscrire">
 
-		<input type="submit" name="operation" value="Annuler"></p> </b>
+				<input type="submit"  class="main_btn_light" name="operation" value="Annuler">
 
-		<input type="hidden" name = "op" value = "creationcompte"> 
+				<input type="hidden" name = "op" value = "creationcompte"> 
+            </div>
+          </form>
 
-	</form> 
-</c>
 
-</div>
+        </div>
+
+  </section>
+  <!-- ================ formulaire section end ================= -->
+
+
+
 </body>
 </html>
