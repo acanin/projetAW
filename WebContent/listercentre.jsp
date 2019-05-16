@@ -18,7 +18,7 @@
 		String s = "Centre " + c.getNom() + " à " + c.getVille();
 		int id = c.getId(); %>
 		
-		<li> <a href="Servlet?op=profilcentre&centre=<%= id%>"> <%= s %>  </a> </li>
+		<li> <a href="Servlet?op=listeC&centre=<%= id%>"> <%= s %>  </a> </li>
 	
 	<% } %>
 

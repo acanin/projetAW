@@ -18,20 +18,24 @@ public class Medecin {
 	int id;
 	String nom;
 	Specialite specialisation;
+	boolean sexe; // 1 pour les femmes et 0 pour les mecs
+	
 	
 	@ManyToOne
 	Centre owner;
 	
 	public Medecin(){}
 	
-	public Medecin(String n, Specialite s) {
+	public Medecin(String n, Specialite s, boolean sexe) {
 		this.nom = n;
-		this.specialisation = s;				
+		this.specialisation = s;	
+		this.sexe = sexe;
 	}
 
 	public int getId() {
 		return id;
 	}
+
 
 	public void setId(int id) {
 		this.id = id;
@@ -43,6 +47,14 @@ public class Medecin {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+	
+	public boolean isSexe() {
+		return sexe;
+	}
+
+	public void setSexe(boolean sexe) {
+		this.sexe = sexe;
 	}
 
 	public Specialite getSpecialisation() {
