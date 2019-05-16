@@ -1,34 +1,35 @@
 package enumerations;
 
 public enum AntecedentsMedicaux {
-	CARDIAQUE,
-	ASTHMATIQUE,
-	DIABETIQUE,
+	FAUSSE_COUCHE,
+	ASTHME,
+	DIABETE,
+	TROUBLE_CARDIAQUE,
+	CANCER,
 	PARKINSON,
-	AVC,
 	ALZHEIMER,
 	SIDA,
-	FAUSSE_COUCHE;
+	AUCUN;
 	
 public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values();
 	
 	public static String toString(AntecedentsMedicaux c){
 		String s = null;
 		switch(c) {
-		case CARDIAQUE:
-			s = "Cardiaque";
+		case FAUSSE_COUCHE:
+			s = "Fausse couche";
 			break;
-		case ASTHMATIQUE:
-			s = "Asthmatique";
+		case ASTHME:
+			s = "Asthme";
 			break;
-		case DIABETIQUE:
-			s = "Diabetique";
+		case DIABETE:
+			s = "Diabete";
 			break;
 		case PARKINSON:
-			s = "Parkison";
+			s = "Parkinson";
 			break;
-		case AVC:
-			s = "AVC";
+		case TROUBLE_CARDIAQUE:
+			s = "Trouble cardiaque";
 			break;
 		case ALZHEIMER:
 			s = "Alzheimer";
@@ -36,9 +37,11 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 		case SIDA:
 			s = "Sida";
 			break;
-		case FAUSSE_COUCHE:
-			s = "Fausse Couche";
+		case CANCER:
+			s = "Cancer";
 			break;
+		case AUCUN:
+			s = "Aucun";
 		}
 		return s;
 	};
@@ -46,20 +49,20 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 	public static AntecedentsMedicaux toCaracteristiques(String nom) {
 		AntecedentsMedicaux s = null;
 		switch(nom) {
-		case "Cardiaque":
-			s = CARDIAQUE;
+		case "Trouble cardiaque":
+			s = TROUBLE_CARDIAQUE;
 			break;
-		case "Asthmatique":
-			s = ASTHMATIQUE;
+		case "Asthme":
+			s = ASTHME;
 			break;
-		case "Diabetique":
-			s = DIABETIQUE;
+		case "Diabete":
+			s = DIABETE;
 			break;
-		case "Parkison":
+		case "Parkinson":
 			s = PARKINSON;
 			break;
-		case "AVC":
-			s = AVC;
+		case "Cancer":
+			s = CANCER;
 			break;
 		case "Alzheimer":
 			s = ALZHEIMER ;
@@ -67,9 +70,11 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 		case "Sida":
 			s = SIDA;
 			break;
-		case "Fausse Couche":
+		case "Fausse couche":
 			s = FAUSSE_COUCHE;
 			break;
+		case "Aucun":
+			s = AUCUN;
 		}
 		return s;
 	}
@@ -77,19 +82,19 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 	public static int toInteger(String nom) {
 		int s = 0;
 		switch(nom) {
-		case "Cardiaque":
+		case "Trouble cardiaque":
 			s = 0;
 			break;
-		case "Asthmatique":
+		case "Asthme":
 			s = 1;
 			break;
-		case "Diabetique":
+		case "Diabete":
 			s = 2;
 			break;
-		case "Parkison":
+		case "Parkinson":
 			s = 3;
 			break;
-		case "AVC":
+		case "Cancer":
 			s = 4;
 			break;
 		case "Alzheimer":
@@ -98,8 +103,11 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 		case "Sida":
 			s = 6;
 			break;
-		case "Fausse Couche":
+		case "Fausse couche":
 			s = 7;
+			break;
+		case "Aucun":
+			s = 8;
 			break;
 		}
 		return s;
