@@ -25,26 +25,25 @@
 	//String c = (String) request.getAttribute("cheveuxR");
 	//String p = (String) request.getAttribute("peauR");
 	//String am = (String) request.getAttribute("amR");
-    //String l = (String) request.getAttribute("loisirR");
-	
+    String l = (String) request.getAttribute("loisirR");
 	%>
+	<%= l %>
 	 <br>
 
-	
-	
 	</b>
-	Voici les donneurs qui vous sont compatibles :
 	
+	Voici les donneurs qui vous sont compatibles :
+	<ul>
+		
 	<% Collection<Donneur> ld = (Collection<Donneur>)request.getAttribute("listedonneurCompatible");
+	
 	for (Donneur d : ld){ %>
 		
-		<li> <%= d.getNom() +" - " + d.getPrenom() %> </li>
+		<li> <a href="Servlet?op=afficherDonneurSelectionne&personne<%= d.getId() %>"><%= d.getNom() + " - " + d.getPrenom() %></a> </li>
 		
-	<% }%>
-
-
+	<%  }%>
 	
-	
+	</ul>
 		<input type="submit" name="choix" value="Retour Accueil">
 		<input type="submit" name="choix" value="Bouton2">
 		<input type="hidden" name = "op" value="afficherDonneurSelectionne">
