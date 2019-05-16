@@ -1,10 +1,10 @@
 package enumerations;
 
 public enum AntecedentsMedicaux {
-	FAUSSE_COUCHE,
+	ISG,
 	ASTHME,
 	DIABETE,
-	TROUBLE_CARDIAQUE,
+	CARDIAQUE,
 	CANCER,
 	PARKINSON,
 	ALZHEIMER,
@@ -16,8 +16,8 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 	public static String toString(AntecedentsMedicaux c){
 		String s = null;
 		switch(c) {
-		case FAUSSE_COUCHE:
-			s = "Fausse couche";
+		case ISG:
+			s = "ISG";
 			break;
 		case ASTHME:
 			s = "Asthme";
@@ -28,8 +28,8 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 		case PARKINSON:
 			s = "Parkinson";
 			break;
-		case TROUBLE_CARDIAQUE:
-			s = "Trouble cardiaque";
+		case CARDIAQUE:
+			s = "Cardiaque";
 			break;
 		case ALZHEIMER:
 			s = "Alzheimer";
@@ -49,8 +49,8 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 	public static AntecedentsMedicaux toCaracteristiques(String nom) {
 		AntecedentsMedicaux s = null;
 		switch(nom) {
-		case "Trouble cardiaque":
-			s = TROUBLE_CARDIAQUE;
+		case "Cardiaque":
+			s = CARDIAQUE;
 			break;
 		case "Asthme":
 			s = ASTHME;
@@ -70,8 +70,8 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 		case "Sida":
 			s = SIDA;
 			break;
-		case "Fausse couche":
-			s = FAUSSE_COUCHE;
+		case "ISG":
+			s = ISG;
 			break;
 		case "Aucun":
 			s = AUCUN;
@@ -82,8 +82,8 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 	public static int toInteger(String nom) {
 		int s = 0;
 		switch(nom) {
-		case "Trouble cardiaque":
-			s = 0;
+		case "Cardiaque":
+			s = 4;
 			break;
 		case "Asthme":
 			s = 1;
@@ -92,22 +92,22 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 			s = 2;
 			break;
 		case "Parkinson":
-			s = 3;
-			break;
-		case "Cancer":
-			s = 4;
-			break;
-		case "Alzheimer":
-			s = 5 ;
-			break;
-		case "Sida":
 			s = 6;
 			break;
-		case "Fausse couche":
-			s = 7;
+		case "Cancer":
+			s = 5;
+			break;
+		case "Alzheimer":
+			s = 7 ;
+			break;
+		case "Sida":
+			s = 8;
+			break;
+		case "ISG":
+			s = 0;
 			break;
 		case "Aucun":
-			s = 8;
+			s = 9;
 			break;
 		}
 		return s;

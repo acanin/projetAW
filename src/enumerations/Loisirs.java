@@ -7,7 +7,7 @@ public enum Loisirs {
 	COURSE,
 	JUDO,
 	ESCALADE,
-	JEUX_VIDEO,
+	JEUX,
 	VIOLON,
 	PIANO,
 	GUITARE;
@@ -35,8 +35,8 @@ public static final Loisirs[] allloisirs = Loisirs.values();
 		case ESCALADE:
 			s = "Escalade";
 			break;
-		case JEUX_VIDEO:
-			s = "Jeux video";
+		case JEUX:
+			s = "Jeux";
 			break;
 		case VIOLON:
 			s = "Violon";
@@ -72,8 +72,8 @@ public static final Loisirs[] allloisirs = Loisirs.values();
 		case "Escalade":
 			s = Loisirs.ESCALADE;
 			break;
-		case "Jeux video":
-			s = Loisirs.JEUX_VIDEO;
+		case "Jeux":
+			s = Loisirs.JEUX;
 			break;
 		case "Violon":
 			s = VIOLON;
@@ -109,7 +109,7 @@ public static final Loisirs[] allloisirs = Loisirs.values();
 		case "Escalade":
 			s = 5;
 			break;
-		case "Jeux video":
+		case "Jeux":
 			s = 6;
 			break;
 		case "Violon":

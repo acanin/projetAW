@@ -1,21 +1,16 @@
 package enumerations;
 
 public enum Peau {
-	TRES_BLANCHE,
 	CLAIRE,
 	INTERMEDIAIRE,
 	MATE,
-	BRUN_FONCE,
-	TRES_FONCE;
+	FONCE;
 	
 public static final Peau[] allpeau = Peau.values();
 	
 	public static String toString(Peau p){
 		String s = null;
 		switch(p) {
-		case TRES_BLANCHE:
-			s = "Tres blanche";
-			break;
 		case CLAIRE:
 			s = "Claire";
 			break;
@@ -25,11 +20,8 @@ public static final Peau[] allpeau = Peau.values();
 		case MATE:
 			s = "Mate";
 			break;
-		case BRUN_FONCE:
-			s = "Brun fonce";
-			break;
-		case TRES_FONCE:
-			s = "Tres fonce";
+		case FONCE:
+			s = "Fonce";
 			break;
 		}
 		return s;
@@ -38,9 +30,6 @@ public static final Peau[] allpeau = Peau.values();
 	public static Peau toCaracteristiques(String nom) {
 		Peau s = null;
 		switch(nom) {
-		case "Tres blanche":
-			s = TRES_BLANCHE ;
-			break;
 		case "Claire":
 			s = CLAIRE;
 			break;
@@ -50,11 +39,8 @@ public static final Peau[] allpeau = Peau.values();
 		case "Mate":
 			s = MATE;
 			break;
-		case "Brun fonce":
-			s = BRUN_FONCE;
-			break;
-		case "Tres fonce":
-			s = TRES_FONCE;
+		case "Fonce":
+			s = FONCE;
 			break;
 		}
 		return s;
@@ -63,23 +49,17 @@ public static final Peau[] allpeau = Peau.values();
 	public static int toInteger(String nom) {
 		int s = 0;
 		switch(nom) {
-		case "Tres blanche":
+		case "Claire":
 			s = 0;
 			break;
-		case "Claire":
+		case "Intermediaire":
 			s = 1;
 			break;
-		case "Intermediaire":
+		case "Mate":
 			s = 2;
 			break;
-		case "Mate":
+		case "Fonce":
 			s = 3;
-			break;
-		case "Brun fonce":
-			s = 4;
-			break;
-		case "Tres fonce":
-			s = 5;
 			break;
 		}
 		return s;
