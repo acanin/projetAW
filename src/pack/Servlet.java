@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import enumerations.AntecedentsMedicaux;
 import enumerations.Cheveux;
@@ -39,8 +40,7 @@ public class Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 		String op = request.getParameter("op");
 		
 		if (op.equals("index")) {
@@ -48,10 +48,47 @@ public class Servlet extends HttpServlet {
 			if (button.equals("S'inscrire")) {
 				request.getRequestDispatcher("creationcompte.html").forward(request, response);
 			} else {
-				response.getWriter().append("Served at: ").append(request.getContextPath());
+				request.setAttribute("checkfailed", false);
+				request.getRequestDispatcher("pageconnexion.jsp").forward(request, response);
 			}
+		
+		
+		} else if (op.equals("connexioncompte")) {
+			// On recupère les données
+			String identifiant = request.getParameter("identifiant");
+			String mdp = request.getParameter("mdp");
+			ProfilUtilisateur p = facade.checkAuthentification(identifiant, mdp);
 			
 			
+			// On crée la session si l'authentification a marché
+			if (p!=null) {
+				if (p instanceof Admin) {
+					HttpSession session = request.getSession(true);
+					session.setAttribute("isAdmin", true);
+					
+					request.getRequestDispatcher("pageadmin.html").forward(request, response);
+				} else {
+					
+					boolean isDonneur = (p instanceof Donneur);
+					
+					HttpSession session = request.getSession(true);
+					session.setAttribute("nom", p.getNom());
+					session.setAttribute("prenom", p.getPrenom());
+					session.setAttribute("isDonneur", isDonneur);
+						
+					// Passage de paramètres
+					request.setAttribute("listedonneur", facade.listerDonneurs());
+					
+					// On va a la page d'accueil
+					request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+				}
+				
+			// Sinon on affiche un message d'erreur sur la page
+			} else {
+				request.setAttribute("checkfailed", true);
+				request.getRequestDispatcher("pageconnexion.jsp").forward(request, response);
+				//response.getWriter().append("La connexion a échoué.");
+			}
 			
 			
 			
@@ -59,7 +96,7 @@ public class Servlet extends HttpServlet {
 			String button = request.getParameter("operation");
 			if (button.equals("Annuler")) {
 				request.getRequestDispatcher("index.html").forward(request, response);
-			} 
+			}
 			
 			else {
 				String nom = request.getParameter("nom");
@@ -71,42 +108,55 @@ public class Servlet extends HttpServlet {
 				String type = request.getParameter("type");
 				
 				if (type.equals("Receveur")) {
-					facade.ajoutReceveur(nom, prenom, Integer.parseInt(age), sexe);
-					//response.getWriter().append("pageaccueil.jsp");
-					request.setAttribute("nom", nom);
-					request.setAttribute("prenom", prenom);
+					// Ajout du receveur et de l'utilisateur dans la DB
+					facade.ajoutReceveur(nom, prenom, Integer.parseInt(age), sexe, mail, mdp);
+					
+					// Creation de la session
+					HttpSession session = request.getSession(true);
+					session.setAttribute("nom", nom);
+					session.setAttribute("prenom", prenom);
+					session.setAttribute("isDonneur", false);
+					session.setAttribute("isAdmin", false);
+					
+					// Passage de paramètre à la page suivante
 					request.setAttribute("listedonneur", facade.listerDonneurs());
+					
+					// Passage à la page suivante
 					request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 					
 				} else {
+					// Passage de paramètres à la page suivante
 					request.setAttribute("nom", nom);
 					request.setAttribute("prenom", prenom);
 					request.setAttribute("age", age);
 					request.setAttribute("sexe", sexe);
+					request.setAttribute("mail", mail);
+					request.setAttribute("mdp", mdp);
+					
+					// Passage à la page suivante
 					request.getRequestDispatcher("creationprofildonneur.jsp").forward(request, response);
 				}
-				// a completer pour mdp et mail	
 			}
 			
 			
 		} else if (op.equals("pageaccueil")) {	
 			String button = request.getParameter("choix");
-			String nom = request.getParameter("nom");
-			String prenom = request.getParameter("prenom");
 			
-			// Affichage du nombre de donneur 
-			
-			
-			
-			if (button.equals("Rechercher Donneur")) {
-				request.setAttribute("nom", nom);
-				request.setAttribute("prenom", prenom);
-				request.getRequestDispatcher("recherchedonneur.jsp").forward(request, response);
-			} 
+			// Obtention de donnees depuis la session
+			HttpSession session = request.getSession(false); // on ne crée pas de nouvelle session !
+			if (session != null) {
+				// Affichage du nombre de donneur
+				if (button.equals("Rechercher Donneur")) {
+					request.getRequestDispatcher("recherchedonneur.jsp").forward(request, response);
+				}
+			} else {
+				response.getWriter().append("Vous n'êtes pas connecté(e).");
+			}
 			
 			
 			
 		} else if (op.equals("validerCreationDonneur")) {
+			// Obtention des parametres de la page
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
 			String age = request.getParameter("age");
@@ -118,27 +168,35 @@ public class Servlet extends HttpServlet {
 			String peau = request.getParameter("peau");
 			String am = request.getParameter("antecedents");
 			String loisir = request.getParameter("loisirs");
+			String mail = request.getParameter("mail");
+			String mdp = request.getParameter("mdp");
 			
-			facade.ajoutDonneur(nom, prenom, Integer.parseInt(age), Integer.parseInt(taille), Integer.parseInt(poids), sexe, true, Yeux.toCaracteristiques(yeux), Cheveux.toCaracteristiques(cheveux), Peau.toCaracteristiques(peau), Loisirs.toCaracteristiques(loisir), AntecedentsMedicaux.toCaracteristiques(am));
-			request.setAttribute("nom", nom);
-			request.setAttribute("prenom", prenom);
+			// Stockage des donnees du profil et de l'utilisateur dans la DB
+			facade.ajoutDonneur(nom, prenom, Integer.parseInt(age), Integer.parseInt(taille), Integer.parseInt(poids), sexe, true, Yeux.toCaracteristiques(yeux), Cheveux.toCaracteristiques(cheveux), Peau.toCaracteristiques(peau), Loisirs.toCaracteristiques(loisir), AntecedentsMedicaux.toCaracteristiques(am), mail, mdp);
+			
+			// Creation d'une session
+			HttpSession session = request.getSession(true);
+			session.setAttribute("nom", nom);
+			session.setAttribute("prenom", prenom);
+			session.setAttribute("isDonneur", true);
+			session.setAttribute("isAdmin", false);
+			
+			// Passage de paramètres à la page suivante
 			request.setAttribute("listedonneur", facade.listerDonneurs());
+			
+			// Passage à la page suivante
 			request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 			
 			
 			
 		} else if (op.equals("rechercherDonneur")) {
 			String button = request.getParameter("choix");
-			String nom = request.getParameter("nom");
-			String prenom = request.getParameter("prenom");
 			
 			
 			if (button.equals("Annuler")) {
-				request.setAttribute("nom", nom);
-				request.setAttribute("prenom", prenom);
 				request.setAttribute("listedonneur", facade.listerDonneurs());
 				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
-			} 
+			}
 			
 			// Bouton "Valider" 
 			else {
@@ -148,39 +206,38 @@ public class Servlet extends HttpServlet {
 				String peauRecherche = request.getParameter("peauRecherche");
 				String amRecherche = request.getParameter("antecedentRecherche");
 				String loisirRecherche = request.getParameter("loisirRecherche");
-
+					
+					
+					
 				// On les envoie la page d'apres
-				/**request.setAttribute("yeuxR", yeuxRecherche);
+				request.setAttribute("yeuxR", yeuxRecherche);
 				request.setAttribute("cheveuxR", cheveuxRecherche);
 				request.setAttribute("peauR", peauRecherche);
 				request.setAttribute("amR", amRecherche);
-				request.setAttribute("loisirR", loisirRecherche);*/
-				
-				request.setAttribute("nom", nom);
-				request.setAttribute("prenom", prenom);
-				
+				request.setAttribute("loisirR", loisirRecherche);
+					
+					
 				// On envoie la liste des donneurs
 				request.setAttribute("listedonneurCompatible", facade.rechercher(yeuxRecherche,cheveuxRecherche,peauRecherche,amRecherche,loisirRecherche));
-	
+		
 				request.getRequestDispatcher("afficherDonneurSelectionne.jsp").forward(request, response);
 			}
 			
+			
+			
 		} else if (op.equals("afficherDonneurSelectionne")){
 			String button = request.getParameter("choix");
-			String nom = request.getParameter("nom");
-			String prenom = request.getParameter("prenom");
+
 			if(button.equals("personne")){
 				String id = request.getParameter("personneSelect");
 				request.setAttribute("donneur", facade.recupererDonneur(Integer.parseInt(id)));
 				request.getRequestDispatcher("profilDonneurSelectionne.jsp").forward(request, response);
-			
 			}
+			
 			if (button.equals("Retour Accueil")) {
-				request.setAttribute("nom", nom);
-				request.setAttribute("prenom", prenom);
 				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 			} 
-				
+			
 		} else if (op.equals("admin")) {
 			String button = request.getParameter("adminbutton");
 			if (button.equals("Ouverture d'un centre")) {
@@ -233,7 +290,7 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("centre", facade.recupererCentre(Integer.parseInt(id)));
 			request.setAttribute("lm", facade.listerMedecinsCentre(Integer.parseInt(id)));
 			request.getRequestDispatcher("profilcentre.jsp").forward(request, response);
-			
+		
 		} else if (op.equals("profilcentre")) {
 			String button = request.getParameter("button");
 			if (button.equals("PrendreRDV")) {
@@ -254,7 +311,6 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("donneurattente", facade.donneursAttentes());
 			request.setAttribute("donneursignale", facade.donneursSignales());
 			request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
-		
 
 		} else {
 			response.getWriter().append("Served at: ").append(request.getContextPath());
