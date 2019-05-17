@@ -15,7 +15,7 @@ import enumerations.Peau;
 import enumerations.Yeux;
 
 @Entity
-public class Donneur {
+public class Donneur implements ProfilUtilisateur {
 
 	
 	@Id

@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Receveur {
+public class Receveur implements ProfilUtilisateur {
 	
 	
 	@Id
