@@ -169,8 +169,7 @@ public class Servlet extends HttpServlet {
 			
 			
 			
-			
-			
+
 		} else if (op.equals("afficherDonneurSelectionne")){
 			String button = request.getParameter("choix");
 			String nom = request.getParameter("nom");
