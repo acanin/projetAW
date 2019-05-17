@@ -63,10 +63,16 @@ public class Servlet extends HttpServlet {
 			// On crée la session si l'authentification a marché
 			if (p!=null) {
 				if (p instanceof Admin) {
+					// Creation de la session de l'admin
 					HttpSession session = request.getSession(true);
 					session.setAttribute("isAdmin", true);
 					
-					request.getRequestDispatcher("pageadmin.html").forward(request, response);
+					// Parametres de la page de l'admin
+					request.setAttribute("donneurattente", facade.donneursAttentes());
+					request.setAttribute("donneursignale", facade.donneursSignales());
+					
+					// Goto page admin
+					request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
 				} else {
 					
 					boolean isDonneur = (p instanceof Donneur);
@@ -87,7 +93,6 @@ public class Servlet extends HttpServlet {
 			} else {
 				request.setAttribute("checkfailed", true);
 				request.getRequestDispatcher("pageconnexion.jsp").forward(request, response);
-				//response.getWriter().append("La connexion a échoué.");
 			}
 			
 			

@@ -59,19 +59,19 @@ public class Facade {
 	
 	public void ajoutDonneur(String nom, String prenom,  int age, int taille, int poids, String sexe, boolean dispo,Yeux y,Cheveux c,Peau peau, Loisirs l, AntecedentsMedicaux am, String mail, String mdp){
 		Donneur d = new Donneur(nom, prenom, age,taille, poids, sexe.equals("Femme"), dispo, y, c, peau, l, am);
+		em.persist(d);
+		
 		int idProfil = d.getId();
 		Utilisateur u = new Utilisateur(idProfil, mail, mdp);
-		
-		em.persist(d);
 		em.persist(u);
 	}
 
 	public void ajoutReceveur(String n, String p, int a, String s, String mail, String mdp){
 		Receveur r = new Receveur(n, p, a, s.equals("Femme"));
+		em.persist(r);
+		
 		int idProfil = r.getId();
 		Utilisateur u = new Utilisateur(idProfil, mail, mdp);
-		
-		em.persist(r);
 		em.persist(u);
 	}
 	

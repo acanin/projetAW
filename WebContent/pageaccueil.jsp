@@ -49,10 +49,12 @@
           >
             <div class="mb-3 mb-md-0">
               <h2> <form action= "Servlet" method="post">
-				 Bienvenue,  
-						<%String p = (String) request.getAttribute("prenom"); 
-						String n = (String) request.getAttribute("nom");
-						   %>
+				 Bienvenue,
+				<%
+					HttpSession s = request.getSession(false);	
+					String p = (String) session.getAttribute("prenom"); 
+					String n = (String) session.getAttribute("nom");
+				%>
 						<%= n  %> <%= p  %> ! </form></h2> 
             
             </div>
@@ -83,8 +85,6 @@
 			<input type="submit" class = "main_btn" name="choix" value="Rechercher Donneur">
 			<input type="submit" name="choix" value="Bouton2">
 			<input type="hidden" name = "op" value="pageaccueil">
-			<input type="hidden" name = "nom" value = <%= (String) request.getAttribute("nom") %>> 
-			<input type="hidden" name = "prenom" value = <%= (String) request.getAttribute("prenom") %>> 
 			
 			
 		</form>
