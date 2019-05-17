@@ -4,7 +4,9 @@ import java.util.Collection;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import enumerations.*;
@@ -20,11 +22,57 @@ public class Facade {
 		
 	}
 	
+	public ProfilUtilisateur checkAuthentification(String mail, String mdp) {
+		if (mail.equals(Admin.IDENT_ADMIN) && mdp.equals(Admin.MDP_ADMIN)) {
+			return new Admin();
+		} else {
+			Utilisateur u = null;
+			try {
+				TypedQuery<Utilisateur> req = em.createQuery("SELECT u FROM Utilisateur u WHERE u.mail = "+mail+" AND u.mdp = "+mdp, Utilisateur.class);
+				u = req.getSingleResult();
+			} catch (PersistenceException e) {
+				// Cet utilisateur n'existe pas
+				return null;
+			}
+			
+			
+			int idProfil = u.getIdProfilAssocie();
+			
+			try {
+				// On regarde si c'est un Donneur
+				TypedQuery<Donneur> reqD = em.createQuery("SELECT d FROM Donneur d WHERE d.id = "+idProfil, Donneur.class);
+				Donneur d = reqD.getSingleResult();
+				return d;
+			} catch (PersistenceException notDonneur) {
+				try {
+					// Cet utilisateur n'est pas un donneur, c'est peut etre un receveur
+					TypedQuery<Receveur> reqR = em.createQuery("SELECT r FROM Receveur r WHERE r.id = "+idProfil, Receveur.class);
+					Receveur r = reqR.getSingleResult();
+					
+					return r;
+				} catch (PersistenceException notReceveur) {
+					return null; // ni donneur, ni receveur
+				}
+			}
+		}
+	}
+	
+	public void ajoutDonneur(String nom, String prenom,  int age, int taille, int poids, String sexe, boolean dispo,Yeux y,Cheveux c,Peau peau, Loisirs l, AntecedentsMedicaux am, String mail, String mdp){
+		Donneur d = new Donneur(nom, prenom, age,taille, poids, sexe.equals("Femme"), dispo, y, c, peau, l, am);
+		int idProfil = d.getId();
+		Utilisateur u = new Utilisateur(idProfil, mail, mdp);
+		
+		em.persist(d);
+		em.persist(u);
+	}
 
-
-	public void ajoutReceveur(String n, String p, int a, String s){
-
-		em.persist(new Receveur(n, p, a, s.equals("Femme")));
+	public void ajoutReceveur(String n, String p, int a, String s, String mail, String mdp){
+		Receveur r = new Receveur(n, p, a, s.equals("Femme"));
+		int idProfil = r.getId();
+		Utilisateur u = new Utilisateur(idProfil, mail, mdp);
+		
+		em.persist(r);
+		em.persist(u);
 	}
 	
 	public void ajoutCentre(String nom, String adresse, String ville) {
@@ -38,13 +86,25 @@ public class Facade {
 		em.persist(m);
 		m.setOwner(c);
 	}
-	
 
+	public Collection<Donneur> rechercher(String yeux, String cheveux,String peau,String am,String loisir){
+		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) + "AND CHEVEUX = " + Cheveux.toInteger(cheveux) + "AND PEAU = " + Peau.toInteger(peau)  + "AND ANTECEDENTS = " + AntecedentsMedicaux.toInteger(am)  + "AND LOISIRS = " + Loisirs.toInteger(loisir) , Donneur.class);
+		return req.getResultList();
+	}
+
+	public Collection<Donneur> listerDonneurs(){
+		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p", Donneur.class);
+		return req.getResultList();
+	}
+	
+	public Donneur recupererDonneur(int idDonneur) {
+		Donneur d = em.find(Donneur.class,idDonneur);
+		return d;
+	}
 	
 	public Collection<Receveur> listerReceveurs(){
 		TypedQuery<Receveur> req = em.createQuery("select a from Receveur a", Receveur.class);
 		return req.getResultList();
-		
 	}
 	
 	public Collection<Centre> listerCentres(){
@@ -57,30 +117,8 @@ public class Facade {
 		TypedQuery<Medecin> req = em.createQuery("select m from Medecin m", Medecin.class);
 		return req.getResultList();
 	}
-	
-	/** Methodes pour gerer les donneurs 
-	 */
-	
-	public Collection<Donneur> rechercher(String yeux, String cheveux,String peau,String am,String loisir){
-		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) + "AND CHEVEUX = " + Cheveux.toInteger(cheveux) + "AND PEAU = " + Peau.toInteger(peau)  + "AND ANTECEDENTS = " + AntecedentsMedicaux.toInteger(am)  + "AND LOISIRS = " + Loisirs.toInteger(loisir) , Donneur.class);
-		return req.getResultList();
-	}
 
-	public Collection<Donneur> listerDonneurs(){
-		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p", Donneur.class);
-		return req.getResultList();
-		
-	}
-	
-	public void ajoutDonneur(String nom, String prenom,  int age, int taille, int poids, String sexe, boolean dispo,Yeux y,Cheveux c,Peau peau, Loisirs l, AntecedentsMedicaux am){
-		em.persist(new Donneur(nom, prenom, age,taille, poids, sexe.equals("Femme"), dispo, y, c, peau, l, am));
-	}
-	
-	public Donneur recupererDonneur(int idDonneur) {
-		Donneur d = em.find(Donneur.class,idDonneur);
-		return d;
-	}
-	
+
 	public void modifierStatu(String choix, String attente, int id) {
 		Donneur d = em.find(Donneur.class, id);
 		if (attente.equals("oui")) {
@@ -102,7 +140,6 @@ public class Facade {
 	
 	/** Methodes pour les centres 
 	 */
-
 	public Centre recupererCentre(int idCentre) {
 		Centre c = em.find(Centre.class, idCentre);
 		return c;
@@ -118,7 +155,7 @@ public class Facade {
 		TypedQuery<Donneur> req = em.createQuery("select d from Donneur d where attente = true", Donneur.class);
 		return req.getResultList();
 	}
-	
+
 	public Collection<Donneur> donneursSignales() {
 		TypedQuery<Donneur> req = em.createQuery("select d from Donneur d where signale = true", Donneur.class);
 		return req.getResultList();
@@ -153,7 +190,4 @@ public class Facade {
 		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE LOISIRS = " + Loisirs.toInteger(loisir)  , Donneur.class);
 		return req.getResultList();
 	*/
-	
-
-
 }
