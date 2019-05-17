@@ -63,28 +63,32 @@
 
   <!-- ================ formulaire section start ================= -->
   <section class="contact-section area-padding">
-    
+    <div class="container"> 
         <div class="col-12">
           <h2 class="contact-title"> Veuillez remplir les informations ci-dessous pour la création de votre profil de donneur. <br>
-Votre profil sera en ligne lorsqu'il aura été approuvé par l'un de nos administrateurs.  </h2>
+			Votre profil sera en ligne lorsqu'il aura été approuvé par l'un de nos administrateurs.  </h2>
         </div>
 
+<br><br><br>
 
 <form action= "Servlet" method="post">
-
-	<div class="col-sm-6">
-    	 <div class="form-group">
-           <input class="form-control" name="taille" type="text" placeholder="Taille (cm)">
-         </div>          
-     </div>
+        
+        <div class="row">
+		<div class="col-sm-6">
+    	 	<div class="form-group">
+          	 <input class="form-control" name="taille" type="text" placeholder="Taille (cm)">
+        	</div>          
+     	</div>
               
-     <div class="col-sm-6">
-    	<div class="form-group">
-            <input class="form-control" name="poids" type="text" placeholder="Poids (kg)">
-         </div>
-     </div>
-              
-	<div class="formulaire-area">
+     	<div class="col-sm-6">
+    		<div class="form-group">
+         	  <input class="form-control" name="poids" type="text" placeholder="Poids (kg)">
+        	 </div>
+     	</div>
+    	</div>
+    
+   <br> <br> 
+	
 	<p> Couleur des yeux : </p>
 	
 	<%
@@ -94,6 +98,7 @@ Votre profil sera en ligne lorsqu'il aura été approuvé par l'un de nos admini
 		<input type = "radio" name="yeux" value = <%= s %>> <%= s %> 
 	<% } %>
 	
+	<br><br>
 	
 	<p> Cheveux : </p>
 	<%
@@ -103,6 +108,8 @@ Votre profil sera en ligne lorsqu'il aura été approuvé par l'un de nos admini
 		<input type = "radio" name="cheveux" value = <%= s %>> <%= s %> 
 	<% } %>
 	
+	<br><br>
+	
 	<p> Couleur de peau : </p>
 	<%
 		for (Peau p : Peau.allpeau) {
@@ -110,6 +117,8 @@ Votre profil sera en ligne lorsqu'il aura été approuvé par l'un de nos admini
 		%>
 		<input type = "radio" name="peau" value = <%= s %>> <%= s %>
 	<% } %>
+	
+	<br><br>
 	
 	<p> Antécédents Médicaux : </p>
 	<%
@@ -119,6 +128,8 @@ Votre profil sera en ligne lorsqu'il aura été approuvé par l'un de nos admini
 		<input type = "radio" name= "antecedents"  value = <%= s %>> <%= s %>
 	<% } %>
 	
+	<br><br>
+	
 	<p> Loisirs : </p>
 	<%
 		for (Loisirs l : Loisirs.allloisirs) {
@@ -127,7 +138,8 @@ Votre profil sera en ligne lorsqu'il aura été approuvé par l'un de nos admini
 		<input type = "radio" name="loisirs" value = <%= s %>> <%= s %>
 	<% } %>
 	 
-	 <br>
+     
+	 <br><br><br>
              
 		<input type="submit" class="main_btn" name="choix" value="Valider">
 		<input type="hidden" name = "op" value="validerCreationDonneur">
@@ -135,9 +147,9 @@ Votre profil sera en ligne lorsqu'il aura été approuvé par l'un de nos admini
 		<input type="hidden" name = "prenom" value = <%= (String) request.getAttribute("prenom") %>> 
 		<input type="hidden" name = "age" value = <%= (String) request.getAttribute("age") %>> 
 		<input type="hidden" name = "sexe" value = <%= (String) request.getAttribute("sexe") %>> 
-		
-		</div>
-</form>
+	
+	</form>
+	</div>
 </section>
 </body>
 </html>
