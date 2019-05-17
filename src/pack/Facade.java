@@ -98,12 +98,12 @@ public class Facade {
 	
 	
 	public Collection<Donneur> donneursAttentes() {
-		TypedQuery<Donneur> req = em.createQuery("select d from Donneur d where attente = 1", Donneur.class);
+		TypedQuery<Donneur> req = em.createQuery("select d from Donneur d where attente = true", Donneur.class);
 		return req.getResultList();
 	}
 	
 	public Collection<Donneur> donneursSignales() {
-		TypedQuery<Donneur> req = em.createQuery("select d from Donneur d where signale = 1", Donneur.class);
+		TypedQuery<Donneur> req = em.createQuery("select d from Donneur d where signale = true", Donneur.class);
 		return req.getResultList();
 	}
 	

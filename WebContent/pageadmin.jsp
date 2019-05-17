@@ -38,11 +38,11 @@ Donneurs en attente d'approbation :
 Donneurs signalés :
 <%
 	Collection<Donneur> lsignale = (Collection<Donneur>) request.getAttribute("donneursignale");
-	for (Donneur d : ldattente) { 
-		String s = d.getPrenom() + ' ' + d.getNom();
-		int id = d.getId(); %>
+	for (Donneur ds : lsignale) { 
+		String ss = ds.getPrenom() + ' ' + ds.getNom();
+		int ids = ds.getId(); %>
 		
-		<li> <a href="Servlet?op=admin&adminbutton=signale&dsignale=<%= id%>"> <%= s %>  </a> </li>
+		<li> <a href="Servlet?op=admin&adminbutton=signale&dsignale=<%= ids%>"> <%= ss %>  </a> </li>
 	
 	<% } %>
 
