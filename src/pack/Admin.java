@@ -8,28 +8,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-@Entity
-public class Admin {
+public class Admin implements ProfilUtilisateur {
 
+	public static final String IDENT_ADMIN = "admin";
+	public static final String MDP_ADMIN = "admin";
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	/**private Collection<Donneur> donneur_en_attente;
-	private Collection<Donneur> donneurs_signales;
-	private Collection<Receveur> receveurs_signales;*/
-	
-	
-	
-	/** Pour avoir une relation bidirectionnelle 
-	 * 1 centre avec 1 admin
-	 * */
-	@OneToOne
-	Centre owner;
-	
+
 	public Admin(){ 
+	}
 
-		
+	@Override
+	public String getNom() {
+		// TODO Auto-generated method stub
+		return "noname";
+	}
+
+	@Override
+	public String getPrenom() {
+		// TODO Auto-generated method stub
+		return "noname";
 	}
 	
 	
