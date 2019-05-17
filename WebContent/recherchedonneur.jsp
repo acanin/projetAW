@@ -52,7 +52,7 @@
             
             </div>
             <div class="page_link">
-              <a href="pageaccueil.jsp">Accueil</a>
+              <a href="index.html">Accueil</a>
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@
 
 	
 	<br><br>
-	<b>Couleur de peau : </b>
+	<p>Couleur de peau : </p>
 	<%
 		for (Peau p : Peau.allpeau) {
 		String s = Peau.toString(p);
@@ -102,7 +102,7 @@
 		<input type = "radio" name="peauRecherche" value = <%= s %>> <%= s %>  
 	<% } %>
 	<br><br>
-	<b> Antécédents Médicaux : </b>
+	<p> Antécédents Médicaux : </p>
 	<%
 		for (AntecedentsMedicaux am : AntecedentsMedicaux.allantmed) {
 		String s = AntecedentsMedicaux.toString(am);
@@ -110,7 +110,7 @@
 		<input type = "radio" name="antecedentRecherche" value = <%= s %>> <%= s %> 
 	<% } %>
 	<br><br>
-	<b> Loisirs : </b>
+	<p> Loisirs : </p>
 	<%
 		for (Loisirs l : Loisirs.allloisirs) {
 		String s = Loisirs.toString(l);

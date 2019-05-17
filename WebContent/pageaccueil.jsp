@@ -50,8 +50,9 @@
             <div class="mb-3 mb-md-0">
               <h2> <form action= "Servlet" method="post">
 				 Bienvenue,  
-						<% String n = (String) request.getAttribute("nom");
-						   String p = (String) request.getAttribute("prenom");%>
+						<%String p = (String) request.getAttribute("prenom"); 
+						String n = (String) request.getAttribute("nom");
+						   %>
 						<%= n  %> <%= p  %> ! </form></h2> 
             
             </div>
