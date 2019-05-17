@@ -244,6 +244,16 @@ public class Servlet extends HttpServlet {
 				request.setAttribute("med", facade.recupererMedecin(Integer.parseInt(id)));
 				request.getRequestDispatcher("profilmedecin.jsp").forward(request, response);
 			}
+			
+		} else if (op.equals("Confirmer/Supprimer")) {
+			String choix = request.getParameter("confirmation");
+			String attente = request.getParameter("attente");
+			String id = request.getParameter("donneur");
+			
+			facade.modifierStatu(choix, attente,Integer.parseInt(id));
+			request.setAttribute("donneurattente", facade.donneursAttentes());
+			request.setAttribute("donneursignale", facade.donneursSignales());
+			request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
 		
 
 		} else {

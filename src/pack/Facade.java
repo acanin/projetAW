@@ -81,6 +81,23 @@ public class Facade {
 		return d;
 	}
 	
+	public void modifierStatu(String choix, String attente, int id) {
+		Donneur d = em.find(Donneur.class, id);
+		if (attente.equals("oui")) {
+			if (choix.equals("Oui")) {
+				d.setAttente(false);
+			} else {
+				em.remove(d);
+			}
+		} else {
+			if (choix.equals("Non")) {
+				d.setSignale(false);
+			} else {
+				em.remove(d);
+			}
+		}
+	}
+	
 	
 	
 	/** Methodes pour les centres 
