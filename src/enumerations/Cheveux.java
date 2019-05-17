@@ -5,8 +5,7 @@ public enum Cheveux {
 	BRUN,
 	CHATAIN,
 	BLOND,
-	ROUX,
-	CHAUVE;
+	ROUX;
 	
 public static final Cheveux[] allcheveux = Cheveux.values();
 	
@@ -27,9 +26,6 @@ public static final Cheveux[] allcheveux = Cheveux.values();
 			break;
 		case ROUX:
 			s = "Roux";
-			break;
-		case CHAUVE:
-			s = "Chauve";
 			break;
 		}
 		return s;
@@ -53,9 +49,6 @@ public static final Cheveux[] allcheveux = Cheveux.values();
 		case "Roux":
 			s = ROUX;
 			break;
-		case "Chauve":
-			s = CHAUVE;
-			break;
 		}
 		return s;
 	}
@@ -77,9 +70,6 @@ public static final Cheveux[] allcheveux = Cheveux.values();
 			break;
 		case "Roux":
 			s = 4;
-			break;
-		case "Chauve":
-			s = 5;
 			break;
 		}
 		return s;

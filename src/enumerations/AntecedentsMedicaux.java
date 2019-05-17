@@ -1,34 +1,35 @@
 package enumerations;
 
 public enum AntecedentsMedicaux {
+	ISG,
+	ASTHME,
+	DIABETE,
 	CARDIAQUE,
-	ASTHMATIQUE,
-	DIABETIQUE,
+	CANCER,
 	PARKINSON,
-	AVC,
 	ALZHEIMER,
 	SIDA,
-	FAUSSE_COUCHE;
+	AUCUN;
 	
 public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values();
 	
 	public static String toString(AntecedentsMedicaux c){
 		String s = null;
 		switch(c) {
-		case CARDIAQUE:
-			s = "Cardiaque";
+		case ISG:
+			s = "ISG";
 			break;
-		case ASTHMATIQUE:
-			s = "Asthmatique";
+		case ASTHME:
+			s = "Asthme";
 			break;
-		case DIABETIQUE:
-			s = "Diabetique";
+		case DIABETE:
+			s = "Diabete";
 			break;
 		case PARKINSON:
-			s = "Parkison";
+			s = "Parkinson";
 			break;
-		case AVC:
-			s = "AVC";
+		case CARDIAQUE:
+			s = "Cardiaque";
 			break;
 		case ALZHEIMER:
 			s = "Alzheimer";
@@ -36,9 +37,11 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 		case SIDA:
 			s = "Sida";
 			break;
-		case FAUSSE_COUCHE:
-			s = "Fausse Couche";
+		case CANCER:
+			s = "Cancer";
 			break;
+		case AUCUN:
+			s = "Aucun";
 		}
 		return s;
 	};
@@ -49,17 +52,17 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 		case "Cardiaque":
 			s = CARDIAQUE;
 			break;
-		case "Asthmatique":
-			s = ASTHMATIQUE;
+		case "Asthme":
+			s = ASTHME;
 			break;
-		case "Diabetique":
-			s = DIABETIQUE;
+		case "Diabete":
+			s = DIABETE;
 			break;
-		case "Parkison":
+		case "Parkinson":
 			s = PARKINSON;
 			break;
-		case "AVC":
-			s = AVC;
+		case "Cancer":
+			s = CANCER;
 			break;
 		case "Alzheimer":
 			s = ALZHEIMER ;
@@ -67,9 +70,11 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 		case "Sida":
 			s = SIDA;
 			break;
-		case "Fausse Couche":
-			s = FAUSSE_COUCHE;
+		case "ISG":
+			s = ISG;
 			break;
+		case "Aucun":
+			s = AUCUN;
 		}
 		return s;
 	}
@@ -78,28 +83,31 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 		int s = 0;
 		switch(nom) {
 		case "Cardiaque":
-			s = 0;
-			break;
-		case "Asthmatique":
-			s = 1;
-			break;
-		case "Diabetique":
-			s = 2;
-			break;
-		case "Parkison":
-			s = 3;
-			break;
-		case "AVC":
 			s = 4;
 			break;
-		case "Alzheimer":
-			s = 5 ;
+		case "Asthme":
+			s = 1;
 			break;
-		case "Sida":
+		case "Diabete":
+			s = 2;
+			break;
+		case "Parkinson":
 			s = 6;
 			break;
-		case "Fausse Couche":
-			s = 7;
+		case "Cancer":
+			s = 5;
+			break;
+		case "Alzheimer":
+			s = 7 ;
+			break;
+		case "Sida":
+			s = 8;
+			break;
+		case "ISG":
+			s = 0;
+			break;
+		case "Aucun":
+			s = 9;
 			break;
 		}
 		return s;

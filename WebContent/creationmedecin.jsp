@@ -12,6 +12,9 @@
 
 Nom  : <input type="text" name="nom"><br/>
 
+<label for="sexe">Sexe :</label><input type="radio" name= "sexe" value = "Femme"> Femme
+											<input type="radio" name= "sexe" value = "Homme"> Homme </p>
+
 <p> Spécialisation : </p>
 <%
 	for (Specialite sp : Specialite.allspe) {

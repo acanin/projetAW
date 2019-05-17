@@ -33,6 +33,8 @@ public class Donneur {
 	private Peau peau;
 	private Loisirs loisirs;
 	private AntecedentsMedicaux antecedents;
+	private boolean attente; //1 si le profil n'a tjs pas été validé par l'admin
+	private boolean signale; //1 si le profil a ete signale par un autre utilisateur
 	
 	
 	
@@ -55,9 +57,27 @@ public class Donneur {
 		this.peau = peau;
 		this.loisirs = l;
 		this.antecedents = am;
+		this.attente = true;
+		this.signale = false;
 		
 	}
 	
+	public boolean isSignale() {
+		return signale;
+	}
+
+	public void setSignale(boolean signale) {
+		this.signale = signale;
+	}
+
+	public boolean isAttente() {
+		return attente;
+	}
+
+	public void setAttente(boolean attente) {
+		this.attente = attente;
+	}
+
 	public Yeux getYeux() {
 		return yeux;
 	}

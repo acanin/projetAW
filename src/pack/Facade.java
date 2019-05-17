@@ -33,10 +33,10 @@ public class Facade {
 		em.persist(new Centre(nom, adresse, ville));
 	}
 	
-	public void ajoutMedecin(String nom, Specialite spe, int idcentre) {
+	public void ajoutMedecin(String nom, Specialite spe, int idcentre, String sexe) {
 		
 		Centre c = em.find(Centre.class, idcentre);
-		Medecin m = new Medecin(nom,spe);
+		Medecin m = new Medecin(nom,spe,sexe.equals("Femme"));
 		em.persist(m);
 		m.setOwner(c);
 	}
@@ -70,6 +70,33 @@ public class Facade {
 		return req.getResultList();
 	}
 	
+
+	public Centre recupererCentre(int idCentre) {
+		Centre c = em.find(Centre.class, idCentre);
+		return c;
+	}
+	
+	public Collection<Medecin> listerMedecinsCentre(int idCentre) {
+		TypedQuery<Medecin> req = em.createQuery("select m from Medecin m where OWNER_ID = " + idCentre, Medecin.class);
+		return req.getResultList();
+	}
+	
+	
+	public Collection<Donneur> donneursAttentes() {
+		TypedQuery<Donneur> req = em.createQuery("select d from Donneur d where attente = 1", Donneur.class);
+		return req.getResultList();
+	}
+	
+	public Collection<Donneur> donneursSignales() {
+		TypedQuery<Donneur> req = em.createQuery("select d from Donneur d where signale = 1", Donneur.class);
+		return req.getResultList();
+	}
+	
+	public Medecin recupererMedecin(int idMed) {
+		Medecin m = em.find(Medecin.class,idMed);
+		return m;
+	}
+
 	/** 	public Collection<Donneur> rechercherYeux(String yeux){
 		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) , Donneur.class);
 		return req.getResultList();
@@ -95,5 +122,6 @@ public class Facade {
 		return req.getResultList();
 	*/
 	
+
 
 }

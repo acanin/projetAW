@@ -19,6 +19,7 @@ public class Receveur {
 	private String prenom;
 	private int age;
 	private boolean sexe; // 1 pour les femmes et 0 pour les mecs
+	
 
 	
 	/** Pour avoir une relation bidirectionnelle 

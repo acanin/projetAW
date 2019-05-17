@@ -14,7 +14,7 @@
 </h1>
 
 <div id="conteneur"> 
-<b>Veuillez selectionner les caractéristiques que vous recherchées :  </b>
+<b>Veuillez sélectionner les caractéristiques que vous recherchez :  </b>
 
 
 

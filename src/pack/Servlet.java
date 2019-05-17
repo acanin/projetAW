@@ -191,6 +191,10 @@ public class Servlet extends HttpServlet {
 			} else if(button.equals("listercentre")) { // C'est un test qu'il faudra enlever plus tard, flemme de faire la bonne page
 				request.setAttribute("lc", facade.listerCentres());
 				request.getRequestDispatcher("listercentre.jsp").forward(request, response);
+			} else { // C'est un test qu'il faudra enlever plus tard et le mettre ailleurs
+				request.setAttribute("donneurattente", facade.donneursAttentes());
+				request.setAttribute("donneursignale", facade.donneursSignales());
+				request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
 			}
 			
 		} else if (op.equals("creationcentre")) {
@@ -198,22 +202,38 @@ public class Servlet extends HttpServlet {
 			String adresse = request.getParameter("adresse");
 			String ville = request.getParameter("ville");
 			facade.ajoutCentre(nom, adresse, ville);
-			request.getRequestDispatcher("pageadmin.html").forward(request, response);
+			request.setAttribute("donneurattente", facade.donneursAttentes());
+			request.setAttribute("donneursignale", facade.donneursSignales());
+			request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
 			
 			
 		} else if (op.equals("creationmedecin")){
 			String nom = request.getParameter("nom");
 			String spe = request.getParameter("specialite");
 			String idc = request.getParameter("idcentre");
+			String sexe = request.getParameter("sexe");
 			
-			facade.ajoutMedecin(nom, Specialite.toCaracteristiques(spe),Integer.parseInt(idc));
+			facade.ajoutMedecin(nom, Specialite.toCaracteristiques(spe),Integer.parseInt(idc),sexe);
+			request.setAttribute("donneurattente", facade.donneursAttentes());
+			request.setAttribute("donneursignale", facade.donneursSignales());
+			request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
 			
-			request.getRequestDispatcher("pageadmin.html").forward(request, response);
-			
-		} else if(op.equals("profilcentre")) {
+		} else if(op.equals("listeC")) {
 			String id = request.getParameter("centre");
-			request.setAttribute("idcentre", id);
+			request.setAttribute("centre", facade.recupererCentre(Integer.parseInt(id)));
+			request.setAttribute("lm", facade.listerMedecinsCentre(Integer.parseInt(id)));
 			request.getRequestDispatcher("profilcentre.jsp").forward(request, response);
+			
+		} else if (op.equals("profilcentre")) {
+			String button = request.getParameter("button");
+			if (button.equals("PrendreRDV")) {
+				String idc = request.getParameter("idc");
+				response.getWriter().append("RDV " + idc);
+			} else {
+				String id = request.getParameter("medecin");
+				request.setAttribute("med", facade.recupererMedecin(Integer.parseInt(id)));
+				request.getRequestDispatcher("profilmedecin.jsp").forward(request, response);
+			}
 		
 
 		} else {
