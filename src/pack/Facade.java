@@ -20,9 +20,7 @@ public class Facade {
 		
 	}
 	
-	public void ajoutDonneur(String nom, String prenom,  int age, int taille, int poids, String sexe, boolean dispo,Yeux y,Cheveux c,Peau peau, Loisirs l, AntecedentsMedicaux am){
-		em.persist(new Donneur(nom, prenom, age,taille, poids, sexe.equals("Femme"), dispo, y, c, peau, l, am));
-	}
+
 
 	public void ajoutReceveur(String n, String p, int a, String s){
 
@@ -41,11 +39,7 @@ public class Facade {
 		m.setOwner(c);
 	}
 	
-	public Collection<Donneur> listerDonneurs(){
-		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p", Donneur.class);
-		return req.getResultList();
-		
-	}
+
 	
 	public Collection<Receveur> listerReceveurs(){
 		TypedQuery<Receveur> req = em.createQuery("select a from Receveur a", Receveur.class);
@@ -64,12 +58,33 @@ public class Facade {
 		return req.getResultList();
 	}
 	
+	/** Methodes pour gerer les donneurs 
+	 */
 	
 	public Collection<Donneur> rechercher(String yeux, String cheveux,String peau,String am,String loisir){
 		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) + "AND CHEVEUX = " + Cheveux.toInteger(cheveux) + "AND PEAU = " + Peau.toInteger(peau)  + "AND ANTECEDENTS = " + AntecedentsMedicaux.toInteger(am)  + "AND LOISIRS = " + Loisirs.toInteger(loisir) , Donneur.class);
 		return req.getResultList();
 	}
+
+	public Collection<Donneur> listerDonneurs(){
+		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p", Donneur.class);
+		return req.getResultList();
+		
+	}
 	
+	public void ajoutDonneur(String nom, String prenom,  int age, int taille, int poids, String sexe, boolean dispo,Yeux y,Cheveux c,Peau peau, Loisirs l, AntecedentsMedicaux am){
+		em.persist(new Donneur(nom, prenom, age,taille, poids, sexe.equals("Femme"), dispo, y, c, peau, l, am));
+	}
+	
+	public Donneur recupererDonneur(int idDonneur) {
+		Donneur d = em.find(Donneur.class,idDonneur);
+		return d;
+	}
+	
+	
+	
+	/** Methodes pour les centres 
+	 */
 
 	public Centre recupererCentre(int idCentre) {
 		Centre c = em.find(Centre.class, idCentre);

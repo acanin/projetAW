@@ -148,15 +148,13 @@ public class Servlet extends HttpServlet {
 				String peauRecherche = request.getParameter("peauRecherche");
 				String amRecherche = request.getParameter("antecedentRecherche");
 				String loisirRecherche = request.getParameter("loisirRecherche");
-				
-				
-				
+
 				// On les envoie la page d'apres
-				request.setAttribute("yeuxR", yeuxRecherche);
+				/**request.setAttribute("yeuxR", yeuxRecherche);
 				request.setAttribute("cheveuxR", cheveuxRecherche);
 				request.setAttribute("peauR", peauRecherche);
 				request.setAttribute("amR", amRecherche);
-				request.setAttribute("loisirR", loisirRecherche);
+				request.setAttribute("loisirR", loisirRecherche);*/
 				
 				request.setAttribute("nom", nom);
 				request.setAttribute("prenom", prenom);
@@ -167,20 +165,22 @@ public class Servlet extends HttpServlet {
 				request.getRequestDispatcher("afficherDonneurSelectionne.jsp").forward(request, response);
 			}
 			
-			
-			
-
 		} else if (op.equals("afficherDonneurSelectionne")){
 			String button = request.getParameter("choix");
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
+			if(button.equals("personne")){
+				String id = request.getParameter("personneSelect");
+				request.setAttribute("donneur", facade.recupererDonneur(Integer.parseInt(id)));
+				request.getRequestDispatcher("profilDonneurSelectionne.jsp").forward(request, response);
 			
+			}
 			if (button.equals("Retour Accueil")) {
 				request.setAttribute("nom", nom);
 				request.setAttribute("prenom", prenom);
 				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 			} 
-			
+				
 		} else if (op.equals("admin")) {
 			String button = request.getParameter("adminbutton");
 			if (button.equals("Ouverture d'un centre")) {

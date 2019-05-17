@@ -25,9 +25,9 @@
 	//String c = (String) request.getAttribute("cheveuxR");
 	//String p = (String) request.getAttribute("peauR");
 	//String am = (String) request.getAttribute("amR");
-    String l = (String) request.getAttribute("loisirR");
+    //String l = (String) request.getAttribute("loisirR");
 	%>
-	<%= l %>
+
 	 <br>
 
 	</b>
@@ -36,17 +36,17 @@
 	<ul>
 		
 	<% Collection<Donneur> ld = (Collection<Donneur>)request.getAttribute("listedonneurCompatible");
+	for (Donneur d : ld){ 
+		String s = d.getNom() + "-" + d.getPrenom();
+		int id = d.getId();%>
 	
-	for (Donneur d : ld){ %>
-		
-		<li> <a href="Servlet?op=afficherDonneurSelectionne&personne<%= d.getId() %>"><%= d.getNom() + " - " + d.getPrenom() %></a> </li>
+		<%= id %>
+		<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=personne&personneSelect=<%= id  %>"><%= s %></a> </li>
 		
 	<%  }%>
 	
 	</ul>
-		<input type="submit" name="choix" value="Retour Accueil">
-		<input type="submit" name="choix" value="Bouton2">
-		<input type="hidden" name = "op" value="afficherDonneurSelectionne">
+		
 		<input type="hidden" name = "nom" value = <%= (String) request.getAttribute("nom") %>> 
 		<input type="hidden" name = "prenom" value = <%= (String) request.getAttribute("prenom") %>> 
 		

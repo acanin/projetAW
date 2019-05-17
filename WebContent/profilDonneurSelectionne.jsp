@@ -16,7 +16,12 @@
 
 <div id="conteneur"> 
 	
-	
+	<% Donneur donneur = (Donneur) request.getAttribute("donneur");
+	String nom = donneur.getNom();
+	String prenom = donneur.getPrenom();
+	//int taux = 100;//centre.getNb_succes()/centre.getNb_essais();
+	%>
+	<p> Bienvenue sur le profil du donneur <%=nom + " " + prenom %> </p>
 		
 	</form>
 	</c>
