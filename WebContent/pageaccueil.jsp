@@ -55,7 +55,7 @@
 					String p = (String) session.getAttribute("prenom"); 
 					String n = (String) session.getAttribute("nom");
 				%>
-						<%= n  %> <%= p  %> ! </form></h2> 
+						<%= p  %> <%= n  %> ! </form></h2> 
             
             </div>
             <div class="page_link">

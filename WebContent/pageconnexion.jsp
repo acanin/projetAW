@@ -1,39 +1,104 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import = "java.util.*, pack.*, enumerations.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<!doctype html>
+<html lang="en">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+  <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="medcare/img/favicon.png" type="image/png">
+    <title>Bébés à tout prix</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="medcare/css/bootstrap.css">
+    <link rel="stylesheet" href="medcare/css/themify-icons.css">
+    <link rel="stylesheet" href="medcare/css/flaticon.css">
+    <link rel="stylesheet" href="medcare/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="medcare/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="medcare/vendors/animate-css/animate.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="medcare/css/style.css">
+    <link rel="stylesheet" href="medcare/css/responsive.css">
+
 </head>
+
+
 <body>
 
-<h1 id="header">
-    	Bébé à tout prix
-    	<p> Connexion </p>
-</h1>
+    <!--================Header Menu Area =================-->
+    <header class="header_area">	
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    
+                    <a class="navbar-brand logo_h" href="index2.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--================Header Menu Area =================-->
 
-<c>
+ <!--================Home Banner Area =================-->
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div
+            class="banner_content d-md-flex justify-content-between align-items-center"
+          >
+            <div class="mb-3 mb-md-0">
+				 Connexion
+            </div>
+            <div class="page_link">
+              <a href="index.html"> Accueil</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+<body>
+
+ <section class="contact-section area-padding">
+    <div class="container"> 
+        <div class="col-12">
+          <h2 class="contact-title"> Veuillez entrer vos identifiants de connexion :</h2>
+        </div>
+
+
+	<%
+	boolean checkFailed = (boolean) request.getAttribute("checkfailed");
+	if (checkFailed) {
+		%> <b>Utilisateur non reconnu : veuillez vérifier vos identifiants.</b><br> <%
+	}
+	%>
+	
+
 	<form action="Servlet" method="post">
-		<p><label for="identifiant">Identifiant : </label><input type="text" name="identifiant" /></p>
-		
-		<p><label for="mdp">Mot de passe : </label><input type="text" name="mdp" /></p>
-		
-		<input type="submit" name="operation" value="Se connecter">
+	
+	 <div class="col-12">
+                <div class="form-group">
+                  <input class="form-control" name="identifiant" type="text" placeholder="Mail">
+                </div>
+              
+             </div>
+             
+           <div class="col-12">
+                <div class="form-group">
+                  <input class="form-control" name="mdp" type="text" placeholder="Mot de passe">
+                </div>
+              
+             </div>  
+	<br>
+		<input type="submit"  class = "main_btn" name="operation" value="Se connecter">
 		
 		<input type="hidden" name = "op" value = "connexioncompte"> 
 
 	</form>
 	
-	
-	<%
-	boolean checkFailed = (boolean) request.getAttribute("checkfailed");
-	if (checkFailed) {
-		%> <b>Utilisateur non reconnu<br> <%
-	}
-	%>
-
-</c>
+	</div></section>
 
 </body>
 </html>
