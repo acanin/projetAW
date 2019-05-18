@@ -1834,7 +1834,7 @@ ul {
 @media (max-width: 767px) {
   .element-wrap {
     margin-top: 30px; } }
-b, sup, sub, u, del {
+sup, sub, u, del {
   color: #f8b600; }
 
 h1 {
@@ -3421,10 +3421,6 @@ h6 {
     margin-top: 35px; } 
 /*---------------------------------------------------- */
 
-/* Formulaire area */
-.formulaire-area {
-    margin-left: 10px; }
-}
 
 
 /*# sourceMappingURL=style.css.map */

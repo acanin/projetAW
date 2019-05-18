@@ -8,7 +8,7 @@
   <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="medcare/img/favicon.png" type="image/png">
+    <link rel="icon" href="medcare/img/minilogo.png" type="image/png">
     <title>Bébés à tout prix</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="medcare/css/bootstrap.css">
@@ -48,7 +48,7 @@
             class="banner_content d-md-flex justify-content-between align-items-center"
           >
             <div class="mb-3 mb-md-0">
-				 Connexion
+				 <h2>Connexion</h2>
             </div>
             <div class="page_link">
               <a href="index.html"> Accueil</a>
