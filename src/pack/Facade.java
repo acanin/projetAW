@@ -136,6 +136,15 @@ public class Facade {
 		}
 	}
 	
+	public void signalerDonneur(int id){
+		Donneur d = em.find(Donneur.class, id);
+		if(d.isSignale() == false){
+			d.setSignale(true);
+		}
+		
+		
+	}
+	
 	
 	
 	/** Methodes pour les centres 

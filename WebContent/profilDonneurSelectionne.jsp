@@ -49,12 +49,8 @@
             class="banner_content d-md-flex justify-content-between align-items-center"
           >
             <div class="mb-3 mb-md-0">
-            <% Donneur donneur = (Donneur) request.getAttribute("donneur");
-			String nom = donneur.getNom();
-			String prenom = donneur.getPrenom();
-			//int taux = 100;//centre.getNb_succes()/centre.getNb_essais();
-			%>
-              <h2>Bienvenue sur le profil de  <%= prenom + " " + nom %> </h2>
+           
+            
             
             </div>
             <div class="page_link">
@@ -66,15 +62,60 @@
     </section>
     <!--================End Home Banner Area =================-->
 
-<body>
-
-
 <section class="contact-section area-padding">
     <div class="container">
-    
+    <form action= "Servlet" method="post">
+	
         <div class="col-12">
-          <h2 class="contact-title"> Informations sur <%= prenom + " " + nom %> :</h2>
-        </div>
+           <% Donneur donneur = (Donneur) request.getAttribute("donneur");
+			String nom = donneur.getNom();
+			String prenom = donneur.getPrenom();
+			int age = donneur.getAge();
+			Boolean sexe = donneur.isSexe();
+			String yeux = donneur.getYeux().toString();
+			String cheveux = donneur.getCheveux().toString();
+			String peau = donneur.getPeau().toString();
+			String am = donneur.getAntecedents().toString();
+			String loisir = donneur.getLoisirs().toString();
+			int id = donneur.getId();
+			
+			Boolean dispo = donneur.isDisponibilite();
+			Boolean enAttente = donneur.isAttente();
+			Boolean signale = donneur.isSignale();
+			//int taux = 100;//centre.getNb_succes()/centre.getNb_essais();
+			%>
+              <h2>Bienvenue sur le profil de  <%= prenom + " " + nom %> </h2>
+            <%if (enAttente){ %>
+            	Cette personne est en attente de confirmation d'ajout dans notre liste
+            <% }%>
+            <%if (signale){ %>
+            	Cette personne a été signalée 
+            <% }%>
+            <%if (dispo){%> 
+            	Cette personne est actuellement disponible
+            	<%if(sexe == true){ %>
+            		Sexe = Femme
+            	<% } else {%>
+            		Sexe = Homme
+            	<% }%>
+            	Couleur des yeux : <%= yeux %>
+            	Couleur des cheuveux : <%= cheveux %>
+            	Couleur de la peau : <%= peau %>
+            	Antécédents médicaux : <%= am %>
+            	Loisirs : <%= loisir %>
+            	Ville : 
+            	
+            <% }%>
+            
+        
+		<input type="submit" class="main_btn" name="choix" value="Signaler">
+		<input type="hidden" name = "op" value="profildonneurselectionne">
+		<input type="hidden" name = "idsignale" value = <%= Integer.toString(id)  %>> 
+		      </div>
+			</form>
+            
+            
+  
   
 	 <br><br><br>
 	

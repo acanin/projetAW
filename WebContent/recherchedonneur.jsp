@@ -120,7 +120,7 @@
 	<br><br><br>
 		
 		<input type="submit" class="main_btn" name="choix" value="Valider">
-		<input type="submit" class="main_btn_light" name="choix" value="Annuler">
+	
 		
 		<input type="hidden" name = "op" value="rechercherDonneur">
 		<input type="hidden" name = "nom" value = <%= (String) request.getAttribute("nom") %>> 

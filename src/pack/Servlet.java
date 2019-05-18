@@ -196,52 +196,42 @@ public class Servlet extends HttpServlet {
 			
 		} else if (op.equals("rechercherDonneur")) {
 			String button = request.getParameter("choix");
-			
-			
-			if (button.equals("Annuler")) {
-				request.setAttribute("listedonneur", facade.listerDonneurs());
-				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
-			}
-			
-			// Bouton "Valider" 
-			else {
-				// On recupere les carateristiques recherchees 
-				String yeuxRecherche = request.getParameter("yeuxRecherche");
-				String cheveuxRecherche = request.getParameter("cheveuxRecherche");
-				String peauRecherche = request.getParameter("peauRecherche");
-				String amRecherche = request.getParameter("antecedentRecherche");
-				String loisirRecherche = request.getParameter("loisirRecherche");
+			// On recupere les carateristiques recherchees 
+			String yeuxRecherche = request.getParameter("yeuxRecherche");
+			String cheveuxRecherche = request.getParameter("cheveuxRecherche");
+			String peauRecherche = request.getParameter("peauRecherche");
+			String amRecherche = request.getParameter("antecedentRecherche");
+			String loisirRecherche = request.getParameter("loisirRecherche");
+	
+			// On les envoie la page d'apres
+			request.setAttribute("yeuxR", yeuxRecherche);
+			request.setAttribute("cheveuxR", cheveuxRecherche);
+			request.setAttribute("peauR", peauRecherche);
+			request.setAttribute("amR", amRecherche);	
+			request.setAttribute("loisirR", loisirRecherche);
 					
-					
-					
-				// On les envoie la page d'apres
-				request.setAttribute("yeuxR", yeuxRecherche);
-				request.setAttribute("cheveuxR", cheveuxRecherche);
-				request.setAttribute("peauR", peauRecherche);
-				request.setAttribute("amR", amRecherche);
-				request.setAttribute("loisirR", loisirRecherche);
-					
-					
-				// On envoie la liste des donneurs
-				request.setAttribute("listedonneurCompatible", facade.rechercher(yeuxRecherche,cheveuxRecherche,peauRecherche,amRecherche,loisirRecherche));
-		
-				request.getRequestDispatcher("afficherDonneurSelectionne.jsp").forward(request, response);
-			}
-			
+			// On envoie la liste des donneurs
+			request.setAttribute("listedonneurCompatible", facade.rechercher(yeuxRecherche,cheveuxRecherche,peauRecherche,amRecherche,loisirRecherche));
+			request.getRequestDispatcher("afficherDonneurSelectionne.jsp").forward(request, response);
 			
 			
 		} else if (op.equals("afficherDonneurSelectionne")){
 			String button = request.getParameter("choix");
-
 			if(button.equals("personne")){
 				String id = request.getParameter("personneSelect");
 				request.setAttribute("donneur", facade.recupererDonneur(Integer.parseInt(id)));
 				request.getRequestDispatcher("profilDonneurSelectionne.jsp").forward(request, response);
 			}
 			
-			if (button.equals("Retour Accueil")) {
-				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
-			} 
+		} else if (op.equals("profildonneurselectionne")){	
+			String button = request.getParameter("choix");
+			String idsignale = request.getParameter("idsignale");
+			if(button.equals("Signaler")){
+				facade.signalerDonneur(Integer.parseInt(idsignale));
+				request.setAttribute("donneurS", facade.recupererDonneur(Integer.parseInt(idsignale)));
+				request.getRequestDispatcher("personneSignale.jsp").forward(request, response);;
+			}
+			
 			
 		} else if (op.equals("admin")) {
 			String button = request.getParameter("adminbutton");
