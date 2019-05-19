@@ -48,14 +48,14 @@
             class="banner_content d-md-flex justify-content-between align-items-center"
           >
             <div class="mb-3 mb-md-0">
-              <h2> <form action= "Servlet" method="post">
-				 Bienvenue,
+               <form action= "Servlet" method="post">
+				<h2> Bienvenue,
 				<%
 					HttpSession s = request.getSession(false);	
 					String p = (String) session.getAttribute("prenom"); 
 					String n = (String) session.getAttribute("nom");
 				%>
-						<%= p  %> <%= n  %> ! </form></h2> 
+						<%= p  %> <%= n  %> ! </h2></form> 
             
             </div>
             <div class="page_link">

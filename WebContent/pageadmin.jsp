@@ -66,56 +66,62 @@
     
     
         <div class="col-12">
-          <h2 class="contact-title">Actions :  </h2>
-        </div>
+          <h4 class="contact-title">Actions :  </h4>
+       
 		
 		<form action= "Servlet" method="post">
-		
-			<input type="submit" class="main_btn" name="adminbutton" value="Nouveau medecin">
-			<input type="submit" class="main_btn" name="adminbutton" value="Ouverture d'un centre">
-			<input type="submit" class="main_btn" name="adminbutton" value="listercentre">
+			<p>Ici, vous pouvez créer le profil d'un médecin, créer le profil d'un centre ou afficher la liste des centres :</p>
+			<br> <div class="row">
+			<input type="submit" class="genric-btn default" name="adminbutton" value="Nouveau medecin">
 			
+			<input type="submit" class="genric-btn default" name="adminbutton" value="Ouverture d'un centre">
+			
+			<input type="submit" class="genric-btn default" name="adminbutton" value="listercentre">
+			</div>
 			<input type="hidden" name = "op" value="admin">
 
 		</form>
-<br>
+<br><br><br><br>
 
-		<div class="col-12">
-          <h2 class="contact-title">Donneurs en attente :  </h2>
-        </div>
 
-		<ul>
-		
+          <h4 class="contact-title">Donneurs en attente :  </h4>
+       
+	
 		<%
 			Collection<Donneur> ldattente = (Collection<Donneur>) request.getAttribute("donneurattente");
-			for (Donneur d : ldattente) { 
-				String s = d.getPrenom() + ' ' + d.getNom();
-				int id = d.getId(); %>
+		
+		if (ldattente.isEmpty()) {%> Il n'y a aucun donneur en attente pour le moment. 
+		<% } else { %> Voici la liste des donneurs actuellement en attente : <br>
+				<% for (Donneur d : ldattente) { 
+					String s = d.getPrenom() + ' ' + d.getNom();
+					int id = d.getId();%>
 				
-				<li> <a href="Servlet?op=admin&adminbutton=attente&dattente=<%= id%>"> <%= s %>  </a> </li>
-			
-			<% } %>
+					<ul><li> <a href="Servlet?op=admin&adminbutton=attente&dattente=<%= id%>"> <%= s %>  </a> </li>
+				
+			<% }} %>
 		
 		
-		</ul>
-
-		<div class="col-12">
-		          <h2 class="contact-title">Donneurs signalés : </h2>
-		        </div>
-		<br>
+		</ul> 
+<br><br><br><br><br>
+		
+		          <h4 class="contact-title">Donneurs signalés : </h4>
+		        
 		<ul>
 		<%
-			Collection<Donneur> lsignale = (Collection<Donneur>) request.getAttribute("donneursignale");
-			for (Donneur ds : lsignale) { 
+		Collection<Donneur> lsignale = (Collection<Donneur>) request.getAttribute("donneursignale");
+
+		if (lsignale.isEmpty()) { %> Il n'y a aucun donneur signalé pour le moment. 
+		<% } else { %> Voici la liste des donneurs actuellement signalés : <br>
+			<% for (Donneur ds : lsignale) { 
 				String ss = ds.getPrenom() + ' ' + ds.getNom();
 				int ids = ds.getId(); %>
 				
 				<li> <a href="Servlet?op=admin&adminbutton=signale&dsignale=<%= ids%>"> <%= ss %>  </a> </li>
 			
-			<% } %>
+			<% }} %>
 		
 		
-		</ul>
+		</ul></div>
 </div></section>
 
 </body>

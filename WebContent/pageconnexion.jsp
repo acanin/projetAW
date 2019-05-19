@@ -87,7 +87,7 @@
              
            <div class="col-12">
                 <div class="form-group">
-                  <input class="form-control" name="mdp" type="text" placeholder="Mot de passe">
+                  <input class="form-control" name="mdp" type="password" placeholder="Mot de passe">
                 </div>
               
              </div>  
