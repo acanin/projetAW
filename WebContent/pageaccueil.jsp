@@ -12,11 +12,7 @@
     <title>Bébés à tout prix</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="medcare/css/bootstrap.css">
-    <link rel="stylesheet" href="medcare/css/themify-icons.css">
-    <link rel="stylesheet" href="medcare/css/flaticon.css">
-    <link rel="stylesheet" href="medcare/vendors/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="medcare/vendors/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="medcare/vendors/animate-css/animate.css">
+
     <!-- main css -->
     <link rel="stylesheet" href="medcare/css/style.css">
     <link rel="stylesheet" href="medcare/css/responsive.css">
@@ -32,7 +28,7 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
                     
-                    <a class="navbar-brand logo_h" href="index2.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
+                    <a class="navbar-brand logo_h" href="index.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
                     
                 </div>
             </nav>
@@ -85,7 +81,6 @@
 		
 		<br><br>
 			<input type="submit" class = "main_btn" name="choix" value="Rechercher Donneur">
-			<input type="submit" name="choix" value="Bouton2">
 			<input type="hidden" name = "op" value="pageaccueil">
 			
 			

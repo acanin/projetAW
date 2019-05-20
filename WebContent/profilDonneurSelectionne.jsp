@@ -11,11 +11,6 @@
     <title>Bébés à tout prix</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="medcare/css/bootstrap.css">
-    <link rel="stylesheet" href="medcare/css/themify-icons.css">
-    <link rel="stylesheet" href="medcare/css/flaticon.css">
-    <link rel="stylesheet" href="medcare/vendors/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="medcare/vendors/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="medcare/vendors/animate-css/animate.css">
     <!-- main css -->
     <link rel="stylesheet" href="medcare/css/style.css">
     <link rel="stylesheet" href="medcare/css/responsive.css">
@@ -29,44 +24,14 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
                     
-                    <a class="navbar-brand logo_h" href="index2.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
-                    
-                    
-               
+                    <a class="navbar-brand logo_h" href="index.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
+
                 </div>
             </nav>
         </div>
     </header>
     <!--================Header Menu Area =================-->
 
-
- 
- <!--================Home Banner Area =================-->
-    <section class="banner_area">
-      <div class="banner_inner d-flex align-items-center">
-        <div class="container">
-          <div
-            class="banner_content d-md-flex justify-content-between align-items-center"
-          >
-            <div class="mb-3 mb-md-0">
-           
-            
-            
-            </div>
-            <div class="page_link">
-              <a href="index.html">Accueil</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--================End Home Banner Area =================-->
-
-<section class="contact-section area-padding">
-    <div class="container">
-    <form action= "Servlet" method="post">
-	
-        <div class="col-12">
            <% Donneur donneur = (Donneur) request.getAttribute("donneur");
 			String nom = donneur.getNom();
 			String prenom = donneur.getPrenom();
@@ -84,31 +49,60 @@
 			Boolean signale = donneur.isSignale();
 			//int taux = 100;//centre.getNb_succes()/centre.getNb_essais();
 			%>
-              <h2>Bienvenue sur le profil de  <%= prenom + " " + nom %> </h2>
+ 
+ <!--================Home Banner Area =================-->
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div
+            class="banner_content d-md-flex justify-content-between align-items-center"
+          >
+            <div class="mb-3 mb-md-0">
+				<h2>Bienvenue sur le profil de  <%= prenom + " " + nom %> </h2>
+            </div>
+            <div class="page_link">
+              <a href="index.html">Accueil</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+
+<section class="contact-section area-padding">
+    <div class="container">
+    
+    <form action= "Servlet" method="post">
+	
+        <div class="col-12">
+
             <%if (enAttente){ %>
-            	Cette personne est en attente de confirmation d'ajout dans notre liste
+            	<i> Cette personne est en attente de confirmation d'ajout sur notre site.</i><br><br>
             <% }%>
             <%if (signale){ %>
-            	Cette personne a été signalée 
+            	<i> Cette personne a été signalée par un de nos utilisateurs.</i><br><br>
             <% }%>
             <%if (dispo){%> 
-            	Cette personne est actuellement disponible
+            	<i> Cette personne est actuellement disponible pour un don.</i><br><br>
+            	
+            	 <h3> Informations sur <%= prenom + " " + nom %> :</h3> <br>
+            	
             	<%if(sexe == true){ %>
-            		Sexe = Femme
+            		Sexe : Femme <br>
             	<% } else {%>
-            		Sexe = Homme
+            		Sexe : Homme <br>
             	<% }%>
-            	Couleur des yeux : <%= yeux %>
-            	Couleur des cheuveux : <%= cheveux %>
-            	Couleur de la peau : <%= peau %>
-            	Antécédents médicaux : <%= am %>
-            	Loisirs : <%= loisir %>
-            	Ville : 
+            	Couleur des yeux : <%= yeux %><br>
+            	Couleur des cheveux : <%= cheveux %><br>
+            	Peau : <%= peau %><br>
+            	Antécédents médicaux : <%= am %><br>
+            	Loisirs : <%= loisir %><br>
+      
             	
             <% }%>
             
-        
-		<input type="submit" class="main_btn" name="choix" value="Signaler">
+        <br><br>
+		<input type="submit" class="genric-btn danger radius" name="choix" value="Signaler">
 		<input type="hidden" name = "op" value="profildonneurselectionne">
 		<input type="hidden" name = "idsignale" value = <%= Integer.toString(id)  %>> 
 		      </div>
