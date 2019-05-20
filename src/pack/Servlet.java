@@ -204,11 +204,11 @@ public class Servlet extends HttpServlet {
 			String loisirRecherche = request.getParameter("loisirRecherche");
 	
 			// On les envoie la page d'apres
-			request.setAttribute("yeuxR", yeuxRecherche);
-			request.setAttribute("cheveuxR", cheveuxRecherche);
-			request.setAttribute("peauR", peauRecherche);
-			request.setAttribute("amR", amRecherche);	
-			request.setAttribute("loisirR", loisirRecherche);
+			//request.setAttribute("yeuxR", yeuxRecherche);
+			//request.setAttribute("cheveuxR", cheveuxRecherche);
+			//request.setAttribute("peauR", peauRecherche);
+			//request.setAttribute("amR", amRecherche);	
+			//request.setAttribute("loisirR", loisirRecherche);
 					
 			// On envoie la liste des donneurs
 			request.setAttribute("listedonneurCompatible", facade.rechercher(yeuxRecherche,cheveuxRecherche,peauRecherche,amRecherche,loisirRecherche));
@@ -221,6 +221,11 @@ public class Servlet extends HttpServlet {
 				String id = request.getParameter("personneSelect");
 				request.setAttribute("donneur", facade.recupererDonneur(Integer.parseInt(id)));
 				request.getRequestDispatcher("profilDonneurSelectionne.jsp").forward(request, response);
+			}else if(button.equals("refaire")) {
+				//response.getWriter().append("Il faut pouvoir revenir sur la recherche");
+				request.getRequestDispatcher("recherchedonneur.jsp").forward(request, response);
+			}else{
+				response.getWriter().append("Probleme dans Servlet op = affDonneurSelect");
 			}
 			
 		} else if (op.equals("profildonneurselectionne")){	

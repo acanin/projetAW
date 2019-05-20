@@ -83,7 +83,7 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 		int s = 0;
 		switch(nom) {
 		case "Cardiaque":
-			s = 4;
+			s = 3;
 			break;
 		case "Asthme":
 			s = 1;
@@ -92,22 +92,22 @@ public static final AntecedentsMedicaux[] allantmed = AntecedentsMedicaux.values
 			s = 2;
 			break;
 		case "Parkinson":
-			s = 6;
+			s = 5;
 			break;
 		case "Cancer":
-			s = 5;
+			s = 4;
 			break;
 		case "Alzheimer":
 			s = 7 ;
 			break;
 		case "Sida":
-			s = 8;
+			s = 6;
 			break;
 		case "ISG":
 			s = 0;
 			break;
 		case "Aucun":
-			s = 9;
+			s = 8;
 			break;
 		}
 		return s;

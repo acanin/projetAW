@@ -123,8 +123,7 @@
 	
 		
 		<input type="hidden" name = "op" value="rechercherDonneur">
-		<input type="hidden" name = "nom" value = <%= (String) request.getAttribute("nom") %>> 
-		<input type="hidden" name = "prenom" value = <%= (String) request.getAttribute("prenom") %>> 
+
 	</form>
 	
 

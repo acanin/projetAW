@@ -1,11 +1,9 @@
 <%@ page language="java" import = "java.util.*, pack.*, enumerations.*" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!doctype html>
 <html lang="en">
-
 <head>
-  <!-- Required meta tags -->
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="medcare/img/minilogo.png" type="image/png">
@@ -20,11 +18,9 @@
     <!-- main css -->
     <link rel="stylesheet" href="medcare/css/style.css">
     <link rel="stylesheet" href="medcare/css/responsive.css">
-
 </head>
-
-
 <body>
+
 
     <!--================Header Menu Area =================-->
     <header class="header_area">	
@@ -34,12 +30,15 @@
                     
                     <a class="navbar-brand logo_h" href="index2.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
                     
+                    
+               
                 </div>
             </nav>
         </div>
     </header>
     <!--================Header Menu Area =================-->
 
+ 
  <!--================Home Banner Area =================-->
     <section class="banner_area">
       <div class="banner_inner d-flex align-items-center">
@@ -48,20 +47,11 @@
             class="banner_content d-md-flex justify-content-between align-items-center"
           >
             <div class="mb-3 mb-md-0">
-               <form action= "Servlet" method="post">
-				<h2> Bienvenue,
-				<%
-					HttpSession s = request.getSession(false);	%>
-			
-					
-					<%-- 		String n = (String) session.getAttribute("nom");  --%> 
-					<%-- 		String p = (String) session.getAttribute("prenom");  --%> 
-				
-					<%--	<%= p  %> <%= n  %> ! --%> </h2></form> 
+              <h2>Personne Signalée</h2>
             
             </div>
             <div class="page_link">
-              <a href="index.html"> Accueil</a>
+              <a href="index.html">Accueil</a>
             </div>
           </div>
         </div>
@@ -69,29 +59,30 @@
     </section>
     <!--================End Home Banner Area =================-->
 
- <section class="contact-section area-padding">
-    <div class="container"> 
+<!-- ================Affichage résultats section start ================= -->
+  <section class="contact-section area-padding">
+    <div class="container">
+    
         <div class="col-12">
-          <h2 class="contact-title"> Que voulez-vous faire ?</h2>
+          <h2 class="contact-title">Votre signalement a bien été pris en compte, merci pour votre implication.  </h2>
         </div>
+  
+	 <br><br><br>
+	
 
-		<form action= "Servlet" method="post">
-			<br>
-		<p> Nous avons actuellement 
-		<% Collection<Donneur> ld = (Collection<Donneur>) request.getAttribute("listedonneur");
-			int nb_donneur = ld.size(); %>
-			
-			<%= nb_donneur  %> donneurs disponibles dans tous nos centres. Cela vous intéresse ?<br>
+<ul>
+
+<%Donneur d = (Donneur) request.getAttribute("donneurS"); %>
+Vous venez de signaler <%= d.getNom() + " " + d.getPrenom() + "." %>
+	
 		
-		<br><br>
-			<input type="submit" class = "main_btn" name="choix" value="Rechercher Donneur">
-			<input type="submit" name="choix" value="Bouton2">
-			<input type="hidden" name = "op" value="pageaccueil">
-			
-			
-		</form>
-		
-	</div>
-</section>
+	
+
+
+
+</ul>
+
+
+</div></section>
 </body>
 </html>

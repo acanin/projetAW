@@ -85,18 +85,26 @@
 	<ul>
 		
 	<% Collection<Donneur> ld = (Collection<Donneur>)request.getAttribute("listedonneurCompatible");
-	for (Donneur d : ld){ 
-		String s = d.getPrenom() + " " + d.getNom();
-		int id = d.getId();%>
+	if (ld.size() == 0){
+		int id = 0;%>
+		Il n'y a aucun donneur qui correspond à vos attentes. Essayez encore trouver le donneur parfait.
 		
-		<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=personne&personneSelect=<%= id  %>"><%= s %></a> </li>
+		<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=refaire"><%= "Refaire une recheche" %></a> </li>
 		
-	<%  }%>
+	<%}else {
+		for (Donneur d : ld){ 
+			String s = d.getPrenom() + " " + d.getNom();
+			int id = d.getId();%>
+		
+			<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=personne&personneSelect=<%= id  %>"><%= s %></a> </li>
+		
+	<% }
+	}%>
 	
 	</ul>
 		
-		<input type="hidden" name = "nom" value = <%= (String) request.getAttribute("nom") %>> 
-		<input type="hidden" name = "prenom" value = <%= (String) request.getAttribute("prenom") %>> 
+		
+		
 		
 		
 	</form>

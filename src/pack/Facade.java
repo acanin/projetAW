@@ -87,10 +87,70 @@ public class Facade {
 		m.setOwner(c);
 	}
 
+	
+	
+	
+	public String sqlYeux(String y){
+		if (y == null){
+			return"";
+		}else {
+			int num = Yeux.toInteger(y);
+			return "YEUX = " + Integer.toString(num) + " AND ";
+		}
+	}
+		
+	public String sqlCheveux(String c){
+		if (c == null){
+			return"";
+		}else {
+			int num = Cheveux.toInteger(c);
+			return "CHEVEUX = " + Integer.toString(num) + " AND ";
+		}
+	}
+	
+	public String sqlPeau(String p){
+		if (p == null){
+			return"";
+		}else {
+			int num = Cheveux.toInteger(p);
+			return "PEAU = " + Integer.toString(num) + " AND ";
+		}
+	}
+	
+	public String sqlAM(String a){
+		if (a == null){
+			return"";
+		}else {
+			int num = Cheveux.toInteger(a);
+			return "ANTECEDENTS = " + Integer.toString(num) + " AND ";
+		}
+	}
+	
+	public String sqlLoisir(String l){
+		if (l == null){
+			return"";
+		}else {
+			int num = Cheveux.toInteger(l);
+			return "LOISIRS = " + Integer.toString(num) + " AND ";
+		}
+	}
+	
 	public Collection<Donneur> rechercher(String yeux, String cheveux,String peau,String am,String loisir){
-		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) + "AND CHEVEUX = " + Cheveux.toInteger(cheveux) + "AND PEAU = " + Peau.toInteger(peau)  + "AND ANTECEDENTS = " + AntecedentsMedicaux.toInteger(am)  + "AND LOISIRS = " + Loisirs.toInteger(loisir) , Donneur.class);
+		String Y = sqlYeux(yeux);
+		String C = sqlCheveux(cheveux);
+		String P = sqlPeau(peau);
+		String A = sqlAM(cheveux);
+		String L = sqlLoisir(yeux);
+
+		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE " + Y + C + P + A  + L + " SIGNALE = FALSE", Donneur.class);
 		return req.getResultList();
 	}
+	
+	
+	/**public Collection<Donneur> rechercher(String yeux, String cheveux,String peau,String am,String loisir){
+		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) + "AND CHEVEUX = " + Cheveux.toInteger(cheveux) + "AND PEAU = " + Peau.toInteger(peau)  + "AND ANTECEDENTS = " + AntecedentsMedicaux.toInteger(am)  + "AND LOISIRS = " + Loisirs.toInteger(loisir) + " AND SIGNALE = FALSE", Donneur.class);
+		return req.getResultList();
+	}*/
 
 	public Collection<Donneur> listerDonneurs(){
 		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p", Donneur.class);
@@ -141,8 +201,6 @@ public class Facade {
 		if(d.isSignale() == false){
 			d.setSignale(true);
 		}
-		
-		
 	}
 	
 	
