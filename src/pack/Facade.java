@@ -28,7 +28,9 @@ public class Facade {
 		} else {
 			Utilisateur u = null;
 			try {
-				TypedQuery<Utilisateur> req = em.createQuery("SELECT u FROM Utilisateur u WHERE u.mail = "+mail+" AND u.mdp = "+mdp, Utilisateur.class);
+				TypedQuery<Utilisateur> req = em.createQuery("SELECT u FROM Utilisateur u WHERE u.mail = :mailValue AND u.mdp = :mdpValue", Utilisateur.class);
+				req.setParameter("mailValue", mail);
+				req.setParameter("mdpValue", mdp);
 				u = req.getSingleResult();
 			} catch (PersistenceException e) {
 				// Cet utilisateur n'existe pas

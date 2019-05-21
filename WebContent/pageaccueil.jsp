@@ -47,13 +47,15 @@
                <form action= "Servlet" method="post">
 				<h2> Bienvenue,
 				<%
-					HttpSession s = request.getSession(false);	%>
+					HttpSession s = request.getSession(false);
 			
 					
-					<%-- 		String n = (String) session.getAttribute("nom");  --%> 
-					<%-- 		String p = (String) session.getAttribute("prenom");  --%> 
-				
-					<%--	<%= p  %> <%= n  %> ! --%> </h2></form> 
+					String n = (String) session.getAttribute("nom");
+					String p = (String) session.getAttribute("prenom");
+				%>
+					
+					<%= p  %> <%= n  %> !
+				</h2></form> 
             
             </div>
             <div class="page_link">
