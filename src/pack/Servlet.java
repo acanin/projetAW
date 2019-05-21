@@ -197,21 +197,15 @@ public class Servlet extends HttpServlet {
 		} else if (op.equals("rechercherDonneur")) {
 			String button = request.getParameter("choix");
 			// On recupere les carateristiques recherchees 
+			String sexeRecherche = request.getParameter("sexeRecherche");
 			String yeuxRecherche = request.getParameter("yeuxRecherche");
 			String cheveuxRecherche = request.getParameter("cheveuxRecherche");
 			String peauRecherche = request.getParameter("peauRecherche");
-			String amRecherche = request.getParameter("antecedentRecherche");
-			String loisirRecherche = request.getParameter("loisirRecherche");
+			
 	
-			// On les envoie la page d'apres
-			//request.setAttribute("yeuxR", yeuxRecherche);
-			//request.setAttribute("cheveuxR", cheveuxRecherche);
-			//request.setAttribute("peauR", peauRecherche);
-			//request.setAttribute("amR", amRecherche);	
-			//request.setAttribute("loisirR", loisirRecherche);
 					
 			// On envoie la liste des donneurs
-			request.setAttribute("listedonneurCompatible", facade.rechercher(yeuxRecherche,cheveuxRecherche,peauRecherche,amRecherche,loisirRecherche));
+			request.setAttribute("listedonneurCompatible", facade.rechercher(sexeRecherche,yeuxRecherche,cheveuxRecherche,peauRecherche));
 			request.getRequestDispatcher("afficherDonneurSelectionne.jsp").forward(request, response);
 			
 			
@@ -234,7 +228,12 @@ public class Servlet extends HttpServlet {
 			if(button.equals("Signaler")){
 				facade.signalerDonneur(Integer.parseInt(idsignale));
 				request.setAttribute("donneurS", facade.recupererDonneur(Integer.parseInt(idsignale)));
-				request.getRequestDispatcher("personneSignale.jsp").forward(request, response);;
+				request.getRequestDispatcher("personneSignale.jsp").forward(request, response);
+			}else if (button.equals("Accueil")){
+				request.setAttribute("listedonneur", facade.listerDonneurs());
+				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+			} else {
+				response.getWriter().append("Page rdv à faire ");
 			}
 			
 			

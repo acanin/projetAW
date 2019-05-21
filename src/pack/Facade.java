@@ -119,33 +119,22 @@ public class Facade {
 		}
 	}
 	
-	public String sqlAM(String a){
-		if (a == null){
-			return"";
-		}else {
-			int num = Cheveux.toInteger(a);
-			return "ANTECEDENTS = " + Integer.toString(num) + " AND ";
-		}
-	}
+
 	
-	public String sqlLoisir(String l){
-		if (l == null){
-			return"";
-		}else {
-			int num = Cheveux.toInteger(l);
-			return "LOISIRS = " + Integer.toString(num) + " AND ";
-		}
-	}
-	
-	public Collection<Donneur> rechercher(String yeux, String cheveux,String peau,String am,String loisir){
+	public Collection<Donneur> rechercher(String sexe,String yeux, String cheveux,String peau){
 		String Y = sqlYeux(yeux);
 		String C = sqlCheveux(cheveux);
 		String P = sqlPeau(peau);
-		String A = sqlAM(cheveux);
-		String L = sqlLoisir(yeux);
-
-		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE " + Y + C + P + A  + L + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
-		return req.getResultList();
+		if (sexe.equals("Femme")){
+			TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = TRUE AND " + Y + C + P  + " SIGNALE = FALSE", Donneur.class);
+			//TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = TRUE AND" + Y + C + P  + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
+			return req.getResultList();
+		}else{
+			TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = FALSE AND " + Y + C + P  + " SIGNALE = FALSE", Donneur.class);
+			//TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = FALSE AND" + Y + C + P  + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
+			return req.getResultList();
+		}
+		
 	}
 	
 	
