@@ -144,7 +144,7 @@ public class Facade {
 		String A = sqlAM(cheveux);
 		String L = sqlLoisir(yeux);
 
-		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE " + Y + C + P + A  + L + " SIGNALE = FALSE", Donneur.class);
+		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE " + Y + C + P + A  + L + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
 		return req.getResultList();
 	}
 	
