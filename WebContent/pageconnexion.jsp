@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="medcare/css/bootstrap.css">
     <!-- main css -->
     <link rel="stylesheet" href="medcare/css/style.css">
+    <link rel="stylesheet" href="style_batp.css">
     <link rel="stylesheet" href="medcare/css/responsive.css">
 
 </head>
@@ -60,40 +61,27 @@
     <div class="container"> 
         <div class="col-12">
           <h2 class="contact-title"> Veuillez entrer vos identifiants de connexion :</h2>
-        </div>
-
-
-	<%
-	boolean checkFailed = (boolean) request.getAttribute("checkfailed");
-	if (checkFailed) {
-		%> <b>Utilisateur non reconnu : veuillez vérifier vos identifiants.</b><br> <%
-	}
-	%>
+			<br>
+		  <%
+			boolean checkFailed = (boolean) request.getAttribute("checkfailed");
+			if (checkFailed) {%>
+				 <echec>Utilisateur non reconnu : veuillez vérifier vos identifiants.</echec><br> <%
+			}
+		  %>
 	
 
-	<form action="Servlet" method="post">
+		<form action="Servlet" method="post">
+		 <div class="form-group">
+		 	<input class="form-control" name="identifiant" type="text" placeholder="Mail"></div>
+         <div class="form-group">
+         	<input class="form-control" name="mdp" type="password" placeholder="Mot de passe"></div>
+		 <br>
+		 <input type="submit" class = "main_btn" name="operation" value="Se connecter">
+		 <input type="hidden" name = "op" value = "connexioncompte"> 
 	
-	 <div class="col-12">
-                <div class="form-group">
-                  <input class="form-control" name="identifiant" type="text" placeholder="Mail">
-                </div>
-              
-             </div>
-             
-           <div class="col-12">
-                <div class="form-group">
-                  <input class="form-control" name="mdp" type="password" placeholder="Mot de passe">
-                </div>
-              
-             </div>  
-	<br>
-		<input type="submit"  class = "main_btn" name="operation" value="Se connecter">
-		
-		<input type="hidden" name = "op" value = "connexioncompte"> 
-
-	</form>
+		</form>
 	
-	</div></section>
-
+		</div></div>
+ </section>
 </body>
 </html>

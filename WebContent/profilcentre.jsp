@@ -25,9 +25,7 @@
                 <div class="container">
                     
                     <a class="navbar-brand logo_h" href="index.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
-                    
-                    
-               
+				
                 </div>
             </nav>
         </div>
@@ -64,52 +62,42 @@
 
 <section class="contact-section area-padding">
     <div class="container">
-    
-        <div class="col-12">
-          <h2 class="contact-title"> Nous sommes ravis de vous accueillir au centre <%= nom %> ! </h2>
-        </div>
-	<br> <br>
-<p>Nous sommes basés au <%= centre.getAdresse() %> à <%= centre.getVille() %>. </p>
+    <div class="col-12">
+    	<h2 class="contact-title"> Nous sommes ravis de vous accueillir au centre <%= nom %> ! </h2><br><br>
 
-<% if (centre.getNb_essais() != 0) {
-	int taux = centre.getNb_succes()/centre.getNb_essais();%>
-
-<p> A l'heure actuelle, nous avons un taux de réussite de <%= taux %> sur <%= centre.getNb_essais() %> essais. </p>
-
-<% } %>
-
-
-
-Voici la liste des médecins travaillant chez nous : 
-<ul>
-
-<%
-	Collection<Medecin> lm = (Collection<Medecin>) request.getAttribute("lm");
-	for (Medecin m : lm) { 
-		String s = "Medecin " + m.getNom() + ", " + Specialite.toString(m.getSpecialisation());
-		int id = m.getId(); %>
+		<p>Nous sommes basés au <%= centre.getAdresse() %> à <%= centre.getVille() %>. </p>
 		
-		<li> <a href="Servlet?op=profilcentre&button=rien&medecin=<%= id%>"> <%= s %>  </a> </li>
-	
-	<% } %>
-</ul>
-	
-<p>N'hésitez pas à prendre rendez-vous en ligne :</p>
+		<% if (centre.getNb_essais() != 0) {
+			int taux = centre.getNb_succes()/centre.getNb_essais();%>
+		
+		<p> A l'heure actuelle, nous avons un taux de réussite de <%= taux %> sur <%= centre.getNb_essais() %> essais. </p>
+		
+		<% } %>
 
+		Voici la liste des médecins travaillant chez nous : 
+		<ul>
+		
+		<%	Collection<Medecin> lm = (Collection<Medecin>) request.getAttribute("lm");
+			for (Medecin m : lm) { 
+				String s = "Medecin " + m.getNom() + ", " + Specialite.toString(m.getSpecialisation());
+				int id = m.getId(); %>
+				
+				<li> <a href="Servlet?op=profilcentre&button=rien&medecin=<%= id%>"> <%= s %>  </a> </li>
+			
+			<% } %>
+		</ul>
+			
+		<p>N'hésitez pas à prendre rendez-vous en ligne :</p>
+		
+		
+		<form action= "Servlet" method="post">
+			<input type="submit" class="main_btn" name="button" value="PrendreRDV">
+			<input type="hidden" name = "op" value="profilcentre">
+			<input type="hidden" name = "idc" value="<%= centre.getId() %>">
+			
+		</form>
 
-<form action= "Servlet" method="post">
-	<input type="submit" class="main_btn" name="button" value="PrendreRDV">
-	<input type="hidden" name = "op" value="profilcentre">
-	<input type="hidden" name = "idc" value="<%= centre.getId() %>">
-	
-</form>
-
-
-
-</div>
-<p>  </p>
+</div></div>
 </section>
-
-
 </body>
 </html>

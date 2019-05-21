@@ -71,13 +71,13 @@
         <div class="row">
 		<div class="col-sm-6">
     	 	<div class="form-group">
-          	 <input class="form-control" name="taille" type="text" placeholder="Taille (cm)">
+          	 <input class="form-control" name="taille" type="text" placeholder="Taille (cm)" required>
         	</div>          
      	</div>
               
      	<div class="col-sm-6">
     		<div class="form-group">
-         	  <input class="form-control" name="poids" type="text" placeholder="Poids (kg)">
+         	  <input class="form-control" name="poids" type="text" placeholder="Poids (kg)" required>
         	 </div>
      	</div>
     	</div>
