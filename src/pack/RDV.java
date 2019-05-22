@@ -13,16 +13,22 @@ public class RDV {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private int heure;
+	private int jour;
+	private int mois;
 	//private Date date;
-	
+	/**
 	@ManyToOne
 	Centre owner;
+	*/
 	
 	@ManyToOne
 	Receveur receveur;
 	
 	@ManyToOne
 	Donneur donneur;
+	
+	@ManyToOne
+	Medecin medecin;
 	
 	
 	/** Pour avoir une relation bidirectionnelle 
@@ -31,43 +37,78 @@ public class RDV {
 	public RDV(){
 		
 	}
-	
-	public Centre getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Centre owner) {
-		this.owner = owner;
-	}
 
 
 	public int getId() {
 		return id;
 	}
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 
 	public int getHeure() {
 		return heure;
 	}
 
+
 	public void setHeure(int heure) {
 		this.heure = heure;
 	}
 
-	/**public Date getDate() {
-		return date;
+
+	public int getJour() {
+		return jour;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}*/
+
+	public void setJour(int jour) {
+		this.jour = jour;
+	}
+
+
+	public int getMois() {
+		return mois;
+	}
+
+
+	public void setMois(int mois) {
+		this.mois = mois;
+	}
+
+
+	public Receveur getReceveur() {
+		return receveur;
+	}
+
+
+	public void setReceveur(Receveur receveur) {
+		this.receveur = receveur;
+	}
+
+
+	public Donneur getDonneur() {
+		return donneur;
+	}
+
+
+	public void setDonneur(Donneur donneur) {
+		this.donneur = donneur;
+	}
+
+
+	public Medecin getMedecin() {
+		return medecin;
+	}
+
+
+	public void setMedecin(Medecin medecin) {
+		this.medecin = medecin;
+	}
 	
-	
-	
-	
+
 	
 	
 	

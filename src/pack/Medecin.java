@@ -2,10 +2,12 @@ package pack;
 
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import enumerations.Specialite;
 
@@ -24,6 +26,9 @@ public class Medecin {
 	@ManyToOne
 	Centre owner;
 	
+	@OneToMany(mappedBy="medecin", fetch = FetchType.EAGER)
+	RDV rdv;
+	
 	public Medecin(){}
 	
 	public Medecin(String n, Specialite s, boolean sexe) {
@@ -39,6 +44,16 @@ public class Medecin {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	
+
+	public RDV getRdv() {
+		return rdv;
+	}
+
+	public void setRdv(RDV rdv) {
+		this.rdv = rdv;
 	}
 
 	public String getNom() {

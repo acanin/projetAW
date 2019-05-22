@@ -71,7 +71,7 @@
 			
 			<input type="submit" class="genric-btn default" name="adminbutton" value="Ouverture d'un centre">
 			
-			<input type="submit" class="genric-btn default" name="adminbutton" value="listercentre">
+			<input type="submit" class="genric-btn default" name="adminbutton" value="Liste des centres">
 			</div>
 			<input type="hidden" name = "op" value="admin">
 

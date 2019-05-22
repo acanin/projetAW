@@ -360,7 +360,7 @@ public class Servlet extends HttpServlet {
 			} else if (button.equals("Nouveau medecin")) {
 				request.setAttribute("lc", facade.listerCentres());
 				request.getRequestDispatcher("creationmedecin.jsp").forward(request, response);
-			} else if(button.equals("listercentre")) { // C'est un test qu'il faudra enlever plus tard, flemme de faire la bonne page
+			} else if(button.equals("Liste des centres")) { 
 				request.setAttribute("lc", facade.listerCentres());
 				request.getRequestDispatcher("listercentre.jsp").forward(request, response);
 			} else if (button.equals("attente")) {
@@ -373,10 +373,6 @@ public class Servlet extends HttpServlet {
 				request.setAttribute("donneur", facade.recupererDonneur(Integer.parseInt(id)));
 				request.setAttribute("attente", false);
 				request.getRequestDispatcher("adminProfilDonneur.jsp").forward(request, response);
-			} else { // C'est un test qu'il faudra enlever plus tard et le mettre ailleurs
-				request.setAttribute("donneurattente", facade.donneursAttentes());
-				request.setAttribute("donneursignale", facade.donneursSignales());
-				request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
 			}
 			
 		} else if (op.equals("creationcentre")) {
