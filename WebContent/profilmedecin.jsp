@@ -80,12 +80,12 @@
     
         <div class="col-12">
           <h2 class="contact-title"> Informations sur <%= civilite %> :</h2>
-        </div>
+        
   
-	 <br><br><br>
+	 <br><br>
 	
 	<p> <%= civilite %> est <%= spe%> dans notre centre <%=centre %>. </p>
-	</div>
+	</div></div>
 	</section>
 </body>
 </html>

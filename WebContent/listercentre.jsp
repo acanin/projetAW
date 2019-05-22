@@ -24,9 +24,7 @@
                 <div class="container">
                     
                     <a class="navbar-brand logo_h" href="index.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
-                    
-                    
-               
+
                 </div>
             </nav>
         </div>
@@ -60,12 +58,12 @@
     
         <div class="col-12">
           <h2 class="contact-title">Voici la liste des centres :  </h2>
-        </div>
+        
   
-	 <br><br><br>
+	 <br><br>
 	
 
-<ul>
+	<ul>
 
 <%
 	Collection<Centre> lc = (Collection<Centre>) request.getAttribute("lc");
@@ -78,9 +76,9 @@
 	<% } %>
 
 
-</ul>
+	</ul>
 
-
+</div>
 </div></section>
 </body>
 </html>

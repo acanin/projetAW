@@ -75,29 +75,31 @@ if (attente){
     <div class="container"> 
         <div class="col-12">
           <h2 class="contact-title">  Ce donneur <%= status%></h2>
-
-<form action= "Servlet" method="post">
-<br>
-<% if (attente) {%>
-
-<h5><label for="confirmation">Confirmer l'ajout au site :</label><input type="radio" name= "confirmation" value = "Oui"> Oui
-											<input type="radio" name= "confirmation" value = "Non"> Non 
-
-
-<%} else {%>
-
-<label for="confirmation">Supprimer du site :</label><input type="radio" name= "confirmation" value = "Oui"> Oui
-											<input type="radio" name= "confirmation" value = "Non"> Non 
-
-<%} %>
-</h5><br>
-<input type="submit" class="main_btn" name="adminbutton" value="valider">
-
-<input type="hidden" name = "op" value="Confirmer/Supprimer">
-<input type="hidden" name = "attente" value="<%=val%>">
-<input type="hidden" name = "donneur" value="<%=donneur.getId()%>">
-
-</form></div>
+			
+			<form action= "Servlet" method="post">
+			<br>
+			<% if (attente) {%>
+			
+			<h5><label for="confirmation">Confirmer l'ajout au site :
+						</label><input type="radio" name= "confirmation" value = "Oui"> Oui
+								<input type="radio" name= "confirmation" value = "Non"> Non 
+			
+			
+			<%} else {%>
+			
+			<label for="confirmation">Supprimer du site :
+						</label><input type="radio" name= "confirmation" value = "Oui"> Oui
+								<input type="radio" name= "confirmation" value = "Non"> Non 
+			
+			<%} %>
+			</h5><br>
+			<input type="submit" class="main_btn" name="adminbutton" value="valider">
+			
+			<input type="hidden" name = "op" value="Confirmer/Supprimer">
+			<input type="hidden" name = "attente" value="<%=val%>">
+			<input type="hidden" name = "donneur" value="<%=donneur.getId()%>">
+			
+			</form></div>
 </div></section>
 </body>
 </html>
