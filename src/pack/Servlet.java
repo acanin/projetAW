@@ -153,10 +153,13 @@ public class Servlet extends HttpServlet {
 				// Affichage du nombre de donneur
 				if (button.equals("Rechercher Donneur")) {
 					request.getRequestDispatcher("recherchedonneur.jsp").forward(request, response);
+				}else {
+					request.getRequestDispatcher("recherchecentre.jsp").forward(request, response);
 				}
+				
 			} else {
-				response.getWriter().append("Vous n'êtes pas connecté(e).");
-			}
+					response.getWriter().append("Vous n'êtes pas connecté(e).");
+				}
 			
 			
 			
@@ -235,6 +238,41 @@ public class Servlet extends HttpServlet {
 			} else {
 				response.getWriter().append("Page rdv à faire ");
 			}
+			
+			
+		
+			
+		} else if (op.equals("rechercherCentre")) {
+			String mode = request.getParameter("mode");
+			String texte = request.getParameter("texte");
+			String button = request.getParameter("choix");
+			if(button.equals("Valider")){
+				if (mode.equals("ville")){
+					// ici texte est le nom d'une ville
+					request.setAttribute("listeCentre", facade.recupererCentre(texte));
+					request.getRequestDispatcher("listerCentreRecherche.jsp").forward(request, response);
+				}else {
+					// ici texte est le nom d'un medecin
+					//request.setAttribute("centre", facade.recupererCentreMedecin(texte));
+					//request.getRequestDispatcher("CentreMedecin.jsp").forward(request, response);
+				}
+			}
+			
+		} else if(op.equals("listerCentreRecherche")){
+			String button = request.getParameter("choix");
+			if(button.equals("centre")){
+				String id = request.getParameter("centreSelect");
+				request.setAttribute("centre", facade.recupererCentre(Integer.parseInt(id)));
+				request.setAttribute("lm", facade.listerMedecinsCentre(Integer.parseInt(id)));
+				request.getRequestDispatcher("profilcentre.jsp").forward(request, response);
+				
+			}else if(button.equals("refaire")){
+				request.getRequestDispatcher("recherchecentre.jsp").forward(request, response);
+			} else{
+				response.getWriter().append("Probleme dans Servlet op = listerCentreRecherche");
+			}
+			
+			
 			
 			
 		} else if (op.equals("admin")) {

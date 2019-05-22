@@ -24,7 +24,7 @@
                 <div class="container">
                     
                     <a class="navbar-brand logo_h" href="index.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
-s
+
                 </div>
             </nav>
         </div>
