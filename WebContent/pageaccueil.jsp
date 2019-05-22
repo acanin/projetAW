@@ -83,7 +83,11 @@
 		
 		<br><br>
 			<input type="submit" class = "main_btn" name="choix" value="Rechercher Donneur">
+<<<<<<< HEAD
 			<input type="submit" class = "main_btn" name="choix" value="Rechercher Centre">
+=======
+			<input type="submit" class = "main_btn" name="choix" value="Mon Compte">
+>>>>>>> 03c8142cee87d3704a37a808ebb616b14d0ad20d
 			<input type="hidden" name = "op" value="pageaccueil">
 			
 			

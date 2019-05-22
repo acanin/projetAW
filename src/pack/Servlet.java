@@ -81,6 +81,9 @@ public class Servlet extends HttpServlet {
 					session.setAttribute("nom", p.getNom());
 					session.setAttribute("prenom", p.getPrenom());
 					session.setAttribute("isDonneur", isDonneur);
+					session.setAttribute("mail", identifiant);
+					session.setAttribute("mdp", mdp);
+					session.setAttribute("isAdmin", false);
 						
 					// Passage de paramètres
 					request.setAttribute("listedonneur", facade.listerDonneurs());
@@ -120,6 +123,8 @@ public class Servlet extends HttpServlet {
 					HttpSession session = request.getSession(true);
 					session.setAttribute("nom", nom);
 					session.setAttribute("prenom", prenom);
+					session.setAttribute("mail", mail);
+					session.setAttribute("mdp", mdp);
 					session.setAttribute("isDonneur", false);
 					session.setAttribute("isAdmin", false);
 					
@@ -153,14 +158,88 @@ public class Servlet extends HttpServlet {
 				// Affichage du nombre de donneur
 				if (button.equals("Rechercher Donneur")) {
 					request.getRequestDispatcher("recherchedonneur.jsp").forward(request, response);
+<<<<<<< HEAD
 				}else {
 					request.getRequestDispatcher("recherchecentre.jsp").forward(request, response);
+=======
+				} else {
+					request.getRequestDispatcher("moncompte.jsp").forward(request, response);
+>>>>>>> 03c8142cee87d3704a37a808ebb616b14d0ad20d
 				}
 				
 			} else {
+<<<<<<< HEAD
 					response.getWriter().append("Vous n'êtes pas connecté(e).");
 				}
+=======
+				response.getWriter().append("Vous n'êtes pas connecté(e).");
+			}
+		
+		
+		} else if (op.equals("modifierMonCompte")) {
+			HttpSession s = request.getSession(false);
+>>>>>>> 03c8142cee87d3704a37a808ebb616b14d0ad20d
 			
+			if ((boolean)s.getAttribute("isDonneur")) {
+				// Obtention des parametres de la page
+				int age = Integer.parseInt(request.getParameter("age"));
+				String sexe = request.getParameter("sexe");
+				int taille = Integer.parseInt(request.getParameter("taille"));
+				int poids = Integer.parseInt(request.getParameter("poids"));
+				Cheveux cheveux = Cheveux.toCaracteristiques(request.getParameter("cheveux"));
+				AntecedentsMedicaux am = AntecedentsMedicaux.toCaracteristiques(request.getParameter("antecedents"));
+				Loisirs loisir = Loisirs.toCaracteristiques(request.getParameter("loisirs"));
+				String mail = request.getParameter("mail");
+				String mdp = request.getParameter("mdp");
+				boolean dispo = request.getParameter("dispo").equals("yes");
+				
+				// Obtention des parametres de la session
+				String nom = (String) s.getAttribute("nom");
+				String prenom = (String) s.getAttribute("prenom");
+				String mailInit = (String) s.getAttribute("mail");
+				String mdpInit = (String) s.getAttribute("mdp");
+				
+				// Modification du donneur dans la DB
+				facade.modifierDonneur(mailInit, mdpInit, nom, prenom, age, taille, poids, sexe, dispo, cheveux, loisir, am, mail, mdp);
+				
+				// Passage de paramètre à la page suivante
+				request.setAttribute("listedonneur", facade.listerDonneurs());
+				
+				// Mise a jour des donnees de la session
+				s.setAttribute("mail", mail);
+				s.setAttribute("mdp", mdp);
+				
+				// Passage a la vue suivante
+				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+			
+			} else {
+				// Modification d'un compte receveur
+				int age = Integer.parseInt(request.getParameter("age"));
+				String sexe = request.getParameter("sexe");
+				String mail = request.getParameter("mail");
+				String mdp = request.getParameter("mdp");
+				int nbSucces = Integer.parseInt(request.getParameter("nbSucces"));
+				int nbEchecs = Integer.parseInt(request.getParameter("nbEchecs"));
+				
+				// Obtention des parametres de la session
+				String nom = (String) s.getAttribute("nom");
+				String prenom = (String) s.getAttribute("prenom");
+				String mailInit = (String) s.getAttribute("mail");
+				String mdpInit = (String) s.getAttribute("mdp");
+				
+				// Modification du receveur dans la DB
+				facade.modifierReceveur(mailInit, mdpInit, nom, prenom, age, sexe, mail, mdp, nbSucces, nbEchecs);
+				
+				// Passage de paramètre à la page suivante
+				request.setAttribute("listedonneur", facade.listerDonneurs());
+				
+				// Mise a jour des donnees de la session
+				s.setAttribute("mail", mail);
+				s.setAttribute("mdp", mdp);
+				
+				// Passage a la vue suivante
+				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+			}
 			
 			
 		} else if (op.equals("validerCreationDonneur")) {
@@ -186,6 +265,8 @@ public class Servlet extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("nom", nom);
 			session.setAttribute("prenom", prenom);
+			session.setAttribute("mail", mail);
+			session.setAttribute("mdp", mdp);
 			session.setAttribute("isDonneur", true);
 			session.setAttribute("isAdmin", false);
 			
