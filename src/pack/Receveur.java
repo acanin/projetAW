@@ -1,7 +1,5 @@
 package pack;
 
-import java.util.Collection;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,10 +26,10 @@ public class Receveur implements ProfilUtilisateur {
 	@ManyToOne
 	Centre owner; 
 	
-	public Receveur(){
-		
-		
+	public Receveur(){		
 	}
+	
+	
 	public Receveur(String n, String p, int a, boolean s){
 		this.nom = n;
 		this.prenom = p;

@@ -18,6 +18,12 @@ public class RDV {
 	@ManyToOne
 	Centre owner;
 	
+	@ManyToOne
+	Receveur receveur;
+	
+	@ManyToOne
+	Donneur donneur;
+	
 	
 	/** Pour avoir une relation bidirectionnelle 
 	 * 1 centre avec plsr rdv
@@ -34,10 +40,6 @@ public class RDV {
 		this.owner = owner;
 	}
 
-	public RDV(int h){
-		this.heure = h;
-		//this.date = d;
-	}
 
 	public int getId() {
 		return id;

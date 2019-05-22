@@ -45,10 +45,10 @@
             
 			<% Centre centre = (Centre) request.getAttribute("centre");
 			String nom = centre.getNom();
-			//int taux = 100;//centre.getNb_succes()/centre.getNb_essais();
+			HttpSession ses = request.getSession(false);
 			%>
 
-              <h2>Profil du centre <%= nom %> </h2>
+              <h2>Profil du centre <%= nom %>  </h2>
             
             </div>
             <div class="page_link">
@@ -94,11 +94,14 @@ Voici la liste des médecins travaillant chez nous :
 	<% } %>
 </ul>
 	
+	<% if (!(boolean)ses.getAttribute("isAdmin")) { %> 
 <p>N'hésitez pas à prendre rendez-vous en ligne :</p>
-
+<% } %>
 
 <form action= "Servlet" method="post">
+	<% if (!(boolean)ses.getAttribute("isAdmin")) { %> 
 	<input type="submit" class="main_btn" name="button" value="PrendreRDV">
+	<% } %>
 	<input type="hidden" name = "op" value="profilcentre">
 	<input type="hidden" name = "idc" value="<%= centre.getId() %>">
 	
