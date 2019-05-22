@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="medcare/css/bootstrap.css">
     <!-- main css -->
     <link rel="stylesheet" href="medcare/css/style.css">
+    <link rel="stylesheet" href="medcare/css/style_batp.css">
     <link rel="stylesheet" href="medcare/css/responsive.css">
 </head>
 <body>
@@ -104,9 +105,9 @@
             <%} %>
             
         <br><br>
-        <input type="submit" class="genric-btn danger radius" name="choix" value="Prendre rdv">
+        <input type="submit" class="genric-btn info radius" name="choix" value="Prendre rdv">
 		<input type="submit" class="genric-btn danger radius" name="choix" value="Signaler">
-		<input type="submit" class="genric-btn danger radius" name="choix" value="Accueil">
+		<input type="submit" class="genric-btn default radius" name="choix" value="Accueil">
 		<input type="hidden" name = "op" value="profildonneurselectionne">
 		<input type="hidden" name = "idsignale" value = <%= Integer.toString(id)  %>> 
 		      </div>
