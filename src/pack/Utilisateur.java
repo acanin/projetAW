@@ -11,16 +11,18 @@ public class Utilisateur {
 	private int idProfilAssocie;
 	private String mail;
 	private String mdp;
+	private boolean isReceveur;
 	
 	
 	
 	public Utilisateur() {
 	}
 	
-	public Utilisateur(int idProfilAssocie, String mail, String mdp) {
+	public Utilisateur(int idProfilAssocie, String mail, String mdp, boolean isReceveur) {
 		this.idProfilAssocie = idProfilAssocie;
 		this.mail = mail;
 		this.mdp = mdp;
+		this.isReceveur = isReceveur;
 	}
 
 	public int getIdProfilAssocie() {
@@ -45,6 +47,14 @@ public class Utilisateur {
 
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
+	}
+
+	public boolean isReceveur() {
+		return isReceveur;
+	}
+
+	public void setReceveur(boolean isReceveur) {
+		this.isReceveur = isReceveur;
 	}
 
 }

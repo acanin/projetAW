@@ -83,6 +83,7 @@
 		
 		<br><br>
 			<input type="submit" class = "main_btn" name="choix" value="Rechercher Donneur">
+			<input type="submit" class = "main_btn" name="choix" value="Mon Compte">
 			<input type="hidden" name = "op" value="pageaccueil">
 			
 			
