@@ -43,10 +43,10 @@
             
 			<% Centre centre = (Centre) request.getAttribute("centre");
 			String nom = centre.getNom();
-			//int taux = 100;//centre.getNb_succes()/centre.getNb_essais();
+			//HttpSession ses = request.getSession(false);
 			%>
 
-              <h2>Profil du centre <%= nom %> </h2>
+              <h2>Profil du centre <%= nom %>  </h2>
             
             </div>
             <div class="page_link">
@@ -67,6 +67,12 @@
 
 		<p>Nous sommes basés au <%= centre.getAdresse() %> à <%= centre.getVille() %>. </p>
 		
+
+	
+
+
+
+
 		<% if (centre.getNb_essais() != 0) {
 			int taux = centre.getNb_succes()/centre.getNb_essais();%>
 		
@@ -74,9 +80,9 @@
 		
 		<% } %>
 
+
 		Voici la liste des médecins travaillant chez nous : 
 		<ul>
-		
 		<%	Collection<Medecin> lm = (Collection<Medecin>) request.getAttribute("lm");
 			for (Medecin m : lm) { 
 				String s = "Medecin " + m.getNom() + ", " + Specialite.toString(m.getSpecialisation());
@@ -87,15 +93,19 @@
 			<% } %>
 		</ul>
 			
-		<p>N'hésitez pas à prendre rendez-vous en ligne :</p>
-		
-		
-		<form action= "Servlet" method="post">
-			<input type="submit" class="main_btn" name="button" value="PrendreRDV">
-			<input type="hidden" name = "op" value="profilcentre">
-			<input type="hidden" name = "idc" value="<%= centre.getId() %>">
-			
-		</form>
+
+	<% if (!(boolean)session.getAttribute("isAdmin")) { %> 
+<p>N'hésitez pas à prendre rendez-vous en ligne :</p>
+<% } %>
+
+<form action= "Servlet" method="post">
+	<% if (!(boolean)session.getAttribute("isAdmin")) { %> 
+	<input type="submit" class="main_btn" name="button" value="PrendreRDV">
+	<% } %>
+	<input type="hidden" name = "op" value="profilcentre">
+	<input type="hidden" name = "idc" value="<%= centre.getId() %>">
+	
+</form>
 
 </div></div>
 </section>

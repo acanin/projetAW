@@ -24,13 +24,14 @@
                 <div class="container">
                     
                     <a class="navbar-brand logo_h" href="index.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
-
+                    
+                    
+               
                 </div>
             </nav>
         </div>
     </header>
     <!--================Header Menu Area =================-->
-
 
  
  <!--================Home Banner Area =================-->
@@ -41,7 +42,7 @@
             class="banner_content d-md-flex justify-content-between align-items-center"
           >
             <div class="mb-3 mb-md-0">
-              <h2>Rechercher un donneur</h2>
+              <h2>Résultats de la recherche</h2>
             
             </div>
             <div class="page_link">
@@ -53,85 +54,42 @@
     </section>
     <!--================End Home Banner Area =================-->
 
-<!-- ================ formulaire section start ================= -->
+<!-- ================Affichage résultats section start ================= -->
   <section class="contact-section area-padding">
     <div class="container">
     
         <div class="col-12">
-          <h2 class="contact-title">Veuillez sélectionner les caractéristiques que vous recherchez :  </h2>
+          <h2 class="contact-title">Voici les centres :  </h2>
         </div>
   
 	 <br><br><br>
-
-
+	
 	<form action= "Servlet" method="post">
 	
-	<p> Sexe : </p>
+	 <br>
 	
-		<input type = "radio" name="sexeRecherche" value = "Femme"> Femme
-		<input type = "radio" name="sexeRecherche" value = "Homme"> Homme
-
-	
-	<br><br>
-	
-	<p> Yeux : </p>
-	
-	<%
-		for (Yeux y : Yeux.allyeux) {
-		String s = Yeux.toString(y);
-		%>
-		<input type = "radio" name="yeuxRecherche" value = <%= s %>> <%= s %>
-	<% } %>
-	
-	<br><br>
-	<p> Cheveux : </p>
-	
-	<%
-		for (Cheveux y : Cheveux.allcheveux) {
-		String s = Cheveux.toString(y);
-		%>
-		<input type = "radio" name="cheveuxRecherche" value = <%= s %>> <%= s %> 
-	<% } %>
-
-	
-	<br><br>
-	<p>Couleur de peau : </p>
-	<%
-		for (Peau p : Peau.allpeau) {
-		String s = Peau.toString(p);
-		%>
-		<input type = "radio" name="peauRecherche" value = <%= s %>> <%= s %>  
-	<% } %>
-	<br><br>
-	
-	
-	<%-- <p> Antécédents Médicaux : </p>
-	<%
-		for (AntecedentsMedicaux am : AntecedentsMedicaux.allantmed) {
-		String s = AntecedentsMedicaux.toString(am);
-		%>
-		<input type = "radio" name="antecedentRecherche" value = <%= s %>> <%= s %> 
-	<% } %>
-	<br><br>
-	
-	<p> Loisirs : </p>
-	<%
-		for (Loisirs l : Loisirs.allloisirs) {
-		String s = Loisirs.toString(l);
-		%>
-		<input type = "radio" name="loisirRecherche" value = <%= s %>> <%= s %> 
-	<% } %> 
-	<br><br> --%>
-	<br>
+	<ul>
 		
-		<input type="submit" class="main_btn" name="choix" value="Valider">
+	<%Collection<Centre> lc = (Collection<Centre>)request.getAttribute("listeCentre");
+	for (Centre c : lc){
+		int id = c.getId();%>
+		<li> <a href="Servlet?op=listerCentreRecherche&choix=centre&centreSelect=<%= id  %>"><%= c.getNom() %></a> </li>
 	
-		
-		<input type="hidden" name = "op" value="rechercherDonneur">
-
+	<%}
+	if(lc.size() == 0){%>
+		<p>Il n'y a pas de centre dans cette ville. </p>
+		<p>Verifiez que vous avez bien écrit le nom de la ville.</p>
+		<li> <a href="Servlet?op=listerCentreRecherche&choix=refaire"><%= "Refaire une recheche" %></a> </li>
+	<%} %>
+	
+	
+	<input type="hidden" name = "op" value="rechercherCentre">
+	
+	
 	</form>
 	
-
+	
+	
 </div>
 </section>
 </body>

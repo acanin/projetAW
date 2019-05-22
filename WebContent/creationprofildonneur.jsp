@@ -143,7 +143,7 @@
 		<input type="hidden" name = "age" value = <%= (String) request.getAttribute("age") %>> 
 		<input type="hidden" name = "sexe" value = <%= (String) request.getAttribute("sexe") %>>
 		<input type="hidden" name = "mail" value = <%= (String) request.getAttribute("mail") %>>
-		<input type="hidden" name = "mdp" value = <%= (String) request.getAttribute("mdp") %>> 
+		<input type="hidden" name = "mdp" value = <%= (String) request.getAttribute("mdp") %>>
 	
 	</form>
 	</div>
