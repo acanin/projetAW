@@ -66,7 +66,7 @@
             <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                  <input class="form-control" name="nom" type="text" placeholder="Nom">
+                  <input class="form-control" name="nom" type="text" placeholder="Nom" required>
                 </div></div></div>
   <br><br>            
 <label for="sexe">Sexe : </label><br><input type="radio" name= "sexe" value = "Femme"> Femme

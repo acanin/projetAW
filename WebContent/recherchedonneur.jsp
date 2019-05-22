@@ -24,7 +24,7 @@
                 <div class="container">
                     
                     <a class="navbar-brand logo_h" href="index.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
-s
+
                 </div>
             </nav>
         </div>
@@ -66,6 +66,14 @@ s
 
 	<form action= "Servlet" method="post">
 	
+	<p> Sexe : </p>
+	
+		<input type = "radio" name="sexeRecherche" value = "Femme"> Femme
+		<input type = "radio" name="sexeRecherche" value = "Homme"> Homme
+
+	
+	<br><br>
+	
 	<p> Yeux : </p>
 	
 	<%
@@ -95,7 +103,9 @@ s
 		<input type = "radio" name="peauRecherche" value = <%= s %>> <%= s %>  
 	<% } %>
 	<br><br>
-	<p> Antécédents Médicaux : </p>
+	
+	
+	<%-- <p> Antécédents Médicaux : </p>
 	<%
 		for (AntecedentsMedicaux am : AntecedentsMedicaux.allantmed) {
 		String s = AntecedentsMedicaux.toString(am);
@@ -103,14 +113,16 @@ s
 		<input type = "radio" name="antecedentRecherche" value = <%= s %>> <%= s %> 
 	<% } %>
 	<br><br>
+	
 	<p> Loisirs : </p>
 	<%
 		for (Loisirs l : Loisirs.allloisirs) {
 		String s = Loisirs.toString(l);
 		%>
 		<input type = "radio" name="loisirRecherche" value = <%= s %>> <%= s %> 
-	<% } %>
-	<br><br><br>
+	<% } %> 
+	<br><br> --%>
+	<br>
 		
 		<input type="submit" class="main_btn" name="choix" value="Valider">
 	

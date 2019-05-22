@@ -17,6 +17,8 @@ public class Receveur implements ProfilUtilisateur {
 	private String prenom;
 	private int age;
 	private boolean sexe; // 1 pour les femmes et 0 pour les mecs
+	private int nbSucces;
+	private int nbEchecs;
 	
 
 	
@@ -35,7 +37,8 @@ public class Receveur implements ProfilUtilisateur {
 		this.prenom = p;
 		this.age = a;
 		this.sexe = s;
-		
+		this.nbSucces = 0;
+		this.nbEchecs = 0;
 	}
 
 	
@@ -96,6 +99,18 @@ public class Receveur implements ProfilUtilisateur {
 
 	public void setOwner(Centre owner) {
 		this.owner = owner;
+	}
+	public int getNbSucces() {
+		return nbSucces;
+	}
+	public void setNbSucces(int nbSucces) {
+		this.nbSucces = nbSucces;
+	}
+	public int getNbEchecs() {
+		return nbEchecs;
+	}
+	public void setNbEchecs(int nbEchecs) {
+		this.nbEchecs = nbEchecs;
 	}
 
 

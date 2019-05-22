@@ -76,12 +76,8 @@
 	
         <div class="col-12">
 
-            <%if (enAttente){ %>
-            	<i> Cette personne est en attente de confirmation d'ajout sur notre site.</i><br><br>
-            <% }%>
-            <%if (signale){ %>
-            	<i> Cette personne a été signalée par un de nos utilisateurs.</i><br><br>
-            <% }%>
+        
+
             <%if (dispo){%> 
             	<i> Cette personne est actuellement disponible pour un don.</i><br><br>
             	
@@ -92,17 +88,25 @@
             	<% } else {%>
             		Sexe : Homme <br>
             	<% }%>
+            	Age : <%= donneur.getAge() %><br>
+            	Taille : <%= donneur.getTaille() %> cm<br> 
+            	Poids : <%= donneur.getPoids() %> kg<br> 
             	Couleur des yeux : <%= yeux %><br>
             	Couleur des cheveux : <%= cheveux %><br>
             	Peau : <%= peau %><br>
             	Antécédents médicaux : <%= am %><br>
             	Loisirs : <%= loisir %><br>
+            	Ville : ???
       
             	
-            <% }%>
+            <% } else {%>
+            	Cette personne n'est actuellement pas disponible.
+            <%} %>
             
         <br><br>
+        <input type="submit" class="genric-btn danger radius" name="choix" value="Prendre rdv">
 		<input type="submit" class="genric-btn danger radius" name="choix" value="Signaler">
+		<input type="submit" class="genric-btn danger radius" name="choix" value="Accueil">
 		<input type="hidden" name = "op" value="profildonneurselectionne">
 		<input type="hidden" name = "idsignale" value = <%= Integer.toString(id)  %>> 
 		      </div>

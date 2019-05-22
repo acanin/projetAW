@@ -39,13 +39,16 @@ public class Facade {
 			
 			
 			int idProfil = u.getIdProfilAssocie();
-			
-			try {
-				// On regarde si c'est un Donneur
-				TypedQuery<Donneur> reqD = em.createQuery("SELECT d FROM Donneur d WHERE d.id = "+idProfil, Donneur.class);
-				Donneur d = reqD.getSingleResult();
-				return d;
-			} catch (PersistenceException notDonneur) {
+			if (!u.isReceveur()) {
+				try {
+					// On regarde si c'est un Donneur
+					TypedQuery<Donneur> reqD = em.createQuery("SELECT d FROM Donneur d WHERE d.id = "+idProfil, Donneur.class);
+					Donneur d = reqD.getSingleResult();
+					return d;
+				} catch (PersistenceException notDonneur) {
+					return null;
+				}
+			} else {
 				try {
 					// Cet utilisateur n'est pas un donneur, c'est peut etre un receveur
 					TypedQuery<Receveur> reqR = em.createQuery("SELECT r FROM Receveur r WHERE r.id = "+idProfil, Receveur.class);
@@ -53,7 +56,7 @@ public class Facade {
 					
 					return r;
 				} catch (PersistenceException notReceveur) {
-					return null; // ni donneur, ni receveur
+					return null;
 				}
 			}
 		}
@@ -64,7 +67,7 @@ public class Facade {
 		em.persist(d);
 		
 		int idProfil = d.getId();
-		Utilisateur u = new Utilisateur(idProfil, mail, mdp);
+		Utilisateur u = new Utilisateur(idProfil, mail, mdp, false);
 		em.persist(u);
 	}
 
@@ -73,8 +76,78 @@ public class Facade {
 		em.persist(r);
 		
 		int idProfil = r.getId();
-		Utilisateur u = new Utilisateur(idProfil, mail, mdp);
+		Utilisateur u = new Utilisateur(idProfil, mail, mdp, true);
 		em.persist(u);
+	}
+	
+	public void modifierReceveur(String mailInit, String mdpInit, String nom, String prenom, int age, String sexe, String mail, String mdp, int nbSucces, int nbEchecs) {
+		TypedQuery<Receveur> reqR = em.createQuery("SELECT r FROM Receveur r WHERE r.nom = :nom AND r.prenom = :prenom", Receveur.class);
+		reqR.setParameter("nom", nom);
+		reqR.setParameter("prenom", prenom);
+		Receveur r = reqR.getSingleResult();
+		
+		TypedQuery<Utilisateur> req = em.createQuery("SELECT u FROM Utilisateur u WHERE u.mail = :mailValue AND u.mdp = :mdpValue", Utilisateur.class);
+		req.setParameter("mailValue", mailInit);
+		req.setParameter("mdpValue", mdpInit);
+		Utilisateur u = req.getSingleResult();
+		
+		if (age>0) {
+			r.setAge(age);
+		}
+		if (sexe != null) {
+			r.setSexe(sexe.equals("Femme"));
+		}
+		
+		r.setNbSucces(nbSucces);
+		r.setNbEchecs(nbEchecs);
+		
+		if (mail != null) {
+			u.setMail(mail);
+		}
+		if (mdp != null) {
+			u.setMdp(mdp);
+		}
+	}
+	
+	public void modifierDonneur(String mailInit, String mdpInit, String nom, String prenom,  int age, int taille, int poids, String sexe, boolean dispo,Cheveux c, Loisirs l, AntecedentsMedicaux am, String mail, String mdp) {
+		TypedQuery<Donneur> reqD = em.createQuery("SELECT d FROM Donneur d WHERE d.nom = :nom AND d.prenom = :prenom", Donneur.class);
+		reqD.setParameter("nom", nom);
+		reqD.setParameter("prenom", prenom);
+		Donneur d = reqD.getSingleResult();
+		
+		TypedQuery<Utilisateur> req = em.createQuery("SELECT u FROM Utilisateur u WHERE u.mail = :mailValue AND u.mdp = :mdpValue", Utilisateur.class);
+		req.setParameter("mailValue", mailInit);
+		req.setParameter("mdpValue", mdpInit);
+		Utilisateur u = req.getSingleResult();
+		
+		if (age>0) {
+			d.setAge(age);
+		}
+		if (taille>0) {
+			d.setTaille(taille);
+		}
+		if (poids>0) {
+			d.setPoids(poids);
+		}
+		if (sexe.equals("Homme") || sexe.equals("Femme")) {
+			d.setSexe(sexe.equals("Femme"));
+		}
+		d.setDisponibilite(dispo);
+		if (c != null) {
+			d.setCheveux(c);
+		}
+		if (l != null) {
+			d.setLoisirs(l);
+		}
+		if (am != null) {
+			d.setAntecedents(am);
+		}
+		if (mail != null) {
+			u.setMail(mail);
+		}
+		if (mdp != null) {
+			u.setMdp(mdp);
+		}
 	}
 	
 	public void ajoutCentre(String nom, String adresse, String ville) {
@@ -119,33 +192,22 @@ public class Facade {
 		}
 	}
 	
-	public String sqlAM(String a){
-		if (a == null){
-			return"";
-		}else {
-			int num = Cheveux.toInteger(a);
-			return "ANTECEDENTS = " + Integer.toString(num) + " AND ";
-		}
-	}
+
 	
-	public String sqlLoisir(String l){
-		if (l == null){
-			return"";
-		}else {
-			int num = Cheveux.toInteger(l);
-			return "LOISIRS = " + Integer.toString(num) + " AND ";
-		}
-	}
-	
-	public Collection<Donneur> rechercher(String yeux, String cheveux,String peau,String am,String loisir){
+	public Collection<Donneur> rechercher(String sexe,String yeux, String cheveux,String peau){
 		String Y = sqlYeux(yeux);
 		String C = sqlCheveux(cheveux);
 		String P = sqlPeau(peau);
-		String A = sqlAM(cheveux);
-		String L = sqlLoisir(yeux);
-
-		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE " + Y + C + P + A  + L + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
-		return req.getResultList();
+		if (sexe.equals("Femme")){
+			TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = TRUE AND " + Y + C + P  + " SIGNALE = FALSE", Donneur.class);
+			//TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = TRUE AND" + Y + C + P  + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
+			return req.getResultList();
+		}else{
+			TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = FALSE AND " + Y + C + P  + " SIGNALE = FALSE", Donneur.class);
+			//TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = FALSE AND" + Y + C + P  + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
+			return req.getResultList();
+		}
+		
 	}
 	
 	
@@ -214,6 +276,14 @@ public class Facade {
 		return c;
 	}
 	
+	public Collection<Centre> recupererCentre(String ville) {
+		TypedQuery<Centre> req = em.createQuery("select c from Centre c where ville = :villeValue", Centre.class);
+		req.setParameter("villeValue", ville);
+		return req.getResultList();
+	}
+	
+	
+	
 	public Collection<Medecin> listerMedecinsCentre(int idCentre) {
 		TypedQuery<Medecin> req = em.createQuery("select m from Medecin m where OWNER_ID = " + idCentre, Medecin.class);
 		return req.getResultList();
@@ -235,28 +305,5 @@ public class Facade {
 		return m;
 	}
 
-	/** 	public Collection<Donneur> rechercherYeux(String yeux){
-		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) , Donneur.class);
-		return req.getResultList();
-	}
 	
-	public Collection<Donneur> rechercherCheveux(String cheveux){
-		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE CHEVEUX = " + Cheveux.toInteger(cheveux) , Donneur.class);
-		return req.getResultList();
-	}
-	
-	public Collection<Donneur> rechercherPeau(String peau){
-		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE PEAU = " + Peau.toInteger(peau) , Donneur.class);
-		return req.getResultList();
-	}
-	
-	public Collection<Donneur> rechercherAM(String am){
-		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE ANTECEDENTS = " + AntecedentsMedicaux.toInteger(am) , Donneur.class);
-		return req.getResultList();
-	}
-	
-	public Collection<Donneur> rechercherLoisir(String loisir){
-		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE LOISIRS = " + Loisirs.toInteger(loisir)  , Donneur.class);
-		return req.getResultList();
-	*/
 }

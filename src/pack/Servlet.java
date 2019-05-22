@@ -81,6 +81,9 @@ public class Servlet extends HttpServlet {
 					session.setAttribute("nom", p.getNom());
 					session.setAttribute("prenom", p.getPrenom());
 					session.setAttribute("isDonneur", isDonneur);
+					session.setAttribute("mail", identifiant);
+					session.setAttribute("mdp", mdp);
+					session.setAttribute("isAdmin", false);
 						
 					// Passage de paramètres
 					request.setAttribute("listedonneur", facade.listerDonneurs());
@@ -120,6 +123,8 @@ public class Servlet extends HttpServlet {
 					HttpSession session = request.getSession(true);
 					session.setAttribute("nom", nom);
 					session.setAttribute("prenom", prenom);
+					session.setAttribute("mail", mail);
+					session.setAttribute("mdp", mdp);
 					session.setAttribute("isDonneur", false);
 					session.setAttribute("isAdmin", false);
 					
@@ -153,11 +158,85 @@ public class Servlet extends HttpServlet {
 				// Affichage du nombre de donneur
 				if (button.equals("Rechercher Donneur")) {
 					request.getRequestDispatcher("recherchedonneur.jsp").forward(request, response);
+
+				}else if (button.equals("Rechercher Centre")) {
+					request.getRequestDispatcher("recherchecentre.jsp").forward(request, response);
+
+				} else {
+					request.getRequestDispatcher("moncompte.jsp").forward(request, response);
 				}
+				
 			} else {
+
 				response.getWriter().append("Vous n'êtes pas connecté(e).");
 			}
+
+		
+		
+		} else if (op.equals("modifierMonCompte")) {
+			HttpSession s = request.getSession(false);
+
 			
+			if ((boolean)s.getAttribute("isDonneur")) {
+				// Obtention des parametres de la page
+				int age = Integer.parseInt(request.getParameter("age"));
+				String sexe = request.getParameter("sexe");
+				int taille = Integer.parseInt(request.getParameter("taille"));
+				int poids = Integer.parseInt(request.getParameter("poids"));
+				Cheveux cheveux = Cheveux.toCaracteristiques(request.getParameter("cheveux"));
+				AntecedentsMedicaux am = AntecedentsMedicaux.toCaracteristiques(request.getParameter("antecedents"));
+				Loisirs loisir = Loisirs.toCaracteristiques(request.getParameter("loisirs"));
+				String mail = request.getParameter("mail");
+				String mdp = request.getParameter("mdp");
+				boolean dispo = request.getParameter("dispo").equals("yes");
+				
+				// Obtention des parametres de la session
+				String nom = (String) s.getAttribute("nom");
+				String prenom = (String) s.getAttribute("prenom");
+				String mailInit = (String) s.getAttribute("mail");
+				String mdpInit = (String) s.getAttribute("mdp");
+				
+				// Modification du donneur dans la DB
+				facade.modifierDonneur(mailInit, mdpInit, nom, prenom, age, taille, poids, sexe, dispo, cheveux, loisir, am, mail, mdp);
+				
+				// Passage de paramètre à la page suivante
+				request.setAttribute("listedonneur", facade.listerDonneurs());
+				
+				// Mise a jour des donnees de la session
+				s.setAttribute("mail", mail);
+				s.setAttribute("mdp", mdp);
+				
+				// Passage a la vue suivante
+				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+			
+			} else {
+				// Modification d'un compte receveur
+				int age = Integer.parseInt(request.getParameter("age"));
+				String sexe = request.getParameter("sexe");
+				String mail = request.getParameter("mail");
+				String mdp = request.getParameter("mdp");
+				int nbSucces = Integer.parseInt(request.getParameter("nbSucces"));
+				int nbEchecs = Integer.parseInt(request.getParameter("nbEchecs"));
+				
+				// Obtention des parametres de la session
+				String nom = (String) s.getAttribute("nom");
+				String prenom = (String) s.getAttribute("prenom");
+				String mailInit = (String) s.getAttribute("mail");
+				String mdpInit = (String) s.getAttribute("mdp");
+				
+				// Modification du receveur dans la DB
+				facade.modifierReceveur(mailInit, mdpInit, nom, prenom, age, sexe, mail, mdp, nbSucces, nbEchecs);
+				
+				// Passage de paramètre à la page suivante
+				request.setAttribute("listedonneur", facade.listerDonneurs());
+				
+				// Mise a jour des donnees de la session
+				s.setAttribute("mail", mail);
+				s.setAttribute("mdp", mdp);
+				
+				// Passage a la vue suivante
+				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+			}
 			
 			
 		} else if (op.equals("validerCreationDonneur")) {
@@ -183,6 +262,8 @@ public class Servlet extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("nom", nom);
 			session.setAttribute("prenom", prenom);
+			session.setAttribute("mail", mail);
+			session.setAttribute("mdp", mdp);
 			session.setAttribute("isDonneur", true);
 			session.setAttribute("isAdmin", false);
 			
@@ -197,21 +278,15 @@ public class Servlet extends HttpServlet {
 		} else if (op.equals("rechercherDonneur")) {
 			String button = request.getParameter("choix");
 			// On recupere les carateristiques recherchees 
+			String sexeRecherche = request.getParameter("sexeRecherche");
 			String yeuxRecherche = request.getParameter("yeuxRecherche");
 			String cheveuxRecherche = request.getParameter("cheveuxRecherche");
 			String peauRecherche = request.getParameter("peauRecherche");
-			String amRecherche = request.getParameter("antecedentRecherche");
-			String loisirRecherche = request.getParameter("loisirRecherche");
+			
 	
-			// On les envoie la page d'apres
-			//request.setAttribute("yeuxR", yeuxRecherche);
-			//request.setAttribute("cheveuxR", cheveuxRecherche);
-			//request.setAttribute("peauR", peauRecherche);
-			//request.setAttribute("amR", amRecherche);	
-			//request.setAttribute("loisirR", loisirRecherche);
 					
 			// On envoie la liste des donneurs
-			request.setAttribute("listedonneurCompatible", facade.rechercher(yeuxRecherche,cheveuxRecherche,peauRecherche,amRecherche,loisirRecherche));
+			request.setAttribute("listedonneurCompatible", facade.rechercher(sexeRecherche,yeuxRecherche,cheveuxRecherche,peauRecherche));
 			request.getRequestDispatcher("afficherDonneurSelectionne.jsp").forward(request, response);
 			
 			
@@ -234,8 +309,48 @@ public class Servlet extends HttpServlet {
 			if(button.equals("Signaler")){
 				facade.signalerDonneur(Integer.parseInt(idsignale));
 				request.setAttribute("donneurS", facade.recupererDonneur(Integer.parseInt(idsignale)));
-				request.getRequestDispatcher("personneSignale.jsp").forward(request, response);;
+				request.getRequestDispatcher("personneSignale.jsp").forward(request, response);
+			}else if (button.equals("Accueil")){
+				request.setAttribute("listedonneur", facade.listerDonneurs());
+				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+			} else {
+				response.getWriter().append("Page rdv à faire ");
 			}
+			
+			
+		
+			
+		} else if (op.equals("rechercherCentre")) {
+			String mode = request.getParameter("mode");
+			String texte = request.getParameter("texte");
+			String button = request.getParameter("choix");
+			if(button.equals("Valider")){
+				if (mode.equals("ville")){
+					// ici texte est le nom d'une ville
+					request.setAttribute("listeCentre", facade.recupererCentre(texte));
+					request.getRequestDispatcher("listerCentreRecherche.jsp").forward(request, response);
+				}else {
+					// ici texte est le nom d'un medecin
+					//request.setAttribute("centre", facade.recupererCentreMedecin(texte));
+					//request.getRequestDispatcher("CentreMedecin.jsp").forward(request, response);
+				}
+			}
+			
+		} else if(op.equals("listerCentreRecherche")){
+			String button = request.getParameter("choix");
+			if(button.equals("centre")){
+				String id = request.getParameter("centreSelect");
+				request.setAttribute("centre", facade.recupererCentre(Integer.parseInt(id)));
+				request.setAttribute("lm", facade.listerMedecinsCentre(Integer.parseInt(id)));
+				request.getRequestDispatcher("profilcentre.jsp").forward(request, response);
+				
+			}else if(button.equals("refaire")){
+				request.getRequestDispatcher("recherchecentre.jsp").forward(request, response);
+			} else{
+				response.getWriter().append("Probleme dans Servlet op = listerCentreRecherche");
+			}
+			
+			
 			
 			
 		} else if (op.equals("admin")) {

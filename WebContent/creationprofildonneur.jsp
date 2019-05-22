@@ -71,13 +71,13 @@
         <div class="row">
 		<div class="col-sm-6">
     	 	<div class="form-group">
-          	 <input class="form-control" name="taille" type="text" placeholder="Taille (cm)">
+          	 <input class="form-control" name="taille" type="text" placeholder="Taille (cm)" required>
         	</div>          
      	</div>
               
      	<div class="col-sm-6">
     		<div class="form-group">
-         	  <input class="form-control" name="poids" type="text" placeholder="Poids (kg)">
+         	  <input class="form-control" name="poids" type="text" placeholder="Poids (kg)" required>
         	 </div>
      	</div>
     	</div>
@@ -141,7 +141,9 @@
 		<input type="hidden" name = "nom" value = <%= (String) request.getAttribute("nom") %>> 
 		<input type="hidden" name = "prenom" value = <%= (String) request.getAttribute("prenom") %>> 
 		<input type="hidden" name = "age" value = <%= (String) request.getAttribute("age") %>> 
-		<input type="hidden" name = "sexe" value = <%= (String) request.getAttribute("sexe") %>> 
+		<input type="hidden" name = "sexe" value = <%= (String) request.getAttribute("sexe") %>>
+		<input type="hidden" name = "mail" value = <%= (String) request.getAttribute("mail") %>>
+		<input type="hidden" name = "mdp" value = <%= (String) request.getAttribute("mdp") %>>
 	
 	</form>
 	</div>
