@@ -17,7 +17,6 @@
 
 </head>
 
-
 <body>
 
     <!--================Header Menu Area =================-->
@@ -43,10 +42,6 @@
           >
             <div class="mb-3 mb-md-0">
               <h2>Créer un profil de donneur</h2>
-            
-            </div>
-            <div class="page_link">
-              <a href="index.html">Accueil</a>
             </div>
           </div>
         </div>
@@ -71,13 +66,13 @@
         <div class="row">
 		<div class="col-sm-6">
     	 	<div class="form-group">
-          	 <input class="form-control" name="taille" type="text" placeholder="Taille (cm)" required>
+          	 <input class="form-control" name="taille" type="number" min="100" max="220" placeholder="Taille (cm)" required>
         	</div>          
      	</div>
               
      	<div class="col-sm-6">
     		<div class="form-group">
-         	  <input class="form-control" name="poids" type="text" placeholder="Poids (kg)" required>
+         	  <input class="form-control" name="poids" type="number" placeholder="Poids (kg)" required>
         	 </div>
      	</div>
     	</div>
@@ -90,7 +85,7 @@
 		for (Yeux y : Yeux.allyeux) {
 		String s = Yeux.toString(y);
 		%>
-		<input type = "radio" name="yeux" value = <%= s %>> <%= s %> 
+		<input type = "radio" name="yeux" value = <%= s %> required> <%= s %> 
 	<% } %>
 	
 	<br><br>
@@ -100,7 +95,7 @@
 		for (Cheveux y : Cheveux.allcheveux) {
 		String s = Cheveux.toString(y);
 		%>
-		<input type = "radio" name="cheveux" value = <%= s %>> <%= s %> 
+		<input type = "radio" name="cheveux" value = <%= s %> required> <%= s %> 
 	<% } %>
 	
 	<br><br>
@@ -110,7 +105,7 @@
 		for (Peau p : Peau.allpeau) {
 		String s = Peau.toString(p);
 		%>
-		<input type = "radio" name="peau" value = <%= s %>> <%= s %>
+		<input type = "radio" name="peau" value = <%= s %> required> <%= s %>
 	<% } %>
 	
 	<br><br>
@@ -120,7 +115,7 @@
 		for (AntecedentsMedicaux am : AntecedentsMedicaux.allantmed) {
 		String s = AntecedentsMedicaux.toString(am);
 		%>
-		<input type = "radio" name= "antecedents"  value = <%= s %>> <%= s %>
+		<input type = "radio" name= "antecedents"  value = <%= s %> required> <%= s %>
 	<% } %>
 	
 	<br><br>
@@ -130,13 +125,14 @@
 		for (Loisirs l : Loisirs.allloisirs) {
 		String s = Loisirs.toString(l);
 		%>
-		<input type = "radio" name="loisirs" value = <%= s %>> <%= s %>
+		<input type = "radio" name="loisirs" value = <%= s %> required> <%= s %>
 	<% } %>
 	 
      
 	 <br><br><br>
              
 		<input type="submit" class="main_btn" name="choix" value="Valider">
+		<a href="index.html" class="main_btn_light"> Accueil </a>
 		<input type="hidden" name = "op" value="validerCreationDonneur">
 		<input type="hidden" name = "nom" value = <%= (String) request.getAttribute("nom") %>> 
 		<input type="hidden" name = "prenom" value = <%= (String) request.getAttribute("prenom") %>> 

@@ -38,14 +38,14 @@
 <% Donneur donneur =  (Donneur) request.getAttribute("donneur");
 boolean attente = (boolean) request.getAttribute("attente");
 String nom = donneur.getPrenom() + ' ' + donneur.getNom();
-String status = null;
+String statut = null;
 String val = null;
 
 if (attente){
-	status = "est en attente de confirmation par un administrateur.";
+	statut = "est en attente de confirmation par un administrateur.";
 	val = "oui";
 } else {
-	status = "a été signalé par un de nos receveurs.";
+	statut = "a été signalé par un de nos receveurs.";
 	val = "non";
 }
 
@@ -74,7 +74,7 @@ if (attente){
  <section class="contact-section area-padding">
     <div class="container"> 
         <div class="col-12">
-          <h2 class="contact-title">  Ce donneur <%= status%></h2>
+          <h2 class="contact-title">  Ce donneur <%= statut%></h2>
 			
 			<form action= "Servlet" method="post">
 			<br>

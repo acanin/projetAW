@@ -61,7 +61,7 @@
         <div class="col-lg-8">
         
         
-          <form method="post"  action="Servlet">
+          <form name="creaForm" method="post" action="Servlet">
           
             <div class="row ml-5">
             <div class="col-sm-6">
@@ -95,14 +95,14 @@
               </div>
               <div class="col-12">
                 <div class="form-group">
-                  <input type="radio" name= "sexe" value = "Femme"> Femme
-				  <input type="radio" name= "sexe" value = "Homme"> Homme						
+                  <input type="radio" name= "sexe" value = "Femme"required> Femme
+				  <input type="radio" name= "sexe" value = "Homme" required> Homme						
                 </div>
               </div>
               <div class="col-12">
                 <div class="form-group">
-                  <input type="radio" name= "type" value = "Receveur"> Receveur
-				  <input type="radio" name= "type" value = "Donneur"> Donneur			
+                  <input type="radio" name= "type" value = "Receveur" required> Receveur
+				  <input type="radio" name= "type" value = "Donneur" required> Donneur			
                 </div>
               </div>
               
@@ -111,8 +111,8 @@
             
             <div class="form-group ml-5 pl-xl-3">
               
-                <input type="submit"  class="main_btn" name="operation" value="S'inscrire">
-				<input type="submit"  class="main_btn_light" name="operation" value="Annuler">
+                <input type="submit"  class="main_btn" name="operation" value="S'inscrire" >
+				<a href="index.html" class="main_btn_light"> Accueil </a>
 
 				<input type="hidden" name = "op" value = "creationcompte"> 
             </div>

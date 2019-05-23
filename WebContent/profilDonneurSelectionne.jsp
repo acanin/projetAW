@@ -34,7 +34,7 @@
     <!--================Header Menu Area =================-->
 
            <% Donneur donneur = (Donneur) request.getAttribute("donneur");
-			String nom = donneur.getNom();
+			int id = donneur.getId();
 			String prenom = donneur.getPrenom();
 			int age = donneur.getAge();
 			Boolean sexe = donneur.isSexe();
@@ -43,7 +43,6 @@
 			String peau = donneur.getPeau().toString();
 			String am = donneur.getAntecedents().toString();
 			String loisir = donneur.getLoisirs().toString();
-			int id = donneur.getId();
 			
 			Boolean dispo = donneur.isDisponibilite();
 			Boolean enAttente = donneur.isAttente();
@@ -59,7 +58,7 @@
             class="banner_content d-md-flex justify-content-between align-items-center"
           >
             <div class="mb-3 mb-md-0">
-				<h2>Bienvenue sur le profil de  <%= prenom + " " + nom %> </h2>
+				<h2>Bienvenue sur le profil n°<%= id %></h2>
             </div>
             <div class="page_link">
               <a href="index.html">Accueil</a>
@@ -82,7 +81,7 @@
             <%if (dispo){%> 
             	<i> Cette personne est actuellement disponible pour un don.</i><br><br>
             	
-            	 <h3> Informations sur <%= prenom + " " + nom %> :</h3> <br>
+            	 <h3> Informations sur le donneur n°<%=id %> :</h3> <br>
             	
             	<%if(sexe == true){ %>
             		Sexe : Femme <br>

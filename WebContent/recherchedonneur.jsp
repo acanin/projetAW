@@ -68,8 +68,8 @@
 	
 	<p> Sexe : </p>
 	
-		<input type = "radio" name="sexeRecherche" value = "Femme"> Femme
-		<input type = "radio" name="sexeRecherche" value = "Homme"> Homme
+		<input type = "radio" name="sexeRecherche" value = "Femme" required> Femme
+		<input type = "radio" name="sexeRecherche" value = "Homme" required> Homme
 
 	
 	<br><br>
