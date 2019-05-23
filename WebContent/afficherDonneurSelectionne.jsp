@@ -81,10 +81,9 @@
 		int cpte = 0;
 		for (Donneur d : ld){ 
 			String s = d.getPrenom() + " " + d.getNom();
-			cpte = cpte +1;
 			int id = d.getId();%>
 		
-			<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=personne&personneSelect=<%= id  %>">Donneur compatible <%= cpte %></a> </li>
+			<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=personne&personneSelect=<%= id  %>">Donneur n°<%= id %></a> </li>
 		
 	<% }
 	}%>

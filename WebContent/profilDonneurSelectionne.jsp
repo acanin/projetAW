@@ -58,7 +58,7 @@
             class="banner_content d-md-flex justify-content-between align-items-center"
           >
             <div class="mb-3 mb-md-0">
-				<h2>Bienvenue sur le profil n°<%= id %></h2>
+				<h2>Bienvenue sur le profil du donneur n°<%= id %></h2>
             </div>
             <div class="page_link">
               <a href="index.html">Accueil</a>
