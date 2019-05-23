@@ -28,8 +28,10 @@ public class Medecin {
 	@ManyToOne
 	Centre owner;
 	
+
 	@OneToMany(mappedBy="medecin", fetch = FetchType.EAGER)
 	Collection<RDV> rdv;
+
 	
 	public Medecin(){}
 	
@@ -49,16 +51,6 @@ public class Medecin {
 	}
 	
 	
-
-
-
-	public Collection<RDV> getRdv() {
-		return rdv;
-	}
-
-	public void setRdv(Collection<RDV> rdv) {
-		this.rdv = rdv;
-	}
 
 	public String getNom() {
 		return nom;
@@ -91,5 +83,15 @@ public class Medecin {
 	public void setOwner(Centre owner) {
 		this.owner = owner;
 	}
+
+	public Collection<RDV> getRdv() {
+		return rdv;
+	}
+
+	public void setRdv(Collection<RDV> rdv) {
+		this.rdv = rdv;
+	}
+	
+	
 	
 }

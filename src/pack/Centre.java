@@ -20,8 +20,8 @@ public class Centre {
 	private String ville;
 	private int nb_succes;
 	private int nb_essais;
-	
-	
+
+
 	@OneToMany(mappedBy="owner",fetch=FetchType.EAGER)
 	private Collection<Donneur> listedonneur;
 	
@@ -31,8 +31,10 @@ public class Centre {
 	@OneToMany(mappedBy="owner",fetch=FetchType.EAGER)
 	private Collection<Medecin> listemedecin;
 	
+
 	/**@OneToMany(mappedBy="owner",fetch=FetchType.EAGER)
 	private Collection<RDV> listerdv;*/
+
 	
 	//@OneToOne(mappedBy="owner",fetch=FetchType.EAGER)
 	//private Admin ad;
