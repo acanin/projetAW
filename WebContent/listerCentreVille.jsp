@@ -73,17 +73,17 @@
 	<%Collection<Centre> lc = (Collection<Centre>)request.getAttribute("listeCentre");
 	for (Centre c : lc){
 		int id = c.getId();%>
-		<li> <a href="Servlet?op=listerCentreRecherche&choix=centre&centreSelect=<%= id  %>"><%= c.getNom() %></a> </li>
+		<li> <a href="Servlet?op=listerCentreVille&choix=centre&centreSelect=<%= id  %>"><%= c.getNom() %></a> </li>
 	
 	<%}
 	if(lc.size() == 0){%>
 		<p>Il n'y a pas de centre dans cette ville. </p>
 		<p>Verifiez que vous avez bien écrit le nom de la ville.</p>
-		<li> <a href="Servlet?op=listerCentreRecherche&choix=refaire"><%= "Refaire une recheche" %></a> </li>
+		<li> <a href="Servlet?op=listerCentreVille&choix=refaire"><%= "Refaire une recheche" %></a> </li>
 	<%} %>
 	
 	
-	<input type="hidden" name = "op" value="rechercherCentre">
+	
 	
 	
 	</form>

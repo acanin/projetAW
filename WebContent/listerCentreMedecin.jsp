@@ -59,45 +59,35 @@
     <div class="container">
     
         <div class="col-12">
-          <h2 class="contact-title">Voici les donneurs qui répondent à vos critères :  </h2>
+          <h2 class="contact-title">Voici les centres :  </h2>
         </div>
   
 	 <br><br><br>
 	
 	<form action= "Servlet" method="post">
 	
-
 	 <br>
-	
 	
 	<ul>
 		
-	<% Collection<Donneur> ld = (Collection<Donneur>)request.getAttribute("listedonneurCompatible");
-	if (ld.isEmpty()){
-		int id = 0;%>
-		Il n'y a aucun donneur correspondant à vos attentes. Essayez encore pour trouver le donneur parfait.
-		
-		<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=refaire"><%= "Refaire une recheche" %></a> </li>
-		
-	<%}else {
-		int cpte = 0;
-		for (Donneur d : ld){ 
-			String s = d.getPrenom() + " " + d.getNom();
-			cpte = cpte +1;
-			int id = d.getId();%>
-		
-			<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=personne&personneSelect=<%= id  %>">Donneur compatible <%= cpte %></a> </li>
-		
-	<% }
-	}%>
+	<%Centre c = (Centre)request.getAttribute("centre");
+	if(c==null){%>
+		Ce medecin n'existe pas dans notre base de données, vérifiez l'orthographe du médecin.
+		<li> <a href="Servlet?op=listerCentreMedecin&choix=refaire"><%= "Refaire une recheche" %></a> </li>
 	
-	</ul>
-		
-		
-		
-		
-		
+	<%} else {
+		int id = c.getId();%>
+		<li> <a href="Servlet?op=listerCentreMedecin&choix=centre&centreSelect=<%= id  %>"><%= c.getNom() %></a> </li>
+	
+	<%} %>
+	
+	
+
+	
+	
 	</form>
+	
+	
 	
 </div>
 </section>

@@ -102,6 +102,8 @@
 	<% if (!(boolean)session.getAttribute("isAdmin")) { %> 
 	<input type="submit" class="main_btn" name="button" value="PrendreRDV">
 	<% } %>
+	
+	
 	<input type="hidden" name = "op" value="profilcentre">
 	<input type="hidden" name = "idc" value="<%= centre.getId() %>">
 	

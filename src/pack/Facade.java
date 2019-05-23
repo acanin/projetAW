@@ -282,6 +282,22 @@ public class Facade {
 		return req.getResultList();
 	}
 	
+	public Centre recupererCentreMedecin(String nomMedecin){
+		TypedQuery<Medecin> req = em.createQuery("select m from Medecin m where nom = :nomValue", Medecin.class);
+		req.setParameter("nomValue", nomMedecin);
+		Medecin med = null;
+		Centre centre = null;
+		try {
+			med = req.getSingleResult();
+			centre = med.getOwner();
+		} catch (PersistenceException e) {
+			centre = null;
+		}
+		return centre;
+		
+		
+		
+	}
 	
 	
 	public Collection<Medecin> listerMedecinsCentre(int idCentre) {

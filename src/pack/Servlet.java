@@ -282,9 +282,7 @@ public class Servlet extends HttpServlet {
 			String yeuxRecherche = request.getParameter("yeuxRecherche");
 			String cheveuxRecherche = request.getParameter("cheveuxRecherche");
 			String peauRecherche = request.getParameter("peauRecherche");
-			
 	
-					
 			// On envoie la liste des donneurs
 			request.setAttribute("listedonneurCompatible", facade.rechercher(sexeRecherche,yeuxRecherche,cheveuxRecherche,peauRecherche));
 			request.getRequestDispatcher("afficherDonneurSelectionne.jsp").forward(request, response);
@@ -328,15 +326,15 @@ public class Servlet extends HttpServlet {
 				if (mode.equals("ville")){
 					// ici texte est le nom d'une ville
 					request.setAttribute("listeCentre", facade.recupererCentre(texte));
-					request.getRequestDispatcher("listerCentreRecherche.jsp").forward(request, response);
+					request.getRequestDispatcher("listerCentreVille.jsp").forward(request, response);
 				}else {
 					// ici texte est le nom d'un medecin
-					//request.setAttribute("centre", facade.recupererCentreMedecin(texte));
-					//request.getRequestDispatcher("CentreMedecin.jsp").forward(request, response);
+					request.setAttribute("centre", facade.recupererCentreMedecin(texte));
+					request.getRequestDispatcher("listerCentreMedecin.jsp").forward(request, response);
 				}
 			}
 			
-		} else if(op.equals("listerCentreRecherche")){
+		} else if(op.equals("listerCentreVille")){
 			String button = request.getParameter("choix");
 			if(button.equals("centre")){
 				String id = request.getParameter("centreSelect");
@@ -347,9 +345,22 @@ public class Servlet extends HttpServlet {
 			}else if(button.equals("refaire")){
 				request.getRequestDispatcher("recherchecentre.jsp").forward(request, response);
 			} else{
-				response.getWriter().append("Probleme dans Servlet op = listerCentreRecherche");
+				response.getWriter().append("Probleme dans Servlet op = listerCentreVille");
 			}
 			
+		} else if(op.equals("listerCentreMedecin")){
+			String button = request.getParameter("choix");
+			if(button.equals("centre")){
+				String id = request.getParameter("centreSelect");
+				request.setAttribute("centre", facade.recupererCentre(Integer.parseInt(id)));
+				request.setAttribute("lm", facade.listerMedecinsCentre(Integer.parseInt(id)));
+				request.getRequestDispatcher("profilcentre.jsp").forward(request, response);
+			}else if(button.equals("refaire")){
+				request.getRequestDispatcher("recherchecentre.jsp").forward(request, response);
+				
+			} else{
+				response.getWriter().append("Probleme dans Servlet op = listerCentreMedecin");
+			}
 			
 			
 			
