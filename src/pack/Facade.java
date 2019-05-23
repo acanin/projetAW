@@ -84,7 +84,7 @@ public class Facade {
 		return idProfil;
 	}
 	
-	public void modifierReceveur(String mailInit, String mdpInit, String nom, String prenom, int age, String sexe, String mail, String mdp, int nbSucces, int nbEchecs) {
+	public void modifierReceveur(String mailInit, String mdpInit, String nom, String prenom, int age, String mail, String mdp) {
 		TypedQuery<Receveur> reqR = em.createQuery("SELECT r FROM Receveur r WHERE r.nom = :nom AND r.prenom = :prenom", Receveur.class);
 		reqR.setParameter("nom", nom);
 		reqR.setParameter("prenom", prenom);
@@ -95,25 +95,12 @@ public class Facade {
 		req.setParameter("mdpValue", mdpInit);
 		Utilisateur u = req.getSingleResult();
 		
-		if (age>0) {
-			r.setAge(age);
-		}
-		if (sexe != null) {
-			r.setSexe(sexe.equals("Femme"));
-		}
-		
-		r.setNbSucces(nbSucces);
-		r.setNbEchecs(nbEchecs);
-		
-		if (mail != null) {
-			u.setMail(mail);
-		}
-		if (mdp != null) {
-			u.setMdp(mdp);
-		}
+		r.setAge(age);
+		u.setMail(mail);
+		u.setMdp(mdp);
 	}
 	
-	public void modifierDonneur(String mailInit, String mdpInit, String nom, String prenom,  int age, int taille, int poids, String sexe, boolean dispo,Cheveux c, Loisirs l, AntecedentsMedicaux am, String mail, String mdp) {
+	public void modifierDonneur(String mailInit, String mdpInit, String nom, String prenom,int age, boolean dispo, Loisirs l, String mail, String mdp) {
 		TypedQuery<Donneur> reqD = em.createQuery("SELECT d FROM Donneur d WHERE d.nom = :nom AND d.prenom = :prenom", Donneur.class);
 		reqD.setParameter("nom", nom);
 		reqD.setParameter("prenom", prenom);
@@ -124,34 +111,11 @@ public class Facade {
 		req.setParameter("mdpValue", mdpInit);
 		Utilisateur u = req.getSingleResult();
 		
-		if (age>0) {
-			d.setAge(age);
-		}
-		if (taille>0) {
-			d.setTaille(taille);
-		}
-		if (poids>0) {
-			d.setPoids(poids);
-		}
-		if (sexe.equals("Homme") || sexe.equals("Femme")) {
-			d.setSexe(sexe.equals("Femme"));
-		}
+		d.setAge(age);
 		d.setDisponibilite(dispo);
-		if (c != null) {
-			d.setCheveux(c);
-		}
-		if (l != null) {
-			d.setLoisirs(l);
-		}
-		if (am != null) {
-			d.setAntecedents(am);
-		}
-		if (mail != null) {
-			u.setMail(mail);
-		}
-		if (mdp != null) {
-			u.setMdp(mdp);
-		}
+		d.setLoisirs(l);
+		u.setMail(mail);
+		u.setMdp(mdp);
 	}
 	
 	public void ajoutCentre(String nom, String adresse, String ville) {

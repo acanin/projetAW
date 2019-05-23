@@ -81,57 +81,27 @@
 	<br>
 	<h3> Modifier mes informations personnelles </h3>
 	<br>
-	<input class="form-control" name="age" type="number" min="18" placeholder="Age">
-    
-    <% if (isDonneur) { %>    
-    <input class="form-control" name="taille" type="text" placeholder="Taille (cm)">
-    
-    <input class="form-control" name="poids" type="text" placeholder="Poids (kg)">
-    <% } %>
-    
-    <br>
-    <input type="radio" name= "sexe" value = "Femme"> Femme
-    <br>
-	<input type="radio" name= "sexe" value = "Homme"> Homme
-	
-	<br><br>
-	<% if (!isDonneur) { %>
-	<input class="form-control" name="nbSucces" type="text" placeholder="Nombre de grossesses réussies">
-	<input class="form-control" name="nbEchecs" type="text" placeholder="Nombre de fausses couches">
-	<% } %>
+	<input class="form-control" name="age" type="number" min="18" max="120" placeholder="Age" required>
+
+	<br>
 	
 	<% if (isDonneur) { %>
-	<input type="radio" name= "dispo" value = "yes"> Disponible
-	<input type="radio" name= "dispo" value = "no"> Indisponible
+	<input type="radio" name= "dispo" value = "yes" required> Disponible
+	<input type="radio" name= "dispo" value = "no" required > Indisponible
 	
-	
-	<p> Cheveux : </p>
-	<%
-		for (Cheveux y : Cheveux.allcheveux) {
-		String s = Cheveux.toString(y);
-		%>
-		<input type = "radio" name="cheveux" value = <%= s %>> <%= s %> 
-	<% } %>
-	
-	
-	<p> Antécédents Médicaux : </p>
-	<%
-		for (AntecedentsMedicaux am : AntecedentsMedicaux.allantmed) {
-		String s = AntecedentsMedicaux.toString(am);
-		%>
-		<input type = "radio" name= "antecedents"  value = <%= s %>> <%= s %>
-	<% } %>
-	
-	
-	<p> Loisirs : </p>
+	<br><br>
+
+	<h3> Modifier mes loisirs </h3>
+	<br>
 	<%
 		for (Loisirs l : Loisirs.allloisirs) {
 		String s = Loisirs.toString(l);
 		%>
-		<input type = "radio" name="loisirs" value = <%= s %>> <%= s %>
+		<input type = "radio" name="loisirs" value = <%= s %> required> <%= s %>
 	<% } %>
 	 
-    <% } %>   
+    <% } %>  
+    <br><br>
 		<input type="submit" class="main_btn" name="choix" value="Valider">
 		<input type="hidden" name = "op" value="modifierMonCompte">
 	

@@ -103,11 +103,7 @@ public class Servlet extends HttpServlet {
 			
 		} else if (op.equals("creationcompte")){
 			String button = request.getParameter("operation");
-			if (button.equals("Annuler")) {
-				request.getRequestDispatcher("index.html").forward(request, response);
-			}
-			
-			else {
+			if (button.equals("S'inscrire")) {
 				String nom = request.getParameter("nom");
 				String prenom = request.getParameter("prenom");
 				String mail = request.getParameter("mail");
@@ -147,8 +143,9 @@ public class Servlet extends HttpServlet {
 					
 					// Passage à la page suivante
 					request.getRequestDispatcher("creationprofildonneur.jsp").forward(request, response);
+				
 				}
-			}
+			}else { response.getWriter().append("Served at: ").append(request.getContextPath()); }
 			
 			
 		} else if (op.equals("pageaccueil")) {	
@@ -180,17 +177,6 @@ public class Servlet extends HttpServlet {
 
 			
 			if ((boolean)s.getAttribute("isDonneur")) {
-				// Obtention des parametres de la page
-				int age = Integer.parseInt(request.getParameter("age"));
-				String sexe = request.getParameter("sexe");
-				int taille = Integer.parseInt(request.getParameter("taille"));
-				int poids = Integer.parseInt(request.getParameter("poids"));
-				Cheveux cheveux = Cheveux.toCaracteristiques(request.getParameter("cheveux"));
-				AntecedentsMedicaux am = AntecedentsMedicaux.toCaracteristiques(request.getParameter("antecedents"));
-				Loisirs loisir = Loisirs.toCaracteristiques(request.getParameter("loisirs"));
-				String mail = request.getParameter("mail");
-				String mdp = request.getParameter("mdp");
-				boolean dispo = request.getParameter("dispo").equals("yes");
 				
 				// Obtention des parametres de la session
 				String nom = (String) s.getAttribute("nom");
@@ -198,8 +184,24 @@ public class Servlet extends HttpServlet {
 				String mailInit = (String) s.getAttribute("mail");
 				String mdpInit = (String) s.getAttribute("mdp");
 				
+				// Obtention des parametres de la page
+				Loisirs loisir = Loisirs.toCaracteristiques(request.getParameter("loisirs"));
+				String mail = request.getParameter("mail");
+				if (mail.isEmpty()){
+					mail = mailInit;
+				}
+				String mdp = request.getParameter("mdp");
+				if (mdp.isEmpty()){
+					mdp = mdpInit;
+				}
+				int age = Integer.parseInt(request.getParameter("age"));
+				if (mdp.isEmpty()){
+					mdp = mdpInit;
+				}
+				boolean dispo = request.getParameter("dispo").equals("yes");
+				
 				// Modification du donneur dans la DB
-				facade.modifierDonneur(mailInit, mdpInit, nom, prenom, age, taille, poids, sexe, dispo, cheveux, loisir, am, mail, mdp);
+				facade.modifierDonneur(mailInit, mdpInit, nom, prenom, age, dispo, loisir, mail, mdp);
 				
 				// Passage de paramètre à la page suivante
 				request.setAttribute("listedonneur", facade.listerDonneurs());
@@ -212,22 +214,28 @@ public class Servlet extends HttpServlet {
 				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 			
 			} else {
-				// Modification d'un compte receveur
-				int age = Integer.parseInt(request.getParameter("age"));
-				String sexe = request.getParameter("sexe");
-				String mail = request.getParameter("mail");
-				String mdp = request.getParameter("mdp");
-				int nbSucces = Integer.parseInt(request.getParameter("nbSucces"));
-				int nbEchecs = Integer.parseInt(request.getParameter("nbEchecs"));
-				
 				// Obtention des parametres de la session
 				String nom = (String) s.getAttribute("nom");
 				String prenom = (String) s.getAttribute("prenom");
 				String mailInit = (String) s.getAttribute("mail");
 				String mdpInit = (String) s.getAttribute("mdp");
 				
+				// Modification d'un compte receveur
+				int age = Integer.parseInt(request.getParameter("age"));
+				String mail = request.getParameter("mail");
+				if (mail.isEmpty()){
+					mail = mailInit;
+				}
+				String mdp = request.getParameter("mdp");
+				if (mdp.isEmpty()){
+					mdp = mdpInit;
+				}
+
+				if (mdp.isEmpty()){
+					mdp = mdpInit;
+				}
 				// Modification du receveur dans la DB
-				facade.modifierReceveur(mailInit, mdpInit, nom, prenom, age, sexe, mail, mdp, nbSucces, nbEchecs);
+				facade.modifierReceveur(mailInit, mdpInit, nom, prenom, age, mail, mdp);
 				
 				// Passage de paramètre à la page suivante
 				request.setAttribute("listedonneur", facade.listerDonneurs());

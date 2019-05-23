@@ -105,7 +105,6 @@
 	<% } %>
 	<br><br>
 	
-
 	<br>
 		
 		<input type="submit" class="main_btn" name="choix" value="Valider">
