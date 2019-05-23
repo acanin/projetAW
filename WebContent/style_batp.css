@@ -13,3 +13,8 @@ echec{
 	color:red;
 	font-weight:bold;
 }
+
+petite_case{
+  width: 16px;
+  height: 16px;
+}

@@ -45,9 +45,8 @@
               <h2>Personne Signalée</h2>
             
             </div>
-            <div class="page_link">
-              <a href="index.html">Accueil</a>
-            </div>
+            <a href="Servlet?op=profildonneurselectionne&choix=Accueil"> Accueil </a>
+              <a href="index.html">Me déconnecter</a><br>
           </div>
         </div>
       </div>

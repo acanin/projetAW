@@ -22,7 +22,6 @@
         <div class="main_menu">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
-                    
                     <a class="navbar-brand logo_h" href="index.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
                
                 </div>
@@ -44,7 +43,8 @@
             
             </div>
             <div class="page_link">
-              <a href="index.html">Accueil</a>
+              <a href="Servlet?op=profildonneurselectionne&choix=Accueil"> Accueil </a>
+              <a href="index.html">Me déconnecter</a><br>
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@
 		int id = 0;%>
 		Il n'y a aucun donneur correspondant à vos attentes. Essayez encore pour trouver le donneur parfait.
 		
-		<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=refaire"><%= "Refaire une recheche" %></a> </li>
+		<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=refaire"> Refaire une recherche</a> </li>
 		
 	<%}else {
 		int cpte = 0;

@@ -59,7 +59,7 @@
 				<h2> Compte de <%= prenom %> <%= nom %> </h2></form> 
             </div>
             <div class="page_link">
-              <a href="index.html"> Accueil</a>
+              <a href="index.html"> Me déconnecter</a>
             </div>
           </div>
         </div>
