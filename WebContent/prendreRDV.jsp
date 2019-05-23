@@ -107,7 +107,7 @@
 		<br>
 		 <h4> Veuillez choisir un heure :  </h4>
 		<div class="form-group">
-            <div class="col-sm-10">
+            <div class="col-sm-6">
 			<input class="form-control" name="heure" type="number" placeholder="Heure" min="9" max = "19" required>
 		<br></div></div>
 		<h4>  Veuillez choisir une date : </h4> 
