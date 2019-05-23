@@ -1,10 +1,12 @@
 package pack;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Receveur implements ProfilUtilisateur {
@@ -25,8 +27,11 @@ public class Receveur implements ProfilUtilisateur {
 	/** Pour avoir une relation bidirectionnelle 
 	 * 1 centre avec plsr receveur
 	 * */
-	@ManyToOne
-	Centre owner; 
+	//@ManyToOne
+	//Centre owner; 
+	
+	//@OneToMany(mappedBy="receveur", fetch = FetchType.EAGER)
+	//RDV rdv;
 	
 	public Receveur(){		
 	}
@@ -92,14 +97,14 @@ public class Receveur implements ProfilUtilisateur {
 	}
 
 
-	public Centre getOwner() {
+	/**public Centre getOwner() {
 		return owner;
 	}
 
 
 	public void setOwner(Centre owner) {
 		this.owner = owner;
-	}
+	}*/
 	public int getNbSucces() {
 		return nbSucces;
 	}
@@ -114,4 +119,16 @@ public class Receveur implements ProfilUtilisateur {
 	}
 
 
+	/**public RDV getRdv() {
+		return rdv;
+	}
+
+
+	public void setRdv(RDV rdv) {
+		this.rdv = rdv;
+	}*/
+
+
+	
+	
 }

@@ -16,13 +16,13 @@ public class RDV {
 	private int jour;
 	private int mois;
 	//private Date date;
-	/**
-	@ManyToOne
-	Centre owner;
-	*/
+	//
+	//@ManyToOne
+	//Centre owner;
 	
-	@ManyToOne
-	Receveur receveur;
+	
+	//@ManyToOne
+	//Receveur receveur;
 	
 	@ManyToOne
 	Donneur donneur;
@@ -36,6 +36,12 @@ public class RDV {
 	 * */
 	public RDV(){
 		
+	}
+	
+	public RDV(int heure, int jour, int mois) {
+		this.heure = heure;
+		this.jour = jour;
+		this.mois = mois;
 	}
 
 
@@ -79,14 +85,14 @@ public class RDV {
 	}
 
 
-	public Receveur getReceveur() {
+	/**public Receveur getReceveur() {
 		return receveur;
 	}
 
 
 	public void setReceveur(Receveur receveur) {
 		this.receveur = receveur;
-	}
+	}*/
 
 
 	public Donneur getDonneur() {
@@ -107,11 +113,6 @@ public class RDV {
 	public void setMedecin(Medecin medecin) {
 		this.medecin = medecin;
 	}
-	
-
-	
-	
-	
 	
 	
 	

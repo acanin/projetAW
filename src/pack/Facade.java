@@ -62,22 +62,26 @@ public class Facade {
 		}
 	}
 	
-	public void ajoutDonneur(String nom, String prenom,  int age, int taille, int poids, String sexe, boolean dispo,Yeux y,Cheveux c,Peau peau, Loisirs l, AntecedentsMedicaux am, String mail, String mdp){
+	public int ajoutDonneur(String nom, String prenom,  int age, int taille, int poids, String sexe, boolean dispo,Yeux y,Cheveux c,Peau peau, Loisirs l, AntecedentsMedicaux am, String mail, String mdp){
 		Donneur d = new Donneur(nom, prenom, age,taille, poids, sexe.equals("Femme"), dispo, y, c, peau, l, am);
 		em.persist(d);
 		
 		int idProfil = d.getId();
 		Utilisateur u = new Utilisateur(idProfil, mail, mdp, false);
 		em.persist(u);
+		
+		return idProfil;
 	}
 
-	public void ajoutReceveur(String n, String p, int a, String s, String mail, String mdp){
+	public int ajoutReceveur(String n, String p, int a, String s, String mail, String mdp){
 		Receveur r = new Receveur(n, p, a, s.equals("Femme"));
 		em.persist(r);
 		
 		int idProfil = r.getId();
 		Utilisateur u = new Utilisateur(idProfil, mail, mdp, true);
 		em.persist(u);
+		
+		return idProfil;
 	}
 	
 	public void modifierReceveur(String mailInit, String mdpInit, String nom, String prenom, int age, String sexe, String mail, String mdp, int nbSucces, int nbEchecs) {
@@ -303,6 +307,26 @@ public class Facade {
 	public Medecin recupererMedecin(int idMed) {
 		Medecin m = em.find(Medecin.class,idMed);
 		return m;
+	}
+	
+	public boolean nouveauRDV(int idMed, int heure, int jour, int mois, int idDon) {
+		boolean ok = false;
+		try {
+			TypedQuery<RDV> req = em.createQuery("select r from RDV r where medecin = " + idMed + " and jour = " + jour + "and mois = " + mois + "and heure = " + heure, RDV.class);
+			RDV rdv = req.getSingleResult();
+		
+		} catch (Exception e) {
+			Medecin m = em.find(Medecin.class, idMed);
+			Donneur d = em.find(Donneur.class, idDon);
+			RDV r = new RDV(heure,jour,mois);
+			em.persist(r);
+			r.setDonneur(d);
+			r.setMedecin(m);
+			d.setOwner(m.getOwner());
+			ok = true;
+		}
+		
+		return ok;
 	}
 
 	

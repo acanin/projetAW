@@ -83,7 +83,8 @@
 
 		Voici la liste des médecins travaillant chez nous : 
 		<ul>
-		<%	Collection<Medecin> lm = (Collection<Medecin>) request.getAttribute("lm");
+		<%	//Collection<Medecin> lm = (Collection<Medecin>) request.getAttribute("lm");
+			Collection<Medecin> lm = centre.getListemedecin();
 			for (Medecin m : lm) { 
 				String s = "Medecin " + m.getNom() + ", " + Specialite.toString(m.getSpecialisation());
 				int id = m.getId(); %>

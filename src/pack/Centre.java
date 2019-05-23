@@ -25,14 +25,14 @@ public class Centre {
 	@OneToMany(mappedBy="owner",fetch=FetchType.EAGER)
 	private Collection<Donneur> listedonneur;
 	
-	@OneToMany(mappedBy="owner",fetch=FetchType.EAGER)
-	private Collection<Receveur> listereceveur;
+	/**@OneToMany(mappedBy="owner",fetch=FetchType.EAGER)
+	private Collection<Receveur> listereceveur;*/
 	
 	@OneToMany(mappedBy="owner",fetch=FetchType.EAGER)
 	private Collection<Medecin> listemedecin;
 	
-	@OneToMany(mappedBy="owner",fetch=FetchType.EAGER)
-	private Collection<RDV> listerdv;
+	/**@OneToMany(mappedBy="owner",fetch=FetchType.EAGER)
+	private Collection<RDV> listerdv;*/
 	
 	//@OneToOne(mappedBy="owner",fetch=FetchType.EAGER)
 	//private Admin ad;
@@ -92,6 +92,30 @@ public class Centre {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Collection<Donneur> getListedonneur() {
+		return listedonneur;
+	}
+
+	public void setListedonneur(Collection<Donneur> listedonneur) {
+		this.listedonneur = listedonneur;
+	}
+
+	/**public Collection<Receveur> getListereceveur() {
+		return listereceveur;
+	}
+
+	public void setListereceveur(Collection<Receveur> listereceveur) {
+		this.listereceveur = listereceveur;
+	}*/
+
+	public Collection<Medecin> getListemedecin() {
+		return listemedecin;
+	}
+
+	public void setListemedecin(Collection<Medecin> listemedecin) {
+		this.listemedecin = listemedecin;
 	}
 
 	

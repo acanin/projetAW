@@ -61,7 +61,7 @@ if (attente){
 				 <h2>Profil du donneur <%= nom %></h2>
             </div>
             <div class="page_link">
-              <a href="index.html"> Accueil</a>
+              <a href="Servlet?op=RetourAccueilAdmin"> Accueil</a>
             </div>
           </div>
         </div>
@@ -75,10 +75,18 @@ if (attente){
     <div class="container"> 
         <div class="col-12">
           <h2 class="contact-title">  Ce donneur <%= status%></h2>
+          <% Collection<RDV> lrdv = donneur.getRdv();
+          for (RDV rdv : lrdv) {
+        	  Medecin m = rdv.getMedecin();
+        	  String med = m.getNom() + ", " + Specialite.toString(m.getSpecialisation()) + " (" + m.getOwner().getNom() +")";
+        	  String rdv_string = rdv.getJour() + "/" + rdv.getMois() + " à " + rdv.getHeure() + "h avec " + med;%>
+        	  <p> <%= rdv_string %> </p>
+          <%} %>
 			
 			<form action= "Servlet" method="post">
 			<br>
 			<% if (attente) {%>
+			
 			
 			<h5><label for="confirmation">Confirmer l'ajout au site :
 						</label><input type="radio" name= "confirmation" value = "Oui"> Oui
