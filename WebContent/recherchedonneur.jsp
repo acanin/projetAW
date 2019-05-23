@@ -45,7 +45,8 @@
             
             </div>
             <div class="page_link">
-              <a href="index.html">Accueil</a>
+              <a href="Servlet?op=profildonneurselectionne&choix=Accueil"> Accueil </a>
+              <a href="index.html">Me déconnecter</a><br>
             </div>
           </div>
         </div>
@@ -104,33 +105,13 @@
 	<% } %>
 	<br><br>
 	
-	
-	<%-- <p> Antécédents Médicaux : </p>
-	<%
-		for (AntecedentsMedicaux am : AntecedentsMedicaux.allantmed) {
-		String s = AntecedentsMedicaux.toString(am);
-		%>
-		<input type = "radio" name="antecedentRecherche" value = <%= s %>> <%= s %> 
-	<% } %>
-	<br><br>
-	
-	<p> Loisirs : </p>
-	<%
-		for (Loisirs l : Loisirs.allloisirs) {
-		String s = Loisirs.toString(l);
-		%>
-		<input type = "radio" name="loisirRecherche" value = <%= s %>> <%= s %> 
-	<% } %> 
-	<br><br> --%>
+
 	<br>
 		
 		<input type="submit" class="main_btn" name="choix" value="Valider">
-	
-		
 		<input type="hidden" name = "op" value="rechercherDonneur">
 
 	</form>
-	
 
 </div>
 </section>
