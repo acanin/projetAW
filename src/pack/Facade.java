@@ -1,5 +1,7 @@
 package pack;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
@@ -167,11 +169,11 @@ public class Facade {
 		String C = sqlCheveux(cheveux);
 		String P = sqlPeau(peau);
 		if (sexe.equals("Femme")){
-			TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = TRUE AND " + Y + C + P  + " SIGNALE = FALSE", Donneur.class);
+			TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = TRUE AND " + Y + C + P  + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
 			//TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = TRUE AND" + Y + C + P  + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
 			return req.getResultList();
 		}else{
-			TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = FALSE AND " + Y + C + P  + " SIGNALE = FALSE", Donneur.class);
+			TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = FALSE AND " + Y + C + P  + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
 			//TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = FALSE AND" + Y + C + P  + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
 			return req.getResultList();
 		}
@@ -187,6 +189,17 @@ public class Facade {
 	public Collection<Donneur> listerDonneurs(){
 		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p", Donneur.class);
 		return req.getResultList();
+	}
+	
+	public Collection<Donneur> listerDonneursDisponibles(){
+		List<Donneur> list = new ArrayList<Donneur>();
+		try {
+		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p where disponibilite = true and signale = false and attente = false", Donneur.class);
+		list = req.getResultList();
+		} catch (Exception e) {
+			
+		}
+		return list;
 	}
 	
 	public Donneur recupererDonneur(int idDonneur) {
@@ -268,10 +281,10 @@ public class Facade {
 	}
 	
 	
-	public Collection<Medecin> listerMedecinsCentre(int idCentre) {
+	/**public Collection<Medecin> listerMedecinsCentre(int idCentre) {
 		TypedQuery<Medecin> req = em.createQuery("select m from Medecin m where OWNER_ID = " + idCentre, Medecin.class);
 		return req.getResultList();
-	}
+	}*/
 	
 	
 	public Collection<Donneur> donneursAttentes() {
@@ -289,7 +302,7 @@ public class Facade {
 		return m;
 	}
 	
-	public boolean nouveauRDV(int idMed, int heure, int jour, int mois, int idDon) {
+	public boolean nouveauRDV(int idMed, int heure, int jour, int mois, int idDon,boolean premierefois) {
 		boolean ok = false;
 		try {
 			TypedQuery<RDV> req = em.createQuery("select r from RDV r where medecin = " + idMed + " and jour = " + jour + "and mois = " + mois + "and heure = " + heure, RDV.class);
@@ -302,12 +315,20 @@ public class Facade {
 			em.persist(r);
 			r.setDonneur(d);
 			r.setMedecin(m);
-			d.setOwner(m.getOwner());
+			if (premierefois) {
+			d.setOwner(m.getOwner()); }
 			ok = true;
 		}
 		
 		return ok;
 	}
+	
+	public Centre recupererCentreduMedecin(int idmed) {
+		return em.find(Medecin.class,idmed).getOwner();
+	}
 
+	public Centre recupererCentreduDonneur(int idd) {
+		return em.find(Donneur.class,idd).getOwner();
+	}
 	
 }
