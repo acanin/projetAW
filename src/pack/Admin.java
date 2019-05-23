@@ -29,6 +29,11 @@ public class Admin implements ProfilUtilisateur {
 		return "noname";
 	}
 	
+	@Override
+	public int getId() {
+		return 0;
+	}
+	
 	
 	
 }

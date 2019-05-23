@@ -1,6 +1,8 @@
 package pack;
 
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,8 +28,10 @@ public class Medecin {
 	@ManyToOne
 	Centre owner;
 	
-	//@OneToMany(mappedBy="medecin", fetch = FetchType.EAGER)
-	//RDV rdv;
+
+	@OneToMany(mappedBy="medecin", fetch = FetchType.EAGER)
+	Collection<RDV> rdv;
+
 	
 	public Medecin(){}
 	
@@ -47,14 +51,6 @@ public class Medecin {
 	}
 	
 	
-
-	/**public RDV getRdv() {
-		return rdv;
-	}
-
-	public void setRdv(RDV rdv) {
-		this.rdv = rdv;
-	}*/
 
 	public String getNom() {
 		return nom;
@@ -87,5 +83,15 @@ public class Medecin {
 	public void setOwner(Centre owner) {
 		this.owner = owner;
 	}
+
+	public Collection<RDV> getRdv() {
+		return rdv;
+	}
+
+	public void setRdv(Collection<RDV> rdv) {
+		this.rdv = rdv;
+	}
+	
+	
 	
 }

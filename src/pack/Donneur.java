@@ -3,10 +3,12 @@ package pack;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import enumerations.AntecedentsMedicaux;
 import enumerations.Cheveux;
@@ -44,6 +46,10 @@ public class Donneur implements ProfilUtilisateur {
 	@ManyToOne
 	Centre owner; 
 	
+	@OneToMany(mappedBy="donneur", fetch = FetchType.EAGER)
+	Collection<RDV> rdv;
+	
+	
 	public Donneur(String n, String p, int a, int t, int po, boolean s, boolean dispo,Yeux y,Cheveux c,Peau peau,Loisirs l, AntecedentsMedicaux am){
 		this.nom = n;
 		this.prenom = p;
@@ -59,7 +65,6 @@ public class Donneur implements ProfilUtilisateur {
 		this.antecedents = am;
 		this.attente = true;
 		this.signale = false;
-		
 	}
 	
 	public boolean isSignale() {
@@ -193,27 +198,18 @@ public class Donneur implements ProfilUtilisateur {
 	public void setOwner(Centre owner) {
 		this.owner = owner;
 	}
+
+	public Collection<RDV> getRdv() {
+		return rdv;
+	}
+
+	public void setRdv(Collection<RDV> rdv) {
+		this.rdv = rdv;
+	}
+
+
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	
 }
