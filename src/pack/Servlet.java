@@ -166,6 +166,15 @@ public class Servlet extends HttpServlet {
 				} else if (button.equals("Liste de nos centres")) {
 					request.setAttribute("lc", facade.listerCentres());
 					request.getRequestDispatcher("listercentre.jsp").forward(request, response);
+				} else if (button.equals("Prendre RDV")) {
+					int id = Integer.parseInt(request.getParameter("id"));
+					Centre c = facade.recupererCentreduDonneur(id);
+					
+					request.setAttribute("rdvpris", false);
+					request.setAttribute("lc", facade.listerCentres());
+					request.setAttribute("centre", c);
+					request.getRequestDispatcher("prendreRDV.jsp").forward(request, response);
+					
 
 				} else {
 					request.getRequestDispatcher("moncompte.jsp").forward(request, response);
@@ -280,6 +289,7 @@ public class Servlet extends HttpServlet {
 			//request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 			request.setAttribute("rdvpris", false);
 			request.setAttribute("lc", facade.listerCentres());
+			request.setAttribute("centre", null);
 			 request.getRequestDispatcher("prendreRDV.jsp").forward(request, response);
 			
 			
@@ -445,7 +455,7 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("donneursignale", facade.donneursSignales());
 			request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
 			
-		} else if(op.equals("ValiderRDV")) {
+		} else if(op.equals("ValiderRDV1")) {
 			String med = request.getParameter("medecin");
 			int heure = Integer.parseInt(request.getParameter("heure"));
 			int jour = Integer.parseInt(request.getParameter("jour"));
@@ -456,18 +466,39 @@ public class Servlet extends HttpServlet {
 			response.getWriter().append(jour);
 			response.getWriter().append(mois);
 			response.getWriter().append(idDonneur);*/
-			Centre c = facade.recupererMedecin(Integer.parseInt(med)).getOwner();
+			//Centre c = facade.recupererCentreduMedecin(Integer.parseInt(med));
 			
-			Donneur d = facade.recupererDonneur(Integer.parseInt(idDonneur));
-			d.setOwner(c);
+			//Donneur d = facade.recupererDonneur(Integer.parseInt(idDonneur));
+			//d.setOwner(c);
 			
-			boolean ok = facade.nouveauRDV(Integer.parseInt(med), heure, jour, mois, Integer.parseInt(idDonneur));
+			boolean ok = facade.nouveauRDV(Integer.parseInt(med), heure, jour, mois, Integer.parseInt(idDonneur),true);
 			if (ok) {
 				request.setAttribute("listedonneur", facade.listerDonneursDisponibles());
 				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 			} else {
 				request.setAttribute("rdvpris", true);
 				request.setAttribute("lc", facade.listerCentres());
+				request.setAttribute("centre", null);
+				request.getRequestDispatcher("prendreRDV.jsp").forward(request, response);
+			}
+			
+		} else if(op.equals("ValiderRDV")) {
+			String med = request.getParameter("medecin");
+			int heure = Integer.parseInt(request.getParameter("heure"));
+			int jour = Integer.parseInt(request.getParameter("jour"));
+			int mois = Integer.parseInt(request.getParameter("mois"));
+			String idDonneur = request.getParameter("donneur");
+			Centre c = facade.recupererCentreduMedecin(Integer.parseInt(med));
+			
+			
+			boolean ok = facade.nouveauRDV(Integer.parseInt(med), heure, jour, mois, Integer.parseInt(idDonneur),false);
+			if (ok) {
+				request.setAttribute("listedonneur", facade.listerDonneursDisponibles());
+				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+			} else {
+				request.setAttribute("rdvpris", true);
+				request.setAttribute("lc", facade.listerCentres());
+				request.setAttribute("centre", c);
 				request.getRequestDispatcher("prendreRDV.jsp").forward(request, response);
 			}
 			

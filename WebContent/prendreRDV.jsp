@@ -61,9 +61,10 @@
   <section class="contact-section area-padding">
     <div class="container">
     
+    <%Centre centredonneur = (Centre) request.getAttribute("centre");%>
         <div class="col-12">
-          <h3> Pour que votre profil soit visible sur le site, il faut qu'un médecin ait validé votre 
-          condition physique. <br>Veuillez prendre rendez-vous avec un médecin dans un de nos centres ci-dessous : </h3>
+          <h3> <%if (centredonneur != null) { %>Pour que votre profil soit visible sur le site, il faut qu'un médecin ait validé votre 
+          condition physique. <%} %> <br>Veuillez prendre rendez-vous avec un médecin dans un de nos centres ci-dessous : </h3>
        <br><br>
        
         	<form action= "Servlet" method="post">
@@ -72,21 +73,36 @@
 		<echec> Ce créneau est déjà pris avec ce médecin. Sélectionnez-en un autre. </echec>
 		<%} %>
 		
+		<% 
+		if (centredonneur == null) {
+			Collection<Centre> lc = (Collection<Centre>) request.getAttribute("lc");
 		
-		<% Collection<Centre> lc = (Collection<Centre>) request.getAttribute("lc");
-		for (Centre	 centre : lc) {
-			String s = centre.getNom()+'('+centre.getVille()+')';
-			Collection <Medecin> med = centre.getListemedecin();
-			%>
-			<h4> Centre <%= s %> </h4>
-			
-			<%for (Medecin m : med) { 
-				String str_med = "Medecin " + m.getNom() + ", " + Specialite.toString(m.getSpecialisation());%>
-				  <input type = "radio" name="medecin" value = <%= m.getId() %> required> <%= str_med %>  
-			<br>
-			<% }%>
-			<br><br>
-		<% } %>
+			for (Centre	 centre : lc) {
+				String s = centre.getNom()+'('+centre.getVille()+')';
+				Collection <Medecin> med = centre.getListemedecin();
+				%>
+				<h4> Centre <%= s %> </h4>
+				
+				<%for (Medecin m : med) { 
+					String str_med = "Medecin " + m.getNom() + ", " + Specialite.toString(m.getSpecialisation());%>
+					  <input type = "radio" name="medecin" value = <%= m.getId() %> required> <%= str_med %>  
+				<br>
+				<% }%>
+				<br><br>
+			<% } } else {
+				String s = centredonneur.getNom()+'('+centredonneur.getVille()+')';
+				%>
+				<h4> Centre <%= s %> </h4>
+				
+				<%
+				Collection<Medecin> med = centredonneur.getListemedecin();
+				for (Medecin md : med) { 
+					String str_med = "Medecin " + md.getNom() + ", " + Specialite.toString(md.getSpecialisation());%>
+					  <input type = "radio" name="medecin" value = <%= md.getId() %> required> <%= str_med %>  
+				<br>
+				<% }%>
+				<br><br>
+				<%} %>
 		
 		<br>
 		 <h4> Veuillez choisir un heure :  </h4>
@@ -112,7 +128,13 @@
     
     
 		<input type="submit" class="main_btn" name="choix" value="Valider">
+		
+		<% if (centredonneur == null) { %>
+		
+		<input type="hidden" name = "op" value="ValiderRDV1">
+		<%} else { %>
 		<input type="hidden" name = "op" value="ValiderRDV">
+		<%} %>
 		<input type="hidden" name = "donneur" value="<%= session.getAttribute("id") %>" >
 		</form>
 

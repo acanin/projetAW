@@ -338,7 +338,7 @@ public class Facade {
 		return m;
 	}
 	
-	public boolean nouveauRDV(int idMed, int heure, int jour, int mois, int idDon) {
+	public boolean nouveauRDV(int idMed, int heure, int jour, int mois, int idDon,boolean premierefois) {
 		boolean ok = false;
 		try {
 			TypedQuery<RDV> req = em.createQuery("select r from RDV r where medecin = " + idMed + " and jour = " + jour + "and mois = " + mois + "and heure = " + heure, RDV.class);
@@ -351,12 +351,20 @@ public class Facade {
 			em.persist(r);
 			r.setDonneur(d);
 			r.setMedecin(m);
-			d.setOwner(m.getOwner());
+			if (premierefois) {
+			d.setOwner(m.getOwner()); }
 			ok = true;
 		}
 		
 		return ok;
 	}
+	
+	public Centre recupererCentreduMedecin(int idmed) {
+		return em.find(Medecin.class,idmed).getOwner();
+	}
 
+	public Centre recupererCentreduDonneur(int idd) {
+		return em.find(Donneur.class,idd).getOwner();
+	}
 	
 }
