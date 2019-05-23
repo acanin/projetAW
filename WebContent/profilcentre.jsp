@@ -95,7 +95,16 @@
 		</ul>
 			
 
-	<% if (!(boolean)session.getAttribute("isAdmin")) { %> 
+	<% if (!(boolean)session.getAttribute("isAdmin") && !(boolean) session.getAttribute("isDonneur")) { %>
+	<p> Liste de tous nos donneurs <p>
+		<% Collection<Donneur> donneurs = (Collection<Donneur>) request.getAttribute("listedonneur");
+		for (Donneur d : donneurs) {
+		String s = d.getPrenom() + " " + d.getNom();
+			int id = d.getId();%>
+		
+			<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=personne&personneSelect=<%= id  %>">Donneur n°<%= id %></a> </li>
+			<%}%> 
+		
 <p>N'hésitez pas à prendre rendez-vous en ligne :</p>
 <% } %>
 

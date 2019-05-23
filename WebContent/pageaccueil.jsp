@@ -47,8 +47,7 @@
                <form action= "Servlet" method="post">
 				<h2> Bienvenue,
 				<%
-					HttpSession s = request.getSession(false);
-			
+					boolean isDonneur = (boolean) session.getAttribute("isDonneur");
 					
 					String n = (String) session.getAttribute("nom");
 					String p = (String) session.getAttribute("prenom");
@@ -75,16 +74,24 @@
 
 		<form action= "Servlet" method="post">
 			<br>
+			
+			
 		<p> Nous avons actuellement 
 		<% Collection<Donneur> ld = (Collection<Donneur>) request.getAttribute("listedonneur");
 			int nb_donneur = ld.size(); %>
 			
-			<%= nb_donneur  %> donneurs disponibles dans tous nos centres. Cela vous intéresse ?<br>
+			<%= nb_donneur  %> donneurs disponibles dans tous nos centres. <% if (! isDonneur) { %> Cela vous intéresse ?<br>
+			<%} %>
 		
 		<br><br>
+		<% if (! isDonneur ) { %>
 			<input type="submit" class = "main_btn" name="choix" value="Rechercher Donneur">
-
+		<%} else {%>
+			<input type="submit" class = "main_btn" name="choix" value="Prendre RDV">
+			<% } %>
 			<input type="submit" class = "main_btn" name="choix" value="Rechercher Centre">
+			
+			<input type="submit" class = "main_btn" name="choix" value="Liste de nos centres">
 
 			<input type="submit" class = "main_btn" name="choix" value="Mon Compte">
 
