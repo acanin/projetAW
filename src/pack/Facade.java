@@ -64,6 +64,10 @@ public class Facade {
 		}
 	}
 	
+	
+	
+	// METHODES POUR AJOUTER
+	
 	public int ajoutDonneur(String nom, String prenom,  int age, int taille, int poids, String sexe, boolean dispo,Yeux y,Cheveux c,Peau peau, Loisirs l, AntecedentsMedicaux am, String mail, String mdp){
 		Donneur d = new Donneur(nom, prenom, age,taille, poids, sexe.equals("Femme"), dispo, y, c, peau, l, am);
 		em.persist(d);
@@ -86,6 +90,82 @@ public class Facade {
 		return idProfil;
 	}
 	
+	public void ajoutCentre(String nom, String adresse, String ville) {
+		em.persist(new Centre(nom, adresse, ville));
+	}
+	
+	public void ajoutMedecin(String nom, Specialite spe, int idcentre, String sexe) {
+		
+		Centre c = em.find(Centre.class, idcentre);
+		Medecin m = new Medecin(nom,spe,sexe.equals("Femme"));
+		em.persist(m);
+		m.setOwner(c);
+	}
+	
+	public boolean nouveauRDV(int idMed, int heure, int jour, int mois, int idDon,boolean premierefois) {
+		boolean ok = false;
+		try {
+			TypedQuery<RDV> req = em.createQuery("select r from RDV r where medecin = " + idMed + " and jour = " + jour + "and mois = " + mois + "and heure = " + heure, RDV.class);
+			RDV rdv = req.getSingleResult();
+		
+		} catch (Exception e) {
+			Medecin m = em.find(Medecin.class, idMed);
+			Donneur d = em.find(Donneur.class, idDon);
+			RDV r = new RDV(heure,jour,mois);
+			em.persist(r);
+			r.setDonneur(d);
+			r.setMedecin(m);
+			if (premierefois) {
+			d.setOwner(m.getOwner()); }
+			ok = true;
+		}
+		
+		return ok;
+	}
+	
+	public void ajouterNotif(int idD, int idR) {
+		Donneur d = em.find(Donneur.class, idD);
+		Receveur r = em.find(Receveur.class, idR);
+		
+		Notification n = new Notification();
+		
+		em.persist(n);
+		n.setDonneur(d);
+		n.setReceveur(r);
+	}
+	
+	public Receveur recupererReceveur(int id) {
+		return em.find(Receveur.class, id);
+	}
+	
+	
+	// METHODES POUR CHERCHER UN ELEMENT
+	public Donneur recupererDonneur(int idDonneur) {
+		Donneur d = em.find(Donneur.class,idDonneur);
+		return d;
+	}
+	
+	public Centre recupererCentre(int idCentre) {
+		Centre c = em.find(Centre.class, idCentre);
+		return c;
+	}
+	
+	
+	public Medecin recupererMedecin(int idMed) {
+		Medecin m = em.find(Medecin.class,idMed);
+		return m;
+	}
+	
+	
+	public Centre recupererCentreduMedecin(int idmed) {
+		return em.find(Medecin.class,idmed).getOwner();
+	}
+
+	public Centre recupererCentreduDonneur(int idd) {
+		return em.find(Donneur.class,idd).getOwner();
+	}
+	
+	// METHODES POUR MODIFIER ET SUPPRIMER
 	public void modifierReceveur(String mailInit, String mdpInit, String nom, String prenom, int age, String mail, String mdp) {
 		TypedQuery<Receveur> reqR = em.createQuery("SELECT r FROM Receveur r WHERE r.nom = :nom AND r.prenom = :prenom", Receveur.class);
 		reqR.setParameter("nom", nom);
@@ -120,21 +200,45 @@ public class Facade {
 		u.setMdp(mdp);
 	}
 	
-	public void ajoutCentre(String nom, String adresse, String ville) {
-		em.persist(new Centre(nom, adresse, ville));
+	public void modifierStatu(String choix, String attente, int id) {
+		Donneur d = em.find(Donneur.class, id);
+		if (attente.equals("oui")) {
+			if (choix.equals("Oui")) {
+				d.setAttente(false);
+			} else {
+				for (RDV r : d.getRdv()) {
+					em.remove(r);
+				}
+				em.remove(d);
+			}
+		} else {
+			if (choix.equals("Non")) {
+				d.setSignale(false);
+			} else {
+				for (RDV r : d.getRdv()) {
+					em.remove(r);
+				}
+				em.remove(d);
+			}
+		}
 	}
 	
-	public void ajoutMedecin(String nom, Specialite spe, int idcentre, String sexe) {
+	public void modifierNotification(int idn, boolean accepter) {
+		Notification notif = em.find(Notification.class, idn);
+		if (accepter) {
+			notif.setStatu(Statu.ACCEPTE);
+		} else {
+			notif.setStatu(Statu.REFUSE);
+		}
+	}
+	
+	public void supprimerReceveur(int idR){
+		Receveur r = em.find(Receveur.class,idR);
+		em.remove(r);
 		
-		Centre c = em.find(Centre.class, idcentre);
-		Medecin m = new Medecin(nom,spe,sexe.equals("Femme"));
-		em.persist(m);
-		m.setOwner(c);
 	}
 
-	
-	
-	
+	// METHODES POUR FAIRE DES RECHERCHES SPECIFIQUES
 	public String sqlYeux(String y){
 		if (y == null){
 			return"";
@@ -162,7 +266,6 @@ public class Facade {
 		}
 	}
 	
-
 	
 	public Collection<Donneur> rechercher(String sexe,String yeux, String cheveux,String peau){
 		String Y = sqlYeux(yeux);
@@ -170,96 +273,12 @@ public class Facade {
 		String P = sqlPeau(peau);
 		if (sexe.equals("Femme")){
 			TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = TRUE AND " + Y + C + P  + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
-			//TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = TRUE AND" + Y + C + P  + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
 			return req.getResultList();
 		}else{
 			TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = FALSE AND " + Y + C + P  + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
-			//TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE SEXE = FALSE AND" + Y + C + P  + " SIGNALE = FALSE AND ATTENTE = FALSE", Donneur.class);
 			return req.getResultList();
 		}
 		
-	}
-	
-	
-	/**public Collection<Donneur> rechercher(String yeux, String cheveux,String peau,String am,String loisir){
-		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) + "AND CHEVEUX = " + Cheveux.toInteger(cheveux) + "AND PEAU = " + Peau.toInteger(peau)  + "AND ANTECEDENTS = " + AntecedentsMedicaux.toInteger(am)  + "AND LOISIRS = " + Loisirs.toInteger(loisir) + " AND SIGNALE = FALSE", Donneur.class);
-		return req.getResultList();
-	}*/
-
-	public Collection<Donneur> listerDonneurs(){
-		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p", Donneur.class);
-		return req.getResultList();
-	}
-	
-	public Collection<Donneur> listerDonneursDisponibles(){
-		List<Donneur> list = new ArrayList<Donneur>();
-		try {
-		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p where disponibilite = true and signale = false and attente = false", Donneur.class);
-		list = req.getResultList();
-		} catch (Exception e) {
-			
-		}
-		return list;
-	}
-	
-	public Donneur recupererDonneur(int idDonneur) {
-		Donneur d = em.find(Donneur.class,idDonneur);
-		return d;
-	}
-	
-	public Collection<Receveur> listerReceveurs(){
-		TypedQuery<Receveur> req = em.createQuery("select a from Receveur a", Receveur.class);
-		return req.getResultList();
-	}
-	
-	public Collection<Centre> listerCentres(){
-		TypedQuery<Centre> req = em.createQuery("select c from Centre c", Centre.class);
-		return req.getResultList();
-	}
-	
-
-	public Collection<Medecin> listerMedecins() {
-		TypedQuery<Medecin> req = em.createQuery("select m from Medecin m", Medecin.class);
-		return req.getResultList();
-	}
-
-
-	public void modifierStatu(String choix, String attente, int id) {
-		Donneur d = em.find(Donneur.class, id);
-		if (attente.equals("oui")) {
-			if (choix.equals("Oui")) {
-				d.setAttente(false);
-			} else {
-				em.remove(d);
-			}
-		} else {
-			if (choix.equals("Non")) {
-				d.setSignale(false);
-			} else {
-				em.remove(d);
-			}
-		}
-	}
-	
-	public void signalerDonneur(int id){
-		Donneur d = em.find(Donneur.class, id);
-		if(d.isSignale() == false){
-			d.setSignale(true);
-		}
-	}
-	
-	public void supprimerReceveur(int idR){
-		Receveur r = em.find(Receveur.class,idR);
-		em.remove(r);
-		
-	}
-	
-	
-	/** Methodes pour les centres 
-	 */
-	public Centre recupererCentre(int idCentre) {
-		Centre c = em.find(Centre.class, idCentre);
-		return c;
 	}
 	
 	public Collection<Centre> recupererCentre(String ville) {
@@ -281,15 +300,8 @@ public class Facade {
 		}
 		return centre;
 		
-		
-		
 	}
 	
-	
-	/**public Collection<Medecin> listerMedecinsCentre(int idCentre) {
-		TypedQuery<Medecin> req = em.createQuery("select m from Medecin m where OWNER_ID = " + idCentre, Medecin.class);
-		return req.getResultList();
-	}*/
 	
 	
 	public Collection<Donneur> donneursAttentes() {
@@ -302,64 +314,72 @@ public class Facade {
 		return req.getResultList();
 	}
 	
-	public Medecin recupererMedecin(int idMed) {
-		Medecin m = em.find(Medecin.class,idMed);
-		return m;
+
+	// METHODES POUR LISTER 
+	public Collection<Donneur> listerDonneurs(){
+		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p", Donneur.class);
+		return req.getResultList();
 	}
 	
-	public boolean nouveauRDV(int idMed, int heure, int jour, int mois, int idDon,boolean premierefois) {
-		boolean ok = false;
+	public Collection<Donneur> listerDonneursDisponiblesCentre(int id){
+		List<Donneur> list = new ArrayList<Donneur>();
 		try {
-			TypedQuery<RDV> req = em.createQuery("select r from RDV r where medecin = " + idMed + " and jour = " + jour + "and mois = " + mois + "and heure = " + heure, RDV.class);
-			RDV rdv = req.getSingleResult();
-		
+		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p where disponibilite = true and signale = false and attente = false and owner_id = " + id, Donneur.class);
+		list = req.getResultList();
 		} catch (Exception e) {
-			Medecin m = em.find(Medecin.class, idMed);
-			Donneur d = em.find(Donneur.class, idDon);
-			RDV r = new RDV(heure,jour,mois);
-			em.persist(r);
-			r.setDonneur(d);
-			r.setMedecin(m);
-			if (premierefois) {
-			d.setOwner(m.getOwner()); }
-			ok = true;
+			
 		}
-		
-		return ok;
+		return list;
 	}
 	
-	public Centre recupererCentreduMedecin(int idmed) {
-		return em.find(Medecin.class,idmed).getOwner();
+	public Collection<Donneur> listerDonneursDisponibles(){
+		List<Donneur> list = new ArrayList<Donneur>();
+		try {
+		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p where disponibilite = true and signale = false and attente = false ", Donneur.class);
+		list = req.getResultList();
+		} catch (Exception e) {
+			
+		}
+		return list;
+	}
+	
+	
+	public Collection<Receveur> listerReceveurs(){
+		TypedQuery<Receveur> req = em.createQuery("select a from Receveur a", Receveur.class);
+		return req.getResultList();
+	}
+	
+	public Collection<Centre> listerCentres(){
+		TypedQuery<Centre> req = em.createQuery("select c from Centre c", Centre.class);
+		return req.getResultList();
+	}
+	
+
+	public Collection<Medecin> listerMedecins() {
+		TypedQuery<Medecin> req = em.createQuery("select m from Medecin m", Medecin.class);
+		return req.getResultList();
 	}
 
-	public Centre recupererCentreduDonneur(int idd) {
-		return em.find(Donneur.class,idd).getOwner();
-	}
+
 	
-	
-	public void ajouterNotif(int idD, int idR) {
-		Donneur d = em.find(Donneur.class, idD);
-		Receveur r = em.find(Receveur.class, idR);
-		
-		Notification n = new Notification();
-		
-		em.persist(n);
-		n.setDonneur(d);
-		n.setReceveur(r);
-	}
-	
-	public Receveur recupererReceveur(int id) {
-		return em.find(Receveur.class, id);
-	}
-	
-	
-	public void modifierNotification(int idn, boolean accepter) {
-		Notification notif = em.find(Notification.class, idn);
-		if (accepter) {
-			notif.setStatu(Statu.ACCEPTE);
-		} else {
-			notif.setStatu(Statu.REFUSE);
+	// AUTRES
+	public void signalerDonneur(int id){
+		Donneur d = em.find(Donneur.class, id);
+		if(d.isSignale() == false){
+			d.setSignale(true);
 		}
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
 	
 }

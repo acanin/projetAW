@@ -37,6 +37,7 @@
     
 <% Donneur donneur =  (Donneur) request.getAttribute("donneur");
 boolean attente = (boolean) request.getAttribute("attente");
+boolean signale = (boolean) request.getAttribute("signale");
 String nom = donneur.getPrenom() + ' ' + donneur.getNom();
 String statut = null;
 String val = null;
@@ -44,9 +45,11 @@ String val = null;
 if (attente){
 	statut = "est en attente de confirmation par un administrateur.";
 	val = "oui";
-} else {
+} else if (signale) {
 	statut = "a été signalé par un de nos receveurs.";
 	val = "non";
+} else {
+	statut ="jjjj";
 }
 
 %>

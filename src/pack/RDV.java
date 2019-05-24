@@ -15,15 +15,7 @@ public class RDV {
 	private int heure;
 	private int jour;
 	private int mois;
-	//private Date date;
-	//
-	//@ManyToOne
-	//Centre owner;
-	
-	
-	//@ManyToOne
-	//Receveur receveur;
-	
+
 	@ManyToOne
 	Donneur donneur;
 	

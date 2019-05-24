@@ -312,10 +312,8 @@ public class Servlet extends HttpServlet {
 			session.setAttribute("id", id);
 			
 			// Passage de paramètres à la page suivante
-			//request.setAttribute("listedonneur", facade.listerDonneurs());
 			
 			// Passage à la page suivante
-			//request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 			request.setAttribute("rdvpris", false);
 			request.setAttribute("lc", facade.listerCentres());
 			request.setAttribute("centre", null);
@@ -342,7 +340,6 @@ public class Servlet extends HttpServlet {
 				request.setAttribute("donneur", facade.recupererDonneur(Integer.parseInt(id)));
 				request.getRequestDispatcher("profilDonneurSelectionne.jsp").forward(request, response);
 			}else if(button.equals("refaire")) {
-				//response.getWriter().append("Il faut pouvoir revenir sur la recherche");
 				request.getRequestDispatcher("recherchedonneur.jsp").forward(request, response);
 			}else{
 				response.getWriter().append("Probleme dans Servlet op = affDonneurSelect");
@@ -389,7 +386,6 @@ public class Servlet extends HttpServlet {
 			if(button.equals("centre")){
 				String id = request.getParameter("centreSelect");
 				request.setAttribute("centre", facade.recupererCentre(Integer.parseInt(id)));
-				//request.setAttribute("lm", facade.listerMedecinsCentre(Integer.parseInt(id)));
 				request.setAttribute("listedonneur", facade.listerDonneursDisponibles());
 				request.getRequestDispatcher("profilcentre.jsp").forward(request, response);
 				
@@ -404,7 +400,6 @@ public class Servlet extends HttpServlet {
 			if(button.equals("centre")){
 				String id = request.getParameter("centreSelect");
 				request.setAttribute("centre", facade.recupererCentre(Integer.parseInt(id)));
-				//request.setAttribute("lm", facade.listerMedecinsCentre(Integer.parseInt(id)));
 				request.setAttribute("listedonneur", facade.listerDonneursDisponibles());
 				request.getRequestDispatcher("profilcentre.jsp").forward(request, response);
 			}else if(button.equals("refaire")){
@@ -430,17 +425,25 @@ public class Servlet extends HttpServlet {
 				String id = request.getParameter("dattente");
 				request.setAttribute("donneur", facade.recupererDonneur(Integer.parseInt(id)));
 				request.setAttribute("attente", true);
+				request.setAttribute("signale", false);
 				request.getRequestDispatcher("adminProfilDonneur.jsp").forward(request, response);
 			} else if (button.equals("signale")) {
 				String id = request.getParameter("dsignale");
 				request.setAttribute("donneur", facade.recupererDonneur(Integer.parseInt(id)));
 				request.setAttribute("attente", false);
+				request.setAttribute("signale", true);
 				request.getRequestDispatcher("adminProfilDonneur.jsp").forward(request, response);		
 			} else if (button.equals("receveur")) {
 				String idr = request.getParameter("idr");
 				Receveur r = facade.recupererReceveur(Integer.parseInt(idr));
 				request.setAttribute("receveur", r);
 				request.getRequestDispatcher("adminProfilReceveur.jsp").forward(request, response);
+			} else {
+				String id = request.getParameter("idd");
+				request.setAttribute("donneur", facade.recupererDonneur(Integer.parseInt(id)));
+				request.setAttribute("attente", false);
+				request.setAttribute("signale", false);
+				request.getRequestDispatcher("adminProfilDonneur.jsp").forward(request, response);	
 			}
 			
 		} else if (op.equals("creationcentre")) {
@@ -471,8 +474,7 @@ public class Servlet extends HttpServlet {
 		} else if(op.equals("listeC")) {
 			String id = request.getParameter("centre");
 			request.setAttribute("centre", facade.recupererCentre(Integer.parseInt(id)));
-			//request.setAttribute("lm", facade.listerMedecinsCentre(Integer.parseInt(id)));
-			request.setAttribute("listedonneur", facade.listerDonneursDisponibles());
+			request.setAttribute("listedonneur", facade.listerDonneursDisponiblesCentre(Integer.parseInt(id)));
 			request.getRequestDispatcher("profilcentre.jsp").forward(request, response);
 		
 		} else if (op.equals("profilcentre")) {
@@ -519,15 +521,6 @@ public class Servlet extends HttpServlet {
 			int jour = Integer.parseInt(request.getParameter("jour"));
 			int mois = Integer.parseInt(request.getParameter("mois"));
 			String idDonneur = request.getParameter("donneur");
-			/**response.getWriter().append(med);
-			response.getWriter().append(heure);
-			response.getWriter().append(jour);
-			response.getWriter().append(mois);
-			response.getWriter().append(idDonneur);*/
-			//Centre c = facade.recupererCentreduMedecin(Integer.parseInt(med));
-			
-			//Donneur d = facade.recupererDonneur(Integer.parseInt(idDonneur));
-			//d.setOwner(c);
 			
 			boolean ok = facade.nouveauRDV(Integer.parseInt(med), heure, jour, mois, Integer.parseInt(idDonneur),true);
 			if (ok) {
@@ -592,7 +585,7 @@ public class Servlet extends HttpServlet {
 			
 
 		} else {
-			response.getWriter().append("Served at: ").append(request.getContextPath());
+			response.getWriter().append("ERREUR QUI NE DEVRAIT PAS EXISTER");
 		}
 		
 	}

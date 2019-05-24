@@ -27,15 +27,6 @@ public class Receveur implements ProfilUtilisateur {
 	Collection<Notification> notifs;
 
 	
-	/** Pour avoir une relation bidirectionnelle 
-	 * 1 centre avec plsr receveur
-	 * */
-	//@ManyToOne
-	//Centre owner; 
-	
-	//@OneToMany(mappedBy="receveur", fetch = FetchType.EAGER)
-	//RDV rdv;
-	
 	public Receveur(){		
 	}
 	
