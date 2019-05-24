@@ -61,7 +61,8 @@ if (attente){
 				 <h2>Profil du donneur <%= nom %></h2>
             </div>
             <div class="page_link">
-              <a href="Servlet?op=RetourAccueilAdmin"> Accueil</a>
+              <a href="Servlet?op=RetourAccueilAdmin"> Accueil</a><br>
+              <a href="index.html">Me déconnecter</a>
             </div>
           </div>
         </div>

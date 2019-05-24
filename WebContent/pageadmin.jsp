@@ -126,7 +126,7 @@
 		Collection<Donneur> ldonneur = (Collection<Donneur>) request.getAttribute("donneurs");
 
 		if (ldonneur.isEmpty()) { %> Il n'y a aucun donneur pour le moment. 
-		<% } else { %> Voici la liste des donneurs actuellement dans note base : <br>
+		<% } else { %> Voici la liste des donneurs actuellement dans notre base : <br>
 			<% for (Donneur ds : ldonneur) { 
 				String ss = ds.getPrenom() + ' ' + ds.getNom();
 				int ids = ds.getId(); %>

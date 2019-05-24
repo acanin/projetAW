@@ -75,7 +75,7 @@
 	<h3> Modifier mon adresse mail et mes identifiants de connexion </h3><br>
 	
 	<div class="form-group">
-	<input class="form-control" name="mail" type="text" placeholder="Mail"></div><br>
+	<input class="form-control" name="mail" type="text" placeholder="Pseudo"></div><br>
 	
 	<input class="form-control" name="mdp" type="text" placeholder="Mot de passe">
 	<br>
