@@ -49,8 +49,8 @@
               <h2>Profil du centre <%= nom %>  </h2>
             
             </div>
-            <div class="page_link">
-              <a href="index.html">Accueil</a>
+         	<div class="page_link">
+              <a href="index.html">Me déconnecter</a><br>
             </div>
           </div>
         </div>
@@ -69,16 +69,6 @@
 		
 
 	
-
-
-
-
-		<% if (centre.getNb_essais() != 0) {
-			int taux = centre.getNb_succes()/centre.getNb_essais();%>
-		
-		<p> A l'heure actuelle, nous avons un taux de réussite de <%= taux %> sur <%= centre.getNb_essais() %> essais. </p>
-		
-		<% } %>
 
 
 		Voici la liste des médecins travaillant chez nous : 
@@ -105,13 +95,10 @@
 			<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=personne&personneSelect=<%= id  %>">Donneur n°<%= id %></a> </li>
 			<%}%> 
 		
-<p>N'hésitez pas à prendre rendez-vous en ligne :</p>
+
 <% } %>
 
-<form action= "Servlet" method="post">
-	<% if (!(boolean)session.getAttribute("isAdmin")) { %> 
-	<input type="submit" class="main_btn" name="button" value="PrendreRDV">
-	<% } %>
+
 	
 	
 	<input type="hidden" name = "op" value="profilcentre">

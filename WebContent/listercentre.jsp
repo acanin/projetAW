@@ -44,7 +44,7 @@
             
             </div>
             <div class="page_link">
-              <a href="index.html">Accueil</a>
+              <a href="index.html">Me déconnecter</a><br>
             </div>
           </div>
         </div>

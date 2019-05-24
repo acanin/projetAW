@@ -18,8 +18,7 @@ public class Centre {
 	private String nom;
 	private String adresse;
 	private String ville;
-	private int nb_succes;
-	private int nb_essais;
+
 
 
 	@OneToMany(mappedBy="owner",fetch=FetchType.EAGER)
@@ -72,21 +71,6 @@ public class Centre {
 		this.ville = ville;
 	}
 
-	public int getNb_succes() {
-		return nb_succes;
-	}
-
-	public void setNb_succes(int nb_succes) {
-		this.nb_succes = nb_succes;
-	}
-
-	public int getNb_essais() {
-		return nb_essais;
-	}
-
-	public void setNb_essais(int nb_essais) {
-		this.nb_essais = nb_essais;
-	}
 
 	public int getId() {
 		return id;
@@ -104,13 +88,6 @@ public class Centre {
 		this.listedonneur = listedonneur;
 	}
 
-	/**public Collection<Receveur> getListereceveur() {
-		return listereceveur;
-	}
-
-	public void setListereceveur(Collection<Receveur> listereceveur) {
-		this.listereceveur = listereceveur;
-	}*/
 
 	public Collection<Medecin> getListemedecin() {
 		return listemedecin;

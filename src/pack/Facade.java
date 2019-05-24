@@ -248,6 +248,11 @@ public class Facade {
 		}
 	}
 	
+	public void supprimerReceveur(int idR){
+		Receveur r = em.find(Receveur.class,idR);
+		em.remove(r);
+		
+	}
 	
 	
 	/** Methodes pour les centres 

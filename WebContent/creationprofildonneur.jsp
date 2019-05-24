@@ -66,7 +66,7 @@
         <div class="row">
 		<div class="col-sm-6">
     	 	<div class="form-group">
-          	 <input class="form-control" name="taille" type="number" min="100" max="220" placeholder="Taille (cm)" required>
+          	 <input class="form-control" name="taille" type="number" min="50" max="220" placeholder="Taille (cm)" required>
         	</div>          
      	</div>
               
