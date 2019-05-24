@@ -49,7 +49,7 @@ if (attente){
 	statut = "a été signalé par un de nos receveurs.";
 	val = "non";
 } else {
-	statut ="jjjj";
+	statut ="est disponible.";
 }
 
 %>
