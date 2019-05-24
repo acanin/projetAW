@@ -10,15 +10,16 @@
 
 <h4> Notifications </h4>
 
+	<form action= "Servlet" method="post">
+
 <%boolean isDonneur = (boolean) request.getAttribute("isDonneur"); 
 if (isDonneur) {
 	Donneur donneur = (Donneur) request.getAttribute("personne");
 	for (Notification notif : donneur.getNotifs()) {
 		String s = "n° " + notif.getId() + ": Statut - " + Statu.toString(notif.getStatu());
 		%>
-		<p> <%= s %> </p>
 		<% if (notif.getStatu() == Statu.ATTENTE) { %>
-			<li> <a href="Servlet?op=notifDonneur&idReceveur=<%= notif.getReceveur().getId()%>"> <%= s %>  </a> </li>
+			<li> <a href="Servlet?op=notifDonneur&idReceveur=<%= notif.getReceveur().getId()%>&idnotif=<%= notif.getId()%>"> <%= s %>  </a> </li>
 		<%} else {%>
 			<p> <%= s %> </p>
 		<%} %>
@@ -31,13 +32,13 @@ if (isDonneur) {
 	for (Notification notif : receveur.getNotifs()) {
 		String s = "n° " + notif.getId() + ": Statut - " + Statu.toString(notif.getStatu());
 		%>
-		<p> <%= s %> </p>
-	<%} %>
+		<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=personne&personneSelect=<%= notif.getDonneur().getId()%>"> <%= s %></a> </li>
+ 	<%} %>
 <%} %>
 
 
 
-
+</form>
 
 </body>
 </html>

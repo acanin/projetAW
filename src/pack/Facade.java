@@ -181,7 +181,10 @@ public class Facade {
 	}
 	
 	
-
+	/**public Collection<Donneur> rechercher(String yeux, String cheveux,String peau,String am,String loisir){
+		TypedQuery<Donneur> req = em.createQuery("SELECT d FROM Donneur d WHERE YEUX = " + Yeux.toInteger(yeux) + "AND CHEVEUX = " + Cheveux.toInteger(cheveux) + "AND PEAU = " + Peau.toInteger(peau)  + "AND ANTECEDENTS = " + AntecedentsMedicaux.toInteger(am)  + "AND LOISIRS = " + Loisirs.toInteger(loisir) + " AND SIGNALE = FALSE", Donneur.class);
+		return req.getResultList();
+	}*/
 
 	public Collection<Donneur> listerDonneurs(){
 		TypedQuery<Donneur> req = em.createQuery("select p from Donneur p", Donneur.class);
@@ -202,11 +205,6 @@ public class Facade {
 	public Donneur recupererDonneur(int idDonneur) {
 		Donneur d = em.find(Donneur.class,idDonneur);
 		return d;
-	}
-	
-	public Receveur recupererReceveur(int idReceveur) {
-		Receveur r = em.find(Receveur.class,idReceveur);
-		return r;
 	}
 	
 	public Collection<Receveur> listerReceveurs(){
@@ -347,6 +345,16 @@ public class Facade {
 	
 	public Receveur recupererReceveur(int id) {
 		return em.find(Receveur.class, id);
+	}
+	
+	
+	public void modifierNotification(int idn, boolean accepter) {
+		Notification notif = em.find(Notification.class, idn);
+		if (accepter) {
+			notif.setStatu(Statu.ACCEPTE);
+		} else {
+			notif.setStatu(Statu.REFUSE);
+		}
 	}
 	
 }

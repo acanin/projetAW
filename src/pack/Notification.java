@@ -19,7 +19,6 @@ public class Notification {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	String text = "Aucun message supplémentaire";
 	
 	Statu statu = Statu.ATTENTE;
 	
@@ -31,9 +30,6 @@ public class Notification {
 	
 	public Notification(){}
 	
-	public Notification(String t) {
-		this.text = t;
-	}
 
 	public int getId() {
 		return id;
@@ -41,14 +37,6 @@ public class Notification {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
 	}
 
 	public Donneur getDonneur() {

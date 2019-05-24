@@ -544,6 +544,25 @@ public class Servlet extends HttpServlet {
 				request.setAttribute("centre", c);
 				request.getRequestDispatcher("prendreRDV.jsp").forward(request, response);
 			}
+		} else if (op.equals("notifDonneur")) {
+			String idR = request.getParameter("idReceveur");
+			String idn = request.getParameter("idnotif");
+			request.setAttribute("receveur", facade.recupererReceveur(Integer.parseInt(idR)));
+			request.setAttribute("idn", idn);
+			request.getRequestDispatcher("receveur.jsp").forward(request, response);
+			
+		} else if (op.equals("profilreceveur")) {
+			String accepter = request.getParameter("accepter");
+			String idn = request.getParameter("idnotif");
+			int idd = Integer.parseInt(request.getParameter("idd"));
+			facade.modifierNotification(Integer.parseInt(idn),accepter.equals("Oui"));
+			
+			request.setAttribute("isDonneur", true);
+			request.setAttribute("personne", facade.recupererDonneur(idd));
+			
+			request.getRequestDispatcher("notif.jsp").forward(request, response);
+			
+			
 			
 		} else if(op.equals("RetourAccueilAdmin")) {
 			// Parametres de la page de l'admin
