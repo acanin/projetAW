@@ -95,15 +95,15 @@ if (attente){
 			
 			
 			<h5><label for="confirmation">Confirmer l'ajout au site :
-						</label><input type="radio" name= "confirmation" value = "Oui"> Oui
-								<input type="radio" name= "confirmation" value = "Non"> Non 
+						</label><input type="radio" name= "confirmation" value = "Oui" required> Oui
+								<input type="radio" name= "confirmation" value = "Non" required> Non 
 			
 			
 			<%} else {%>
 			
 			<label for="confirmation">Supprimer du site :
-						</label><input type="radio" name= "confirmation" value = "Oui"> Oui
-								<input type="radio" name= "confirmation" value = "Non"> Non 
+						</label><input type="radio" name= "confirmation" value = "Oui" required> Oui
+								<input type="radio" name= "confirmation" value = "Non" required> Non 
 			
 			<%} %>
 			</h5><br>
