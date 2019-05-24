@@ -464,14 +464,10 @@ public class Servlet extends HttpServlet {
 		
 		} else if (op.equals("profilcentre")) {
 			String button = request.getParameter("button");
-			if (button.equals("PrendreRDV")) {
-				String idc = request.getParameter("idc");
-				response.getWriter().append("RDV " + idc);
-			} else {
-				String id = request.getParameter("medecin");
-				request.setAttribute("med", facade.recupererMedecin(Integer.parseInt(id)));
-				request.getRequestDispatcher("profilmedecin.jsp").forward(request, response);
-			}
+			String id = request.getParameter("medecin");
+			request.setAttribute("med", facade.recupererMedecin(Integer.parseInt(id)));
+			request.getRequestDispatcher("profilmedecin.jsp").forward(request, response);
+			
 			
 		} else if (op.equals("Confirmer/Supprimer")) {
 			String choix = request.getParameter("confirmation");

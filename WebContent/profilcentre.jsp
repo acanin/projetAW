@@ -105,13 +105,10 @@
 			<li> <a href="Servlet?op=afficherDonneurSelectionne&choix=personne&personneSelect=<%= id  %>">Donneur n°<%= id %></a> </li>
 			<%}%> 
 		
-<p>N'hésitez pas à prendre rendez-vous en ligne :</p>
+
 <% } %>
 
-<form action= "Servlet" method="post">
-	<% if (!(boolean)session.getAttribute("isAdmin")) { %> 
-	<input type="submit" class="main_btn" name="button" value="PrendreRDV">
-	<% } %>
+
 	
 	
 	<input type="hidden" name = "op" value="profilcentre">
