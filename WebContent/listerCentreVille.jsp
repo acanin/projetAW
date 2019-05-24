@@ -24,9 +24,6 @@
                 <div class="container">
                     
                     <a class="navbar-brand logo_h" href="index.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
-                    
-                    
-               
                 </div>
             </nav>
         </div>
@@ -45,8 +42,9 @@
               <h2>Résultats de la recherche</h2>
             
             </div>
-            <div class="page_link">
-              <a href="index.html">Accueil</a>
+           <div class="page_link">
+              <a href="Servlet?op=profildonneurselectionne&choix=Accueil"> Accueil </a>
+              <a href="index.html">Me déconnecter</a><br>
             </div>
           </div>
         </div>
@@ -56,39 +54,22 @@
 
 <!-- ================Affichage résultats section start ================= -->
   <section class="contact-section area-padding">
-    <div class="container">
+    <div class="container">   <div class="col-12">
     
-        <div class="col-12">
-          <h2 class="contact-title">Voici les centres :  </h2>
-        </div>
-  
-	 <br><br><br>
-	
-	<form action= "Servlet" method="post">
-	
-	 <br>
-	
-	<ul>
-		
-	<%Collection<Centre> lc = (Collection<Centre>)request.getAttribute("listeCentre");
+    <%Collection<Centre> lc = (Collection<Centre>)request.getAttribute("listeCentre");
 	for (Centre c : lc){
 		int id = c.getId();%>
-		<li> <a href="Servlet?op=listerCentreVille&choix=centre&centreSelect=<%= id  %>"><%= c.getNom() %></a> </li>
+		<h2 class="contact-title">Voici le centre trouvé :
+		<a href="Servlet?op=listerCentreVille&choix=centre&centreSelect=<%= id  %>">Centre <%= c.getNom() %></a></h2> <br>
 	
 	<%}
 	if(lc.size() == 0){%>
-		<p>Il n'y a pas de centre dans cette ville. </p>
-		<p>Verifiez que vous avez bien écrit le nom de la ville.</p>
-		<li> <a href="Servlet?op=listerCentreVille&choix=refaire"><%= "Refaire une recheche" %></a> </li>
+		<h4>Il n'y a pas de centre dans cette ville, vérifiez que vous avez bien écrit le nom de la ville.</h4> <br>
+	    <a href="Servlet?op=listerCentreVille&choix=refaire"><%= "Refaire une recherche" %></a>
 	<%} %>
 	
 	
-	
-	
-	
-	</form>
-	
-	
+	</div>
 	
 </div>
 </section>

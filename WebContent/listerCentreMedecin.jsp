@@ -24,9 +24,7 @@
                 <div class="container">
                     
                     <a class="navbar-brand logo_h" href="index.html"><img src="medcare/img/logo.png" alt="" height = 150></a>
-                    
-                    
-               
+
                 </div>
             </nav>
         </div>
@@ -42,11 +40,12 @@
             class="banner_content d-md-flex justify-content-between align-items-center"
           >
             <div class="mb-3 mb-md-0">
-              <h2>Résultats de la recherche</h2>
+              <h2>Résultat de la recherche</h2>
             
             </div>
             <div class="page_link">
-              <a href="index.html">Accueil</a>
+              <a href="Servlet?op=profildonneurselectionne&choix=Accueil"> Accueil </a>
+              <a href="index.html">Me déconnecter</a><br>
             </div>
           </div>
         </div>
@@ -56,38 +55,30 @@
 
 <!-- ================Affichage résultats section start ================= -->
   <section class="contact-section area-padding">
-    <div class="container">
+    <div class="container">   <div class="col-12">
     
-        <div class="col-12">
-          <h2 class="contact-title">Voici les centres :  </h2>
-        </div>
-  
-	 <br><br><br>
-	
-	<form action= "Servlet" method="post">
-	
-	 <br>
-	
-	<ul>
-		
-	<%Centre c = (Centre)request.getAttribute("centre");
-	if(c==null){%>
-		Ce medecin n'existe pas dans notre base de données, vérifiez l'orthographe du médecin.
-		<li> <a href="Servlet?op=listerCentreMedecin&choix=refaire"><%= "Refaire une recheche" %></a> </li>
-	
-	<%} else {
-		int id = c.getId();%>
-		<li> <a href="Servlet?op=listerCentreMedecin&choix=centre&centreSelect=<%= id  %>"><%= c.getNom() %></a> </li>
-	
-	<%} %>
-	
-	
+    	<%Centre c = (Centre)request.getAttribute("centre");
+			if(c==null){%>
+			
+			<h4>Ce médecin n'existe pas dans notre base de données, veuiller vérifier l'orthographe du nom entré.</h4>
+		 	<a href="Servlet?op=listerCentreMedecin&choix=refaire"><%= "Refaire une recheche" %></a>
+			
+     <%} else {
+     		int id = c.getId(); %>
 
+			<form action= "Servlet" method="post">
+		
+			
+	  		<h2 class="contact-title">Voici le centre trouvé :  
+			
+			<a href="Servlet?op=listerCentreMedecin&choix=centre&centreSelect=<%= id  %>">Centre <%= c.getNom() %></a></h2> <br>
+			
+			<a href="Servlet?op=listerCentreMedecin&choix=refaire"><%= "Refaire une recherche" %></a>
+			</form>
+		<% }%>
 	
 	
-	</form>
-	
-	
+	</div>
 	
 </div>
 </section>

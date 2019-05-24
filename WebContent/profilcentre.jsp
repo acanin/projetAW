@@ -49,8 +49,8 @@
               <h2>Profil du centre <%= nom %>  </h2>
             
             </div>
-            <div class="page_link">
-              <a href="index.html">Accueil</a>
+         	<div class="page_link">
+              <a href="index.html">Me déconnecter</a><br>
             </div>
           </div>
         </div>
