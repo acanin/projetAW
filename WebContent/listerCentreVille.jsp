@@ -43,7 +43,7 @@
             
             </div>
            <div class="page_link">
-              <a href="Servlet?op=profildonneurselectionne&choix=Accueil"> Accueil </a>
+              <a href="Servlet?op=profildonneurselectionne&choix=Accueil"> Accueil </a><br>
               <a href="index.html">Me déconnecter</a><br>
             </div>
           </div>
@@ -55,18 +55,22 @@
 <!-- ================Affichage résultats section start ================= -->
   <section class="contact-section area-padding">
     <div class="container">   <div class="col-12">
-    
-    <%Collection<Centre> lc = (Collection<Centre>)request.getAttribute("listeCentre");
-	for (Centre c : lc){
-		int id = c.getId();%>
-		<h2 class="contact-title">Voici le centre trouvé :
-		<a href="Servlet?op=listerCentreVille&choix=centre&centreSelect=<%= id  %>">Centre <%= c.getNom() %></a></h2> <br>
+
 	
-	<%}
-	if(lc.size() == 0){%>
+    <%Collection<Centre> lc = (Collection<Centre>)request.getAttribute("listeCentre");
+    if(lc.size() == 0){%>
 		<h4>Il n'y a pas de centre dans cette ville, vérifiez que vous avez bien écrit le nom de la ville.</h4> <br>
 	    <a href="Servlet?op=listerCentreVille&choix=refaire"><%= "Refaire une recherche" %></a>
-	<%} %>
+	<%} else { %>
+			<h2 class="contact-title"> Voici les centres trouvés :</h2>
+			<%for (Centre c : lc){
+				int id = c.getId();%>
+				 
+				<h4><a href="Servlet?op=listerCentreVille&choix=centre&centreSelect=<%= id  %>">Centre <%= c.getNom() %></a> </h4>
+			
+	<%		}
+	}%>
+	
 	
 	
 	</div>

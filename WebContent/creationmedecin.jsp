@@ -70,8 +70,8 @@
                   <input class="form-control" name="nom" type="text" placeholder="Nom" required>
                 </div></div></div>
   <br><br>            
-<label for="sexe">Sexe : </label><br><input type="radio" name= "sexe" value = "Femme"> Femme
-							    <input type="radio" name= "sexe" value = "Homme"> Homme
+<label for="sexe">Sexe : </label><br><input type="radio" name= "sexe" value = "Femme" required> Femme
+							    <input type="radio" name= "sexe" value = "Homme" required> Homme
 
 <br><br>
 <p> Spécialisation : </p>
@@ -79,7 +79,7 @@
 	for (Specialite sp : Specialite.allspe) {
 	String spe = Specialite.toString(sp);
 	%>
-	<input type = "radio" name="specialite" value = <%= spe %>> <%= spe %>
+	<input type = "radio" name="specialite" value = <%= spe %> required> <%= spe %>
 <% } %>
 <br><br>
 <p> Centre associé :</p>
@@ -88,7 +88,7 @@
 		int id = c.getId();
 		String s = c.getNom() + " à " + c.getVille();
 		%>
-		<input type = "radio" name="idcentre" value = <%= id %>> <%= s %>
+		<input type = "radio" name="idcentre" value = <%= id %> required> <%= s %>
 	<% } %>
 	
 <br><br>
