@@ -343,4 +343,8 @@ public class Facade {
 		n.setReceveur(r);
 	}
 	
+	public Receveur recupererReceveur(int id) {
+		return em.find(Receveur.class, id);
+	}
+	
 }

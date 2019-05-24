@@ -172,7 +172,20 @@ public class Servlet extends HttpServlet {
 					int id = Integer.parseInt(request.getParameter("id"));
 					Donneur d = facade.recupererDonneur(id);
 					request.setAttribute("donneur",d );
-					request.getRequestDispatcher("VoirRDV.jsp").forward(request, response);	
+					request.getRequestDispatcher("VoirRDV.jsp").forward(request, response);
+				} else if (button.equals("Voir mes notifications")) {
+					int id = Integer.parseInt(request.getParameter("id"));
+					Donneur d = facade.recupererDonneur(id);
+					request.setAttribute("personne",d );
+					request.setAttribute("isDonneur", true);
+					request.getRequestDispatcher("notif.jsp").forward(request, response);
+					
+				} else if (button.equals("Statut de mes notifications")) {
+					int id = Integer.parseInt(request.getParameter("id"));
+					Receveur r = facade.recupererReceveur(id);
+					request.setAttribute("personne", r);
+					request.setAttribute("isDonneur", false);
+					request.getRequestDispatcher("notif.jsp").forward(request, response);
 
 				} else {
 					request.getRequestDispatcher("moncompte.jsp").forward(request, response);

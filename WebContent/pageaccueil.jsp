@@ -86,10 +86,15 @@
 		<br><br>
 		<% if (! isDonneur ) { %>
 			<input type="submit" class = "main_btn" name="choix" value="Rechercher Donneur">
+			
+			<input type="submit" class = "main_btn" name="choix" value="Statut de mes notifications">
+			
 		<%} else {%>
 			<input type="submit" class = "main_btn" name="choix" value="Prendre RDV">
 			
 			<input type="submit" class = "main_btn" name="choix" value="Voir mes RDV">
+			
+			<input type="submit" class = "main_btn" name="choix" value="Voir mes notifications">
 			<% } %>
 			<input type="submit" class = "main_btn" name="choix" value="Rechercher Centre">
 			
