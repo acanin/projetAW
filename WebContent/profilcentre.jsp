@@ -71,16 +71,6 @@
 	
 
 
-
-
-		<% if (centre.getNb_essais() != 0) {
-			int taux = centre.getNb_succes()/centre.getNb_essais();%>
-		
-		<p> A l'heure actuelle, nous avons un taux de réussite de <%= taux %> sur <%= centre.getNb_essais() %> essais. </p>
-		
-		<% } %>
-
-
 		Voici la liste des médecins travaillant chez nous : 
 		<ul>
 		<%	//Collection<Medecin> lm = (Collection<Medecin>) request.getAttribute("lm");
