@@ -329,16 +329,19 @@ public class Servlet extends HttpServlet {
 			
 		} else if (op.equals("profildonneurselectionne")){	
 			String button = request.getParameter("choix");
-			String idsignale = request.getParameter("idsignale");
+			String iddonneur = request.getParameter("iddonneur");
+			String idreceveur = request.getParameter("idreceveur");
 			if(button.equals("Signaler")){
-				facade.signalerDonneur(Integer.parseInt(idsignale));
-				request.setAttribute("donneurS", facade.recupererDonneur(Integer.parseInt(idsignale)));
+				facade.signalerDonneur(Integer.parseInt(iddonneur));
+				request.setAttribute("donneurS", facade.recupererDonneur(Integer.parseInt(iddonneur)));
 				request.getRequestDispatcher("personneSignale.jsp").forward(request, response);
 			}else if (button.equals("Accueil")){
 				request.setAttribute("listedonneur", facade.listerDonneursDisponibles());
 				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 			} else {
-				response.getWriter().append("Page rdv à faire ");
+				facade.ajouterNotif(Integer.parseInt(iddonneur), Integer.parseInt(idreceveur));
+				request.setAttribute("listedonneur", facade.listerDonneursDisponibles());
+				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
 			}
 			
 			

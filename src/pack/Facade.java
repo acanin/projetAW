@@ -331,4 +331,16 @@ public class Facade {
 		return em.find(Donneur.class,idd).getOwner();
 	}
 	
+	
+	public void ajouterNotif(int idD, int idR) {
+		Donneur d = em.find(Donneur.class, idD);
+		Receveur r = em.find(Receveur.class, idR);
+		
+		Notification n = new Notification();
+		
+		em.persist(n);
+		n.setDonneur(d);
+		n.setReceveur(r);
+	}
+	
 }

@@ -1,5 +1,7 @@
 package pack;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,6 +24,8 @@ public class Receveur implements ProfilUtilisateur {
 	private int nbSucces;
 	private int nbEchecs;
 	
+	@OneToMany(mappedBy = "receveur", fetch = FetchType.EAGER)
+	Collection<Notification> notifs;
 
 	
 	/** Pour avoir une relation bidirectionnelle 
@@ -96,15 +100,6 @@ public class Receveur implements ProfilUtilisateur {
 		this.sexe = sexe;
 	}
 
-
-	/**public Centre getOwner() {
-		return owner;
-	}
-
-
-	public void setOwner(Centre owner) {
-		this.owner = owner;
-	}*/
 	public int getNbSucces() {
 		return nbSucces;
 	}
@@ -119,15 +114,14 @@ public class Receveur implements ProfilUtilisateur {
 	}
 
 
-	/**public RDV getRdv() {
-		return rdv;
+	public Collection<Notification> getNotifs() {
+		return notifs;
 	}
 
 
-	public void setRdv(RDV rdv) {
-		this.rdv = rdv;
-	}*/
-
+	public void setNotifs(Collection<Notification> notifs) {
+		this.notifs = notifs;
+	}
 
 	
 	

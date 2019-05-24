@@ -47,7 +47,6 @@
 			Boolean dispo = donneur.isDisponibilite();
 			Boolean enAttente = donneur.isAttente();
 			Boolean signale = donneur.isSignale();
-			//int taux = 100;//centre.getNb_succes()/centre.getNb_essais();
 			%>
  
  <!--================Home Banner Area =================-->
@@ -104,11 +103,12 @@
             <%} %>
             
         <br><br>
-        <input type="submit" class="genric-btn info radius" name="choix" value="Prendre rdv">
+        <input type="submit" class="genric-btn info radius" name="choix" value="Notifier">
 		<input type="submit" class="genric-btn danger radius" name="choix" value="Signaler">
 		<input type="submit" class="genric-btn default radius" name="choix" value="Accueil">
 		<input type="hidden" name = "op" value="profildonneurselectionne">
-		<input type="hidden" name = "idsignale" value = <%= Integer.toString(id)  %>> 
+		<input type="hidden" name = "iddonneur" value = <%= Integer.toString(id)  %>> 
+		<input type="hidden" name = "idreceveur" value = <%= session.getAttribute("id")  %>> 
 		      </div>
 			</form>
             

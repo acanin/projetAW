@@ -49,6 +49,12 @@ public class Donneur implements ProfilUtilisateur {
 	@OneToMany(mappedBy="donneur", fetch = FetchType.EAGER)
 	Collection<RDV> rdv;
 	
+	@OneToMany(mappedBy="donneur", fetch = FetchType.EAGER)
+	Collection<Notification> notifs;
+	
+	public Donneur(){
+		
+	}
 	
 	public Donneur(String n, String p, int a, int t, int po, boolean s, boolean dispo,Yeux y,Cheveux c,Peau peau,Loisirs l, AntecedentsMedicaux am){
 		this.nom = n;
@@ -123,9 +129,6 @@ public class Donneur implements ProfilUtilisateur {
 		this.antecedents = antecedents;
 	}
 
-	public Donneur(){
-		
-	}
 
 	public int getId() {
 		return id;
@@ -207,9 +210,13 @@ public class Donneur implements ProfilUtilisateur {
 		this.rdv = rdv;
 	}
 
+	public Collection<Notification> getNotifs() {
+		return notifs;
+	}
 
-	
-	
+	public void setNotifs(Collection<Notification> notifs) {
+		this.notifs = notifs;
+	}
 		
 	
 }
