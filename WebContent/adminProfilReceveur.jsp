@@ -13,11 +13,17 @@
   String nom = r.getNom();
   String prenom = r.getPrenom();
   int age = r.getAge();%>
+  
+  <p>Nom : <%= nom %></p>
+  <p>Prenom : <%= prenom %></p>
+  <p>Age : <%= age %></p>
+  
 
 
 <p><input type="submit" name="choix" value="Supprimer"></p>
 <p><input type="submit" name="choix" value="Retour"></p>
 <input type="hidden" name = "op" value = "adminProfilReceveur"> 
+<input type="hidden" name = "idReceveur" value="<%=r.getId()%>">
 
 
 </form> 

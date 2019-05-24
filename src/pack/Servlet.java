@@ -427,7 +427,7 @@ public class Servlet extends HttpServlet {
 				String idr = request.getParameter("idr");
 				Receveur r = facade.recupererReceveur(Integer.parseInt(idr));
 				request.setAttribute("receveur", r);
-				request.getRequestDispatcher("adminProfilDonneur.jsp").forward(request, response);
+				request.getRequestDispatcher("adminProfilReceveur.jsp").forward(request, response);
 			}
 			
 		} else if (op.equals("creationcentre")) {
@@ -484,6 +484,25 @@ public class Servlet extends HttpServlet {
 			request.setAttribute("donneurs", facade.listerDonneurs());
 			request.setAttribute("receveurs", facade.listerReceveurs());
 			request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
+			
+		} else if (op.equals("adminProfilReceveur")){
+			String button = request.getParameter("choix");
+			if(button.equals("Retour")){
+				request.setAttribute("donneurattente", facade.donneursAttentes());
+				request.setAttribute("donneursignale", facade.donneursSignales());
+				request.setAttribute("donneurs", facade.listerDonneurs());
+				request.setAttribute("receveurs", facade.listerReceveurs());
+				request.getRequestDispatcher("pageadmin.jsp").forward(request, response);	
+			} else{
+				String idr = request.getParameter("idReceveur");
+				facade.supprimerReceveur(Integer.parseInt(idr));
+				request.setAttribute("donneurattente", facade.donneursAttentes());
+				request.setAttribute("donneursignale", facade.donneursSignales());
+				request.setAttribute("donneurs", facade.listerDonneurs());
+				request.setAttribute("receveurs", facade.listerReceveurs());
+				request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
+			}
+			
 			
 		} else if(op.equals("ValiderRDV1")) {
 			String med = request.getParameter("medecin");
