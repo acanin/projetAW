@@ -95,8 +95,8 @@
             	Peau : <%= peau %><br>
             	Antécédents médicaux : <%= am %><br>
             	Loisirs : <%= loisir %><br>
-            	Ville : ???
-      
+            	Ville : <%= donneur.getOwner().getVille() %>
+            	
             	
             <% } else {%>
             	Cette personne n'est actuellement pas disponible.

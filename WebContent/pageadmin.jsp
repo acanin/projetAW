@@ -116,6 +116,46 @@
 			<% }} %>
 		
 		
+		</ul>
+		<br><br><br><br><br>
+		
+		          <h4 class="contact-title">Donneurs : </h4>
+		        
+		<ul>
+		<%
+		Collection<Donneur> ldonneur = (Collection<Donneur>) request.getAttribute("donneurs");
+
+		if (ldonneur.isEmpty()) { %> Il n'y a aucun donneur pour le moment. 
+		<% } else { %> Voici la liste des donneurs actuellement dans note base : <br>
+			<% for (Donneur ds : ldonneur) { 
+				String ss = ds.getPrenom() + ' ' + ds.getNom();
+				int ids = ds.getId(); %>
+				
+				<li> <a href="Servlet?op=admin&adminbutton=donneur&idd=<%= ids%>"> <%= ss %>  </a> </li>
+			
+			<% }} %>
+		
+		
+		</ul>
+		<br><br><br><br><br>
+		
+		          <h4 class="contact-title">Receveurs : </h4>
+		        
+		<ul>
+		<%
+		Collection<Receveur> lreceveur = (Collection<Receveur>) request.getAttribute("receveurs");
+
+		if (lreceveur.isEmpty()) { %> Il n'y a aucun receveur pour le moment. 
+		<% } else { %> Voici la liste des receveur dans notre base : <br>
+			<% for (Receveur ds : lreceveur) { 
+				String ss = ds.getPrenom() + ' ' + ds.getNom();
+				int ids = ds.getId(); %>
+				
+				<li> <a href="Servlet?op=admin&adminbutton=receveur&idr=<%= ids%>"> <%= ss %>  </a> </li>
+			
+			<% }} %>
+		
+		
 		</ul></div>
 </div></section>
 
