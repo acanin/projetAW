@@ -150,14 +150,12 @@ public class Servlet extends HttpServlet {
 			
 		} else if (op.equals("pageaccueil")) {	
 			String button = request.getParameter("choix");
-			
 			// Obtention de donnees depuis la session
 			HttpSession session = request.getSession(false); // on ne crée pas de nouvelle session !
 			if (session != null) {
 				// Affichage du nombre de donneur
 				if (button.equals("Rechercher Donneur")) {
 					request.getRequestDispatcher("recherchedonneur.jsp").forward(request, response);
-
 				}else if (button.equals("Rechercher Centre")) {
 					request.getRequestDispatcher("recherchecentre.jsp").forward(request, response);
 				} else if (button.equals("Liste de nos centres")) {
@@ -166,12 +164,15 @@ public class Servlet extends HttpServlet {
 				} else if (button.equals("Prendre RDV")) {
 					int id = Integer.parseInt(request.getParameter("id"));
 					Centre c = facade.recupererCentreduDonneur(id);
-					
 					request.setAttribute("rdvpris", false);
 					request.setAttribute("lc", facade.listerCentres());
 					request.setAttribute("centre", c);
 					request.getRequestDispatcher("prendreRDV.jsp").forward(request, response);
-					
+				} else if (button.equals("Voir mes RDV")) {
+					int id = Integer.parseInt(request.getParameter("id"));
+					Donneur d = facade.recupererDonneur(id);
+					request.setAttribute("donneur",d );
+					request.getRequestDispatcher("VoirRDV.jsp").forward(request, response);	
 
 				} else {
 					request.getRequestDispatcher("moncompte.jsp").forward(request, response);
@@ -181,9 +182,15 @@ public class Servlet extends HttpServlet {
 
 				response.getWriter().append("Vous n'êtes pas connecté(e).");
 			}
+			
+		} else if (op.equals("voirRDV")) {
+			String button = request.getParameter("choix");
+			// On recupere les carateristiques recherchees 
+			if(button.equals("Retour")){
+				request.setAttribute("listedonneur", facade.listerDonneursDisponibles());
+				request.getRequestDispatcher("pageaccueil.jsp").forward(request, response);
+			}
 
-		
-		
 		} else if (op.equals("modifierMonCompte")) {
 			HttpSession s = request.getSession(false);
 
