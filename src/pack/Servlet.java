@@ -70,7 +70,8 @@ public class Servlet extends HttpServlet {
 					// Parametres de la page de l'admin
 					request.setAttribute("donneurattente", facade.donneursAttentes());
 					request.setAttribute("donneursignale", facade.donneursSignales());
-					
+					request.setAttribute("donneurs", facade.listerDonneurs());
+					request.setAttribute("receveurs", facade.listerReceveurs());
 					// Goto page admin
 					request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
 				} else {
@@ -421,6 +422,11 @@ public class Servlet extends HttpServlet {
 				String id = request.getParameter("dsignale");
 				request.setAttribute("donneur", facade.recupererDonneur(Integer.parseInt(id)));
 				request.setAttribute("attente", false);
+				request.getRequestDispatcher("adminProfilDonneur.jsp").forward(request, response);		
+			} else if (button.equals("receveur")) {
+				String idr = request.getParameter("idr");
+				Receveur r = facade.recupererReceveur(Integer.parseInt(idr));
+				request.setAttribute("receveur", r);
 				request.getRequestDispatcher("adminProfilDonneur.jsp").forward(request, response);
 			}
 			
@@ -431,6 +437,8 @@ public class Servlet extends HttpServlet {
 			facade.ajoutCentre(nom, adresse, ville);
 			request.setAttribute("donneurattente", facade.donneursAttentes());
 			request.setAttribute("donneursignale", facade.donneursSignales());
+			request.setAttribute("donneurs", facade.listerDonneurs());
+			request.setAttribute("receveurs", facade.listerReceveurs());
 			request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
 			
 			
@@ -443,6 +451,8 @@ public class Servlet extends HttpServlet {
 			facade.ajoutMedecin(nom, Specialite.toCaracteristiques(spe),Integer.parseInt(idc),sexe);
 			request.setAttribute("donneurattente", facade.donneursAttentes());
 			request.setAttribute("donneursignale", facade.donneursSignales());
+			request.setAttribute("donneurs", facade.listerDonneurs());
+			request.setAttribute("receveurs", facade.listerReceveurs());
 			request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
 			
 		} else if(op.equals("listeC")) {
@@ -471,6 +481,8 @@ public class Servlet extends HttpServlet {
 			facade.modifierStatu(choix, attente,Integer.parseInt(id));
 			request.setAttribute("donneurattente", facade.donneursAttentes());
 			request.setAttribute("donneursignale", facade.donneursSignales());
+			request.setAttribute("donneurs", facade.listerDonneurs());
+			request.setAttribute("receveurs", facade.listerReceveurs());
 			request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
 			
 		} else if(op.equals("ValiderRDV1")) {
@@ -524,6 +536,8 @@ public class Servlet extends HttpServlet {
 			// Parametres de la page de l'admin
 			request.setAttribute("donneurattente", facade.donneursAttentes());
 			request.setAttribute("donneursignale", facade.donneursSignales());
+			request.setAttribute("donneurs", facade.listerDonneurs());
+			request.setAttribute("receveurs", facade.listerReceveurs());
 			
 			// Goto page admin
 			request.getRequestDispatcher("pageadmin.jsp").forward(request, response);
